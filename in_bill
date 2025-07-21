@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>In đơn hàng</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Đơn hàng</h2>
+  <p><strong>ID:</strong> <span id="id"></span></p>
+  <p><strong>Khách hàng:</strong> <span id="ten"></span></p>
+  <p><strong>SĐT:</strong> <span id="sdt"></span></p>
+  <p><strong>Địa chỉ:</strong> <span id="diachi"></span></p>
+  <p><strong>Ghi chú:</strong> <span id="ghichu"></span></p>
 
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("id").textContent = params.get("id");
+    document.getElementById("ten").textContent = params.get("ten");
+    document.getElementById("sdt").textContent = params.get("sdt");
+    document.getElementById("diachi").textContent = params.get("diachi");
+    document.getElementById("ghichu").textContent = params.get("ghichu");
+
+    window.onload = () => {
+      window.print();
+    };
+  </script>
+</body>
+</html>
