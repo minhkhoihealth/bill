@@ -7,9 +7,9 @@
 <style>
 body {
   font-family: Arial;
-  width: 72mm;
+  width: 70mm;
   margin: 0 auto;
-  font-size: 13px;
+  font-size: 9px;
 }
 
 .logo-box {
@@ -26,8 +26,9 @@ body {
 .bill-title {
   text-align: center;
   font-weight: bold;
-  font-size: 14px;   /* nhỏ lại */
-  margin: 4px 0;
+  font-size: 11px;
+  margin: 6px 0;
+  letter-spacing: 1px;
 }
 
 h2 {
@@ -37,7 +38,7 @@ h2 {
 
 .info {
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 table {
@@ -57,7 +58,7 @@ th, td {
 .bold { font-weight: bold; }
 
 .note {
-  font-size: 11px;
+  font-size: 10px;
   font-style: italic;
 }
 
@@ -69,7 +70,7 @@ th, td {
 .footer {
   text-align: center;
   margin-top: 8px;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .button-box {
@@ -79,7 +80,7 @@ th, td {
 
 button {
   padding: 6px 10px;
-  font-size: 13px;
+  font-size: 10px;
   margin: 3px;
 }
 
@@ -95,18 +96,23 @@ button {
   <img id="logo">
 </div>
 
-
+<div class="bill-title">HÓA ĐƠN THANH TOÁN</div>
 
 <h2 id="storeName"></h2>
 <div class="info" id="storeAddress"></div>
 <div class="info" id="storePhone"></div>
-<div class="bill-title">HÓA ĐƠN THANH TOÁN</div>
+
 <hr>
 
 <div><strong>Mã đơn:</strong> <span id="orderId"></span></div>
 <div><strong>Bàn:</strong> <span id="ban"></span></div>
 <div><strong>Khách:</strong> <span id="customerName"></span></div>
 <div><strong>Địa chỉ:</strong> <span id="customerAddress"></span></div>
+
+<div class="barcode-box">
+  <img id="barcode" width="180">
+</div>
+
 <table>
 <thead>
 <tr>
@@ -123,6 +129,11 @@ button {
 <tr class="bold">
   <td colspan="3">TỔNG CỘNG</td>
   <td class="right" id="totalPrice"></td>
+</tr>
+
+<tr>
+  <td colspan="3">Tổng tiền</td>
+  <td class="right" id="paymentAmount"></td>
 </tr>
 
 <tr id="giamgiaRow">
@@ -245,7 +256,7 @@ if (bank && stk && chutk && tongThanhToan) {
 
 // ===== Ngày giờ =====
 document.getElementById("datetime").textContent =
-"Thời gian in: " + new Date().toLocaleString("vi-VN");
+"Ngày in: " + new Date().toLocaleString("vi-VN");
 
 // ===== Đóng trang =====
 function closePage() {
