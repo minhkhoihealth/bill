@@ -6,96 +6,103 @@
 
 <style>
 body {
-  font-family: Arial, sans-serif;
-  width: 76mm;              /* Chuẩn giấy 80mm */
+  font-family: Arial, Helvetica, sans-serif;
+  width: 76mm;
   margin: 0 auto;
-  font-size: 12px;          /* Nội dung 12px */
-  line-height: 1.4;         /* Giãn theo chiều dài */
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 /* ===== Logo ===== */
 .logo-box {
   text-align: center;
-  margin: 6px 0;
+  margin: 8px 0;
 }
 
 .logo-box img {
-  max-width: 140px;
-  max-height: 70px;
+  max-width: 150px;
+  max-height: 80px;
 }
 
-/* ===== Tiêu đề hóa đơn ===== */
+/* ===== Tiêu đề ===== */
 .bill-title {
   text-align: center;
-  font-weight: bold;
-  font-size: 13px;          /* Tiêu đề 13px */
-  margin: 6px 0;
+  font-weight: 800;
+  font-size: 15px;
+  margin: 8px 0;
+  letter-spacing: 0.5px;
 }
 
-/* ===== Tên cửa hàng ===== */
 h2 {
   text-align: center;
-  margin: 4px 0;
-  font-size: 13px;          /* Tiêu đề 13px */
+  margin: 6px 0;
+  font-size: 15px;
+  font-weight: 800;
 }
 
 .info {
   text-align: center;
-  font-size: 12px;
-  margin-bottom: 2px;
+  font-size: 13px;
+  margin-bottom: 4px;
 }
 
 /* ===== Bảng ===== */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 th {
-  font-size: 13px;          /* Header bảng 13px */
-  border-bottom: 1px dashed #000;
-  padding: 6px 0;
+  font-size: 14px;
+  border-bottom: 1.5px dashed #000;
+  padding: 8px 0;
+  font-weight: 700;
 }
 
 td {
   border-bottom: 1px dashed #000;
-  padding: 6px 0;           /* Giãn chiều dài */
-  font-size: 12px;
+  padding: 8px 0;
+  font-size: 13px;
   vertical-align: top;
 }
 
 .right { text-align: right; }
 .center { text-align: center; }
-.bold { font-weight: bold; }
+.bold { font-weight: 800; }
 
 .note {
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic;
+}
+
+/* ===== Tổng thanh toán nổi bật ===== */
+tfoot tr:last-child {
+  font-size: 16px;
+  font-weight: 900;
 }
 
 /* ===== QR ===== */
 .qrcode-box {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
-/* ===== Footer ===== */
 .footer {
   text-align: center;
-  margin-top: 8px;
-  font-size: 12px;
+  margin-top: 10px;
+  font-size: 13px;
 }
 
-/* ===== Nút ===== */
 .button-box {
   text-align: center;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 button {
   padding: 6px 12px;
-  font-size: 12px;
+  font-size: 13px;
   margin: 4px;
 }
 
@@ -152,7 +159,7 @@ button {
   <td class="right" id="phuthu"></td>
 </tr>
 
-<tr class="bold" style="font-size:13px;">
+<tr class="bold">
   <td colspan="3">TỔNG THANH TOÁN</td>
   <td class="right" id="tongthanhtoan"></td>
 </tr>
@@ -160,7 +167,7 @@ button {
 </table>
 
 <div class="qrcode-box">
-  <img id="qrcode" width="140">
+  <img id="qrcode" width="130">
 </div>
 
 <div class="footer" id="datetime"></div>
@@ -178,7 +185,7 @@ function formatMoney(n) {
   return Number(n || 0).toLocaleString("vi-VN");
 }
 
-// Logo
+/* ===== Logo ===== */
 const logo = params.get("logo");
 if (logo && logo.startsWith("http")) {
   document.getElementById("logo").src = logo;
@@ -186,19 +193,19 @@ if (logo && logo.startsWith("http")) {
   document.getElementById("logo").style.display = "none";
 }
 
-// Thông tin cửa hàng
+/* ===== Thông tin cửa hàng ===== */
 document.getElementById("storeName").textContent = params.get("tencuahang") || "";
 document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
 document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
 
-// Đơn hàng
+/* ===== Đơn hàng ===== */
 const orderId = params.get("id") || "";
 document.getElementById("orderId").textContent = orderId;
 document.getElementById("ban").textContent = params.get("ban") || "";
 document.getElementById("customerName").textContent = params.get("ten") || "";
 document.getElementById("customerAddress").textContent = params.get("diachi") || "";
 
-// Tiền
+/* ===== Tiền ===== */
 const giamgia = params.get("giamgia");
 const phuthu = params.get("phuthu");
 const tongThanhToan = params.get("tongthanhtoan");
@@ -213,7 +220,7 @@ if (!giamgia || Number(giamgia) == 0)
 if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
 
-// Sản phẩm
+/* ===== Sản phẩm ===== */
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
 let total = 0;
 let tbody = document.getElementById("productBody");
@@ -242,7 +249,7 @@ data.forEach(row => {
 
 document.getElementById("totalPrice").textContent = formatMoney(total);
 
-// QR
+/* ===== QR ===== */
 const bank = params.get("bank");
 const stk = params.get("stk");
 const chutk = params.get("chutk");
@@ -254,14 +261,16 @@ if (bank && stk && chutk && tongThanhToan) {
   document.getElementById("qrcode").style.display = "none";
 }
 
-// Ngày giờ
+/* ===== Ngày giờ ===== */
 document.getElementById("datetime").textContent =
 "Ngày in: " + new Date().toLocaleString("vi-VN");
 
-// Đóng
+/* ===== Đóng trang ===== */
 function closePage() {
   window.close();
-  setTimeout(() => window.history.back(), 300);
+  setTimeout(() => {
+    window.history.back();
+  }, 300);
 }
 </script>
 
