@@ -22,6 +22,15 @@ body {
   max-height: 80px;
 }
 
+/* ===== TIÊU ĐỀ HÓA ĐƠN ===== */
+.bill-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 6px 0;
+  letter-spacing: 1px;
+}
+
 h2 {
   text-align: center;
   margin: 3px 0;
@@ -87,12 +96,14 @@ button {
   <img id="logo">
 </div>
 
+
+
 <h2 id="storeName"></h2>
 <div class="info" id="storeAddress"></div>
 <div class="info" id="storePhone"></div>
-
-<hr>
 <div class="bill-title">HÓA ĐƠN THANH TOÁN</div>
+<hr>
+
 <div><strong>Mã đơn:</strong> <span id="orderId"></span></div>
 <div><strong>Bàn:</strong> <span id="ban"></span></div>
 <div><strong>Khách:</strong> <span id="customerName"></span></div>
@@ -115,7 +126,6 @@ button {
 <tbody id="productBody"></tbody>
 
 <tfoot>
-
 <tr class="bold">
   <td colspan="3">TỔNG CỘNG</td>
   <td class="right" id="totalPrice"></td>
@@ -140,7 +150,6 @@ button {
   <td colspan="3">TỔNG THANH TOÁN</td>
   <td class="right" id="tongthanhtoan"></td>
 </tr>
-
 </tfoot>
 </table>
 
@@ -223,10 +232,7 @@ data.forEach(row => {
 
   let tr = document.createElement("tr");
   tr.innerHTML = `
-    <td>
-      ${name}
-      ${note ? `<div class="note">(${note})</div>` : ""}
-    </td>
+    <td>${name}${note ? `<div class="note">(${note})</div>` : ""}</td>
     <td class="center">${qty}</td>
     <td class="right">${formatMoney(price)}</td>
     <td class="right">${formatMoney(amount)}</td>
@@ -236,7 +242,7 @@ data.forEach(row => {
 
 document.getElementById("totalPrice").textContent = formatMoney(total);
 
-// ===== QR thanh toán =====
+// ===== QR =====
 const bank = params.get("bank");
 const stk = params.get("stk");
 const chutk = params.get("chutk");
@@ -258,13 +264,6 @@ function closePage() {
   setTimeout(() => {
     window.history.back();
   }, 300);
-}
-  .bill-title {
-  text-align: center;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 5px 0;
-  letter-spacing: 1px;
 }
 </script>
 
