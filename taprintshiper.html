@@ -7,9 +7,9 @@
 <style>
 body {
   font-family: Arial;
-  width: 70mm;
+  width: 72mm;
   margin: 0 auto;
-  font-size: 9px;
+  font-size: 10px; /* Tối đa 10px */
 }
 
 .logo-box {
@@ -18,39 +18,39 @@ body {
 }
 
 .logo-box img {
-  max-width: 150px;
-  max-height: 80px;
+  max-width: 120px;
+  max-height: 60px;
 }
 
 /* ===== TIÊU ĐỀ HÓA ĐƠN ===== */
 .bill-title {
   text-align: center;
   font-weight: bold;
-  font-size: 11px;
-  margin: 6px 0;
-  letter-spacing: 1px;
+  font-size: 10px;
+  margin: 4px 0;
 }
 
 h2 {
   text-align: center;
-  margin: 3px 0;
+  margin: 2px 0;
+  font-size: 10px;
 }
 
 .info {
   text-align: center;
-  font-size: 10px;
+  font-size: 9px; /* nhỏ nhất 9px */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 th, td {
   border-bottom: 1px dashed #000;
-  padding: 4px 0;
-  font-size: 12px;
+  padding: 3px 0;
+  font-size: 9px;
 }
 
 .right { text-align: right; }
@@ -58,29 +58,29 @@ th, td {
 .bold { font-weight: bold; }
 
 .note {
-  font-size: 10px;
+  font-size: 9px;
   font-style: italic;
 }
 
-.qrcode-box, .barcode-box {
+.qrcode-box {
   text-align: center;
   margin-top: 5px;
 }
 
 .footer {
   text-align: center;
-  margin-top: 8px;
-  font-size: 10px;
+  margin-top: 6px;
+  font-size: 9px;
 }
 
 .button-box {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 button {
-  padding: 6px 10px;
-  font-size: 10px;
+  padding: 4px 8px;
+  font-size: 9px;
   margin: 3px;
 }
 
@@ -96,21 +96,18 @@ button {
   <img id="logo">
 </div>
 
-
-
 <h2 id="storeName"></h2>
 <div class="info" id="storeAddress"></div>
 <div class="info" id="storePhone"></div>
-<div class="bill-title">HÓA ĐƠN THANH TOÁN</div>
+
 <hr>
+
+<div class="bill-title">HÓA ĐƠN THANH TOÁN</div>
+
 <div><strong>Mã đơn:</strong> <span id="orderId"></span></div>
 <div><strong>Bàn:</strong> <span id="ban"></span></div>
 <div><strong>Khách:</strong> <span id="customerName"></span></div>
 <div><strong>Địa chỉ:</strong> <span id="customerAddress"></span></div>
-
-<div class="barcode-box">
-  <img id="barcode" width="180">
-</div>
 
 <table>
 <thead>
@@ -130,6 +127,11 @@ button {
   <td class="right" id="totalPrice"></td>
 </tr>
 
+<tr>
+  <td colspan="3">Tổng tiền</td>
+  <td class="right" id="paymentAmount"></td>
+</tr>
+
 <tr id="giamgiaRow">
   <td colspan="3">Giảm giá</td>
   <td class="right" id="giamgia"></td>
@@ -140,7 +142,7 @@ button {
   <td class="right" id="phuthu"></td>
 </tr>
 
-<tr class="bold" style="font-size:15px;">
+<tr class="bold" style="font-size:10px;">
   <td colspan="3">TỔNG THANH TOÁN</td>
   <td class="right" id="tongthanhtoan"></td>
 </tr>
@@ -148,7 +150,7 @@ button {
 </table>
 
 <div class="qrcode-box">
-  <img id="qrcode" width="150">
+  <img id="qrcode" width="120">
 </div>
 
 <div class="footer" id="datetime"></div>
@@ -202,10 +204,6 @@ if (!giamgia || Number(giamgia) == 0)
 
 if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
-
-// ===== Barcode =====
-document.getElementById("barcode").src =
-"https://barcode.tec-it.com/barcode.ashx?code=Code128&data=" + orderId;
 
 // ===== Sản phẩm =====
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
