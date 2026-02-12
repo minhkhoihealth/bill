@@ -235,6 +235,15 @@ if (bank && stk && chutk && tongThanhToan) {
 document.getElementById("datetime").textContent =
 "Ngày in: " + new Date().toLocaleString("vi-VN");
 
+  function closePage() {
+  window.close();
+
+  // Nếu không đóng được (mở trực tiếp), quay lại trang trước
+  setTimeout(() => {
+    window.history.back();
+  }, 300);
+}
+
 </script>
 
 </body>
