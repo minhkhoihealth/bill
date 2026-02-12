@@ -9,7 +9,7 @@ body {
   font-family: Arial;
   width: 72mm;
   margin: 0 auto;
-  font-size: 10px; /* Tối đa 10px */
+  font-size: 10px;
 }
 
 .logo-box {
@@ -22,7 +22,6 @@ body {
   max-height: 60px;
 }
 
-/* ===== TIÊU ĐỀ HÓA ĐƠN ===== */
 .bill-title {
   text-align: center;
   font-weight: bold;
@@ -38,7 +37,7 @@ h2 {
 
 .info {
   text-align: center;
-  font-size: 9px; /* nhỏ nhất 9px */
+  font-size: 9px;
 }
 
 table {
@@ -127,11 +126,6 @@ button {
   <td class="right" id="totalPrice"></td>
 </tr>
 
-<tr>
-  <td colspan="3">Tổng tiền</td>
-  <td class="right" id="paymentAmount"></td>
-</tr>
-
 <tr id="giamgiaRow">
   <td colspan="3">Giảm giá</td>
   <td class="right" id="giamgia"></td>
@@ -168,7 +162,7 @@ function formatMoney(n) {
   return Number(n || 0).toLocaleString("vi-VN");
 }
 
-// ===== Logo =====
+// Logo
 const logo = params.get("logo");
 if (logo && logo.startsWith("http")) {
   document.getElementById("logo").src = logo;
@@ -176,25 +170,23 @@ if (logo && logo.startsWith("http")) {
   document.getElementById("logo").style.display = "none";
 }
 
-// ===== Thông tin cửa hàng =====
+// Thông tin cửa hàng
 document.getElementById("storeName").textContent = params.get("tencuahang") || "";
 document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
 document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
 
-// ===== Đơn hàng =====
+// Đơn hàng
 const orderId = params.get("id") || "";
 document.getElementById("orderId").textContent = orderId;
 document.getElementById("ban").textContent = params.get("ban") || "";
 document.getElementById("customerName").textContent = params.get("ten") || "";
 document.getElementById("customerAddress").textContent = params.get("diachi") || "";
 
-// ===== Tiền =====
-const tongTien = params.get("thanhtoan");
+// Tiền
 const giamgia = params.get("giamgia");
 const phuthu = params.get("phuthu");
 const tongThanhToan = params.get("tongthanhtoan");
 
-document.getElementById("paymentAmount").textContent = formatMoney(tongTien);
 document.getElementById("giamgia").textContent = formatMoney(giamgia);
 document.getElementById("phuthu").textContent = formatMoney(phuthu);
 document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
@@ -205,7 +197,7 @@ if (!giamgia || Number(giamgia) == 0)
 if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
 
-// ===== Sản phẩm =====
+// Sản phẩm
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
 let total = 0;
 let tbody = document.getElementById("productBody");
@@ -234,7 +226,7 @@ data.forEach(row => {
 
 document.getElementById("totalPrice").textContent = formatMoney(total);
 
-// ===== QR =====
+// QR thanh toán
 const bank = params.get("bank");
 const stk = params.get("stk");
 const chutk = params.get("chutk");
@@ -246,11 +238,11 @@ if (bank && stk && chutk && tongThanhToan) {
   document.getElementById("qrcode").style.display = "none";
 }
 
-// ===== Ngày giờ =====
+// Ngày giờ
 document.getElementById("datetime").textContent =
 "Ngày in: " + new Date().toLocaleString("vi-VN");
 
-// ===== Đóng trang =====
+// Đóng trang
 function closePage() {
   window.close();
   setTimeout(() => {
