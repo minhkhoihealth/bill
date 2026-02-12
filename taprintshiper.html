@@ -138,8 +138,10 @@ th, td {
 <div class="footer" id="datetime"></div>
 <div class="footer">Cảm ơn quý khách!</div>
 
-<button onclick="window.print()">🖨️ In</button>
-
+<div style="text-align:center; margin-top:8px;">
+  <button onclick="window.print()">🖨️ In</button>
+  <button onclick="closePage()">❌ Đóng</button>
+</div>
 <script>
 const params = new URLSearchParams(window.location.search);
 
