@@ -64,8 +64,19 @@ th, td {
   font-size: 12px;
 }
 
+.button-box {
+  text-align: center;
+  margin-top: 10px;
+}
+
+button {
+  padding: 6px 10px;
+  font-size: 13px;
+  margin: 3px;
+}
+
 @media print {
-  button { display: none; }
+  .button-box { display: none; }
 }
 </style>
 </head>
@@ -104,6 +115,7 @@ th, td {
 <tbody id="productBody"></tbody>
 
 <tfoot>
+
 <tr class="bold">
   <td colspan="3">TỔNG CỘNG</td>
   <td class="right" id="totalPrice"></td>
@@ -128,6 +140,7 @@ th, td {
   <td colspan="3">TỔNG THANH TOÁN</td>
   <td class="right" id="tongthanhtoan"></td>
 </tr>
+
 </tfoot>
 </table>
 
@@ -138,10 +151,11 @@ th, td {
 <div class="footer" id="datetime"></div>
 <div class="footer">Cảm ơn quý khách!</div>
 
-<div style="text-align:center; margin-top:8px;">
-  <button onclick="window.print()">🖨️ In</button>
+<div class="button-box">
+  <button onclick="window.print()">🖨 In</button>
   <button onclick="closePage()">❌ Đóng</button>
 </div>
+
 <script>
 const params = new URLSearchParams(window.location.search);
 
@@ -149,27 +163,27 @@ function formatMoney(n) {
   return Number(n || 0).toLocaleString("vi-VN");
 }
 
-// Logo
+// ===== Logo =====
 const logo = params.get("logo");
-if (logo) {
+if (logo && logo.startsWith("http")) {
   document.getElementById("logo").src = logo;
 } else {
   document.getElementById("logo").style.display = "none";
 }
 
-// Cửa hàng
+// ===== Thông tin cửa hàng =====
 document.getElementById("storeName").textContent = params.get("tencuahang") || "";
 document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
 document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
 
-// Đơn hàng
+// ===== Đơn hàng =====
 const orderId = params.get("id") || "";
 document.getElementById("orderId").textContent = orderId;
 document.getElementById("ban").textContent = params.get("ban") || "";
 document.getElementById("customerName").textContent = params.get("ten") || "";
 document.getElementById("customerAddress").textContent = params.get("diachi") || "";
 
-// Tiền
+// ===== Tiền =====
 const tongTien = params.get("thanhtoan");
 const giamgia = params.get("giamgia");
 const phuthu = params.get("phuthu");
@@ -186,11 +200,11 @@ if (!giamgia || Number(giamgia) == 0)
 if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
 
-// Barcode
+// ===== Barcode =====
 document.getElementById("barcode").src =
 "https://barcode.tec-it.com/barcode.ashx?code=Code128&data=" + orderId;
 
-// Sản phẩm
+// ===== Sản phẩm =====
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
 let total = 0;
 let tbody = document.getElementById("productBody");
@@ -209,7 +223,10 @@ data.forEach(row => {
 
   let tr = document.createElement("tr");
   tr.innerHTML = `
-    <td>${name}${note ? `<div class="note">(${note})</div>` : ""}</td>
+    <td>
+      ${name}
+      ${note ? `<div class="note">(${note})</div>` : ""}
+    </td>
     <td class="center">${qty}</td>
     <td class="right">${formatMoney(price)}</td>
     <td class="right">${formatMoney(amount)}</td>
@@ -219,7 +236,7 @@ data.forEach(row => {
 
 document.getElementById("totalPrice").textContent = formatMoney(total);
 
-// QR
+// ===== QR thanh toán =====
 const bank = params.get("bank");
 const stk = params.get("stk");
 const chutk = params.get("chutk");
@@ -231,19 +248,17 @@ if (bank && stk && chutk && tongThanhToan) {
   document.getElementById("qrcode").style.display = "none";
 }
 
-// Ngày giờ
+// ===== Ngày giờ =====
 document.getElementById("datetime").textContent =
 "Ngày in: " + new Date().toLocaleString("vi-VN");
 
-  function closePage() {
+// ===== Đóng trang =====
+function closePage() {
   window.close();
-
-  // Nếu không đóng được (mở trực tiếp), quay lại trang trước
   setTimeout(() => {
     window.history.back();
   }, 300);
 }
-
 </script>
 
 </body>
