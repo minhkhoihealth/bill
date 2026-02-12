@@ -30,7 +30,7 @@ table {
 
 th, td {
   border-bottom: 1px dashed #000;
-  padding: 3px 0;
+  padding: 4px 0;
   font-size: 12px;
 }
 
@@ -39,12 +39,6 @@ td { text-align: left; }
 
 .right { text-align: right; }
 .center { text-align: center; }
-
-.total-section {
-  margin-top: 5px;
-  border-top: 1px solid #000;
-  padding-top: 5px;
-}
 
 .bold { font-weight: bold; }
 
@@ -90,17 +84,38 @@ td { text-align: left; }
 <th class="right">TT</th>
 </tr>
 </thead>
-<tbody id="productBody"></tbody>
-</table>
 
-<div class="total-section">
-  <div class="right">Tổng tiền: <span id="paymentAmount"></span></div>
-  <div class="right" id="giamgiaRow">Giảm giá: <span id="giamgia"></span></div>
-  <div class="right" id="phuthuRow">Phụ thu: <span id="phuthu"></span></div>
-  <div class="right bold" style="font-size:15px;">
-    THANH TOÁN: <span id="tongthanhtoan"></span>
-  </div>
-</div>
+<tbody id="productBody"></tbody>
+
+<tfoot>
+
+<tr class="bold">
+  <td colspan="2">TỔNG CỘNG</td>
+  <td class="right" id="totalPrice"></td>
+</tr>
+
+<tr>
+  <td colspan="2">Tổng tiền</td>
+  <td class="right" id="paymentAmount"></td>
+</tr>
+
+<tr id="giamgiaRow">
+  <td colspan="2">Giảm giá</td>
+  <td class="right" id="giamgia"></td>
+</tr>
+
+<tr id="phuthuRow">
+  <td colspan="2">Phụ thu</td>
+  <td class="right" id="phuthu"></td>
+</tr>
+
+<tr class="bold" style="font-size:15px;">
+  <td colspan="2">TỔNG THANH TOÁN</td>
+  <td class="right" id="tongthanhtoan"></td>
+</tr>
+
+</tfoot>
+</table>
 
 <div class="qrcode-box">
   <img id="qrcode" width="150">
@@ -118,12 +133,12 @@ function formatMoney(n) {
   return Number(n || 0).toLocaleString("vi-VN");
 }
 
-// Cửa hàng
+// Thông tin cửa hàng
 document.getElementById("storeName").textContent = params.get("tencuahang") || "";
 document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
 document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
 
-// Đơn hàng
+// Thông tin đơn
 const orderId = params.get("id") || "";
 document.getElementById("orderId").textContent = orderId;
 document.getElementById("ban").textContent = params.get("ban") || "";
@@ -136,6 +151,7 @@ const giamgia = params.get("giamgia");
 const phuthu = params.get("phuthu");
 const tongThanhToan = params.get("tongthanhtoan");
 
+// Hiển thị tiền
 document.getElementById("paymentAmount").textContent = formatMoney(tongTien);
 document.getElementById("giamgia").textContent = formatMoney(giamgia);
 document.getElementById("phuthu").textContent = formatMoney(phuthu);
@@ -159,6 +175,7 @@ let tbody = document.getElementById("productBody");
 
 data.forEach(row => {
   if (!row.trim()) return;
+
   const parts = row.split("|");
   const name = parts[1] || "";
   const qty = parts[3] || 0;
@@ -174,6 +191,8 @@ data.forEach(row => {
   `;
   tbody.appendChild(tr);
 });
+
+document.getElementById("totalPrice").textContent = formatMoney(total);
 
 // QR VietQR
 const bank = params.get("bank");
