@@ -35,12 +35,16 @@ th, td {
 }
 
 th { text-align: left; }
-td { text-align: left; }
 
 .right { text-align: right; }
 .center { text-align: center; }
 
 .bold { font-weight: bold; }
+
+.note {
+  font-size: 11px;
+  font-style: italic;
+}
 
 .qrcode-box, .barcode-box {
   text-align: center;
@@ -59,7 +63,7 @@ td { text-align: left; }
 </style>
 </head>
 
-<body >
+<body>
 
 <h2 id="storeName"></h2>
 <div class="info" id="storeAddress"></div>
@@ -81,6 +85,7 @@ td { text-align: left; }
 <tr>
 <th>SP</th>
 <th class="center">SL</th>
+<th class="right">ĐG</th>
 <th class="right">TT</th>
 </tr>
 </thead>
@@ -90,27 +95,27 @@ td { text-align: left; }
 <tfoot>
 
 <tr class="bold">
-  <td colspan="2">TỔNG CỘNG</td>
+  <td colspan="3">TỔNG CỘNG</td>
   <td class="right" id="totalPrice"></td>
 </tr>
 
 <tr>
-  <td colspan="2">Tổng tiền</td>
+  <td colspan="3">Tổng tiền</td>
   <td class="right" id="paymentAmount"></td>
 </tr>
 
 <tr id="giamgiaRow">
-  <td colspan="2">Giảm giá</td>
+  <td colspan="3">Giảm giá</td>
   <td class="right" id="giamgia"></td>
 </tr>
 
 <tr id="phuthuRow">
-  <td colspan="2">Phụ thu</td>
+  <td colspan="3">Phụ thu</td>
   <td class="right" id="phuthu"></td>
 </tr>
 
 <tr class="bold" style="font-size:15px;">
-  <td colspan="2">TỔNG THANH TOÁN</td>
+  <td colspan="3">TỔNG THANH TOÁN</td>
   <td class="right" id="tongthanhtoan"></td>
 </tr>
 
@@ -133,12 +138,12 @@ function formatMoney(n) {
   return Number(n || 0).toLocaleString("vi-VN");
 }
 
-// Thông tin cửa hàng
+// Cửa hàng
 document.getElementById("storeName").textContent = params.get("tencuahang") || "";
 document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
 document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
 
-// Thông tin đơn
+// Đơn hàng
 const orderId = params.get("id") || "";
 document.getElementById("orderId").textContent = orderId;
 document.getElementById("ban").textContent = params.get("ban") || "";
@@ -177,18 +182,27 @@ data.forEach(row => {
   if (!row.trim()) return;
 
   const parts = row.split("|");
+
   const name = parts[1] || "";
+  const note = parts[2] || "";
   const qty = parts[3] || 0;
+  const price = parts[4] || 0;
   const amount = parts[5] || 0;
 
   total += Number(amount);
 
   let tr = document.createElement("tr");
+
   tr.innerHTML = `
-    <td>${name}</td>
+    <td>
+      ${name}
+      ${note ? `<div class="note">(${note})</div>` : ""}
+    </td>
     <td class="center">${qty}</td>
+    <td class="right">${formatMoney(price)}</td>
     <td class="right">${formatMoney(amount)}</td>
   `;
+
   tbody.appendChild(tr);
 });
 
@@ -210,12 +224,6 @@ if (bank && stk && chutk && tongThanhToan) {
 document.getElementById("datetime").textContent =
 "Ngày in: " + new Date().toLocaleString("vi-VN");
 
-// Tự động in
-function autoPrint() {
-  setTimeout(() => {
-    window.print();
-  }, 500);
-}
 </script>
 
 </body>
