@@ -2,96 +2,131 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Hóa đơn bán hàng</title>
+<title>In hóa đơn</title>
+
 <style>
-  body { font-family: Arial; margin: 20px; }
-  h2 { text-align: center; margin-bottom: 2px; }
-  .info { text-align: center; margin-bottom: 5px; }
-  table { border-collapse: collapse; width: 100%; margin-top: 10px; }
-  table, th, td { border: 1px solid black; }
-  th, td { padding: 5px; text-align: center; }
-  .total-row { font-weight: bold; }
-  .barcode-box, .qrcode-box { text-align: center; margin: 10px 0; }
-  .footer { text-align: center; margin-top: 15px; font-style: italic; }
-  .print-btn { margin: 10px 0; text-align: center; }
+body {
+  font-family: Arial;
+  width: 72mm;
+  margin: 0 auto;
+  font-size: 13px;
+}
+
+h2 {
+  text-align: center;
+  margin: 3px 0;
+}
+
+.info {
+  text-align: center;
+  font-size: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+
+th, td {
+  border-bottom: 1px dashed #000;
+  padding: 3px 0;
+  font-size: 12px;
+}
+
+th { text-align: left; }
+td { text-align: left; }
+
+.right { text-align: right; }
+.center { text-align: center; }
+
+.total-section {
+  margin-top: 5px;
+  border-top: 1px solid #000;
+  padding-top: 5px;
+}
+
+.bold { font-weight: bold; }
+
+.qrcode-box, .barcode-box {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+@media print {
+  button { display: none; }
+}
 </style>
 </head>
 
-<body>
+<body onload="autoPrint()">
 
-<h2 id="storeName">Cửa hàng</h2>
+<h2 id="storeName"></h2>
 <div class="info" id="storeAddress"></div>
 <div class="info" id="storePhone"></div>
 
-<h2>HÓA ĐƠN BÁN HÀNG</h2>
+<hr>
+
+<div><strong>Mã đơn:</strong> <span id="orderId"></span></div>
+<div><strong>Bàn:</strong> <span id="ban"></span></div>
+<div><strong>Khách:</strong> <span id="customerName"></span></div>
+<div><strong>Địa chỉ:</strong> <span id="customerAddress"></span></div>
 
 <div class="barcode-box">
-  <img id="barcode" alt="Barcode">
+  <img id="barcode" width="180">
 </div>
 
-<div class="print-btn">
-  <button onclick="window.print()">🖨 In hóa đơn</button>
-</div>
-
-<p><strong>Mã đơn:</strong> <span id="orderId"></span></p>
-<p><strong>Bàn:</strong> <span id="ban"></span></p>
-<p><strong>Khách hàng:</strong> <span id="customerName"></span></p>
-<p><strong>Địa chỉ:</strong> <span id="customerAddress"></span></p>
-
-<p><strong>Tổng tiền:</strong> <span id="paymentAmount"></span> VND</p>
-<p id="giamgiaRow"><strong>Giảm giá:</strong> <span id="giamgia"></span> VND</p>
-<p id="phuthuRow"><strong>Phụ thu:</strong> <span id="phuthu"></span> VND</p>
-<p><strong>Tổng thanh toán:</strong> <span id="tongthanhtoan"></span> VND</p>
-
-<table id="productTable">
+<table>
 <thead>
 <tr>
-<th>STT</th>
-<th>Tên hàng</th>
-<th>SL</th>
-<th>Đơn giá</th>
-<th>Thành tiền</th>
+<th>SP</th>
+<th class="center">SL</th>
+<th class="right">TT</th>
 </tr>
 </thead>
-<tbody></tbody>
-<tfoot>
-<tr class="total-row">
-<td colspan="2">TỔNG CỘNG</td>
-<td id="totalQty"></td>
-<td></td>
-<td id="totalPrice"></td>
-</tr>
-</tfoot>
+<tbody id="productBody"></tbody>
 </table>
 
+<div class="total-section">
+  <div class="right">Tổng tiền: <span id="paymentAmount"></span></div>
+  <div class="right" id="giamgiaRow">Giảm giá: <span id="giamgia"></span></div>
+  <div class="right" id="phuthuRow">Phụ thu: <span id="phuthu"></span></div>
+  <div class="right bold" style="font-size:15px;">
+    THANH TOÁN: <span id="tongthanhtoan"></span>
+  </div>
+</div>
+
 <div class="qrcode-box">
-<h3>QR Thanh toán</h3>
-<img id="qrcode" width="150">
+  <img id="qrcode" width="150">
 </div>
 
 <div class="footer" id="datetime"></div>
-<div class="footer">Xin cảm ơn Quý khách! Hẹn gặp lại.</div>
+<div class="footer">Cảm ơn quý khách!</div>
+
+<button onclick="window.print()">In lại</button>
 
 <script>
-
 const params = new URLSearchParams(window.location.search);
 
-// Format tiền
-function formatMoney(number) {
-  return Number(number || 0).toLocaleString("vi-VN");
+function formatMoney(n) {
+  return Number(n || 0).toLocaleString("vi-VN");
 }
 
-// Thông tin cửa hàng
+// Cửa hàng
 document.getElementById("storeName").textContent = params.get("tencuahang") || "";
-document.getElementById("storeAddress").textContent = "Địa chỉ: " + (params.get("diachicuahang") || "");
-document.getElementById("storePhone").textContent = "SĐT: " + (params.get("dienthoaicuahang") || "");
+document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
+document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
 
-// Thông tin đơn
+// Đơn hàng
 const orderId = params.get("id") || "";
 document.getElementById("orderId").textContent = orderId;
 document.getElementById("ban").textContent = params.get("ban") || "";
-
-// Khách hàng
 document.getElementById("customerName").textContent = params.get("ten") || "";
 document.getElementById("customerAddress").textContent = params.get("diachi") || "";
 
@@ -106,13 +141,12 @@ document.getElementById("giamgia").textContent = formatMoney(giamgia);
 document.getElementById("phuthu").textContent = formatMoney(phuthu);
 document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
 
-// Ẩn dòng nếu = 0
-if (!giamgia || Number(giamgia) == 0) {
+// Ẩn nếu = 0
+if (!giamgia || Number(giamgia) == 0)
   document.getElementById("giamgiaRow").style.display = "none";
-}
-if (!phuthu || Number(phuthu) == 0) {
+
+if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
-}
 
 // Barcode
 document.getElementById("barcode").src =
@@ -120,32 +154,26 @@ document.getElementById("barcode").src =
 
 // Danh sách sản phẩm
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
-let tbody = document.querySelector("#productTable tbody");
-let totalQty = 0, totalPrice = 0;
+let total = 0;
+let tbody = document.getElementById("productBody");
 
-data.forEach((row, index) => {
+data.forEach(row => {
   if (!row.trim()) return;
   const parts = row.split("|");
   const name = parts[1] || "";
-  const qty = parseInt(parts[3] || 0);
-  const price = parseFloat(parts[4] || 0);
-  const amount = parseFloat(parts[5] || 0);
+  const qty = parts[3] || 0;
+  const amount = parts[5] || 0;
 
-  totalQty += qty;
-  totalPrice += amount;
+  total += Number(amount);
 
   let tr = document.createElement("tr");
-  tr.innerHTML =
-    `<td>${index + 1}</td>
-     <td>${name}</td>
-     <td>${qty}</td>
-     <td>${formatMoney(price)}</td>
-     <td>${formatMoney(amount)}</td>`;
+  tr.innerHTML = `
+    <td>${name}</td>
+    <td class="center">${qty}</td>
+    <td class="right">${formatMoney(amount)}</td>
+  `;
   tbody.appendChild(tr);
 });
-
-document.getElementById("totalQty").textContent = totalQty;
-document.getElementById("totalPrice").textContent = formatMoney(totalPrice);
 
 // QR VietQR
 const bank = params.get("bank");
@@ -154,13 +182,21 @@ const chutk = params.get("chutk");
 
 if (bank && stk && chutk && tongThanhToan) {
   document.getElementById("qrcode").src =
-    `https://img.vietqr.io/image/${bank}-${stk}-compact2.jpg?amount=${tongThanhToan}&addInfo=${orderId}&accountName=${chutk}`;
+    `https://img.vietqr.io/image/${bank}-${stk}-compact2.jpg?amount=${tongThanhToan}&addInfo=${orderId}&accountName=${encodeURIComponent(chutk)}`;
+} else {
+  document.getElementById("qrcode").style.display = "none";
 }
 
 // Ngày giờ
 document.getElementById("datetime").textContent =
 "Ngày in: " + new Date().toLocaleString("vi-VN");
 
+// Tự động in
+function autoPrint() {
+  setTimeout(() => {
+    window.print();
+  }, 500);
+}
 </script>
 
 </body>
