@@ -26,9 +26,8 @@ body {
 .bill-title {
   text-align: center;
   font-weight: bold;
-  font-size: 18px;
-  margin: 6px 0;
-  letter-spacing: 1px;
+  font-size: 14px;   /* nhỏ lại */
+  margin: 4px 0;
 }
 
 h2 {
@@ -108,11 +107,6 @@ button {
 <div><strong>Bàn:</strong> <span id="ban"></span></div>
 <div><strong>Khách:</strong> <span id="customerName"></span></div>
 <div><strong>Địa chỉ:</strong> <span id="customerAddress"></span></div>
-
-<div class="barcode-box">
-  <img id="barcode" width="180">
-</div>
-
 <table>
 <thead>
 <tr>
@@ -129,11 +123,6 @@ button {
 <tr class="bold">
   <td colspan="3">TỔNG CỘNG</td>
   <td class="right" id="totalPrice"></td>
-</tr>
-
-<tr>
-  <td colspan="3">Tổng tiền</td>
-  <td class="right" id="paymentAmount"></td>
 </tr>
 
 <tr id="giamgiaRow">
@@ -256,7 +245,7 @@ if (bank && stk && chutk && tongThanhToan) {
 
 // ===== Ngày giờ =====
 document.getElementById("datetime").textContent =
-"Ngày in: " + new Date().toLocaleString("vi-VN");
+"Thời gian in: " + new Date().toLocaleString("vi-VN");
 
 // ===== Đóng trang =====
 function closePage() {
