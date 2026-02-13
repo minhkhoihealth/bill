@@ -128,6 +128,7 @@ button {
 
 <div><strong>Mã đơn:</strong> <span id="orderId"></span></div>
 <div><strong>Bàn:</strong> <span id="ban"></span></div>
+  <div><strong>Nhân viên:</strong> <span id="nhanvien"></span></div>
 <div><strong>Khách:</strong> <span id="customerName"></span></div>
 <div><strong>Địa chỉ:</strong> <span id="customerAddress"></span></div>
 
@@ -202,6 +203,7 @@ document.getElementById("storePhone").textContent = params.get("dienthoaicuahang
 const orderId = params.get("id") || "";
 document.getElementById("orderId").textContent = orderId;
 document.getElementById("ban").textContent = params.get("ban") || "";
+document.getElementById("nhanvien").textContent = params.get("nhanvien") || "";
 document.getElementById("customerName").textContent = params.get("ten") || "";
 document.getElementById("customerAddress").textContent = params.get("diachi") || "";
 
