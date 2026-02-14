@@ -162,7 +162,10 @@ button {
   <td colspan="3">Phụ thu</td>
   <td class="right" id="phuthu"></td>
 </tr>
-
+<tr id="thueRow">
+  <td colspan="3">thuế</td>
+  <td class="right" id="thue"></td>
+</tr>
 <tr class="bold">
   <td colspan="3">TỔNG THANH TOÁN</td>
   <td class="right" id="tongthanhtoan"></td>
@@ -224,6 +227,9 @@ if (!giamgia || Number(giamgia) == 0)
 
 if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
+  if (!thue || Number(thue) == 0)
+  document.getElementById("thueRow").style.display = "none";
+
 
 /* ===== Sản phẩm ===== */
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
