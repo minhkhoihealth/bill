@@ -216,10 +216,13 @@ document.getElementById("customerAddress").textContent = params.get("diachi") ||
 /* ===== Tiền ===== */
 const giamgia = params.get("giamgia");
 const phuthu = params.get("phuthu");
+  const thue = params.get("thue");
 const tongThanhToan = params.get("tongthanhtoan");
+
 
 document.getElementById("giamgia").textContent = formatMoney(giamgia);
 document.getElementById("phuthu").textContent = formatMoney(phuthu);
+  document.getElementById("thue").textContent = formatMoney(thue);
 document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
 
 if (!giamgia || Number(giamgia) == 0)
@@ -227,7 +230,8 @@ if (!giamgia || Number(giamgia) == 0)
 
 if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
-  if (!thue || Number(thue) == 0)
+
+if (!thue || Number(thue) == 0)
   document.getElementById("thueRow").style.display = "none";
 
 
