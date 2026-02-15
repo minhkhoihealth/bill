@@ -21,17 +21,16 @@ body{
 .title{
   text-align:center;
   font-size:18px;
-  font-weight:400;   /* bỏ in đậm */
+  font-weight:400;
   margin:6px 0;
 }
 
-.order-id{
-  font-size:13px;
-}
-
-.ban{
+/* ===== DÒNG SỐ HĐ + BÀN ===== */
+.info-line{
+  display:flex;
+  justify-content:space-between;
   font-size:14px;
-  font-weight:400;
+  margin-bottom:4px;
 }
 
 hr{
@@ -40,12 +39,12 @@ hr{
   margin:6px 0;
 }
 
-/* ===== DÒNG NỘI DUNG MÓN ===== */
+/* ===== DÒNG MÓN ===== */
 .item{
   padding:8px 0;
   border-bottom:1px dashed #000;
-  font-family: Tahoma, sans-serif; /* đổi sang Tahoma */
-  font-size:20px; /* tăng nhẹ từ 18 lên 20 */
+  font-family: Tahoma, sans-serif;
+  font-size:20px;
   font-weight:bold;
   word-wrap: break-word;
 }
@@ -61,6 +60,13 @@ hr{
   margin-top:10px;
 }
 
+button{
+  padding:6px 12px;
+  margin:4px;
+  font-size:14px;
+  cursor:pointer;
+}
+
 @media print{
   .button-box{ display:none; }
 }
@@ -71,6 +77,7 @@ hr{
 
 <div class="button-box">
   <button onclick="window.print()">🖨 In</button>
+  <button onclick="closePage()">❌ Đóng</button>
 </div>
 
 <div class="header">
@@ -79,8 +86,10 @@ hr{
 
 <div class="title">PHIẾU ORDER BẾP</div>
 
-<div class="order-id">Số HĐ: <span id="orderId"></span></div>
-<div class="ban">Bàn: <span id="ban"></span></div>
+<div class="info-line">
+  <div>Số HĐ: <span id="orderId"></span></div>
+  <div>Bàn: <span id="ban"></span></div>
+</div>
 
 <hr>
 
@@ -133,6 +142,14 @@ data.forEach(row => {
 
 document.getElementById("datetime").textContent =
   "Giờ in: " + new Date().toLocaleString("vi-VN");
+
+// ===== ĐÓNG TRANG =====
+function closePage(){
+  window.close();
+  setTimeout(() => {
+    window.history.back();
+  }, 300);
+}
 </script>
 
 </body>
