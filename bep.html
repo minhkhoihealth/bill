@@ -39,11 +39,13 @@ hr{
   margin:6px 0;
 }
 
+/* ===== DÒNG NỘI DUNG MÓN ===== */
 .item{
   padding:8px 0;
   border-bottom:1px dashed #000;
-  font-size:17px;
-  font-weight:800;
+  font-family: "Times New Roman", Times, serif; /* đổi font */
+  font-size:18px;
+  font-weight:bold; /* in đậm */
   word-wrap: break-word;
 }
 
@@ -99,7 +101,7 @@ document.getElementById("orderId").textContent =
 document.getElementById("ban").textContent =
   params.get("ban") || "";
 
-// ===== Format: Tên|Số lượng|Ghi chú =====
+// Format: Tên|Số lượng|Ghi chú
 const rawData = params.get("data") || "";
 const data = decodeURIComponent(rawData).split("_n_");
 
