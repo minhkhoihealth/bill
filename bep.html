@@ -25,12 +25,12 @@ body{
 }
 
 .order-id{
-  font-size:13px;   /* nhỏ lại */
+  font-size:13px;
 }
 
 .ban{
   font-size:14px;
-  font-weight:400;  /* không đậm */
+  font-weight:400;
 }
 
 hr{
@@ -116,10 +116,10 @@ data.forEach(row => {
 
   if (!name) return;
 
-  let text = name;
+  let text = "● " + name;
 
-  if (qty) text += "  " + qty;
-  if (note) text += "  " + note;
+  if (qty) text += " : " + qty;
+  if (note) text += " : " + note;
 
   let div = document.createElement("div");
   div.className = "item";
