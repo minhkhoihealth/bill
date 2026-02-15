@@ -9,13 +9,12 @@ body{
   font-family: Arial, Helvetica, sans-serif;
   width: 76mm;
   margin: 0 auto;
-  font-size: 15px;
-  font-weight: 700;
 }
 
 .header{
   text-align:center;
   margin-bottom:6px;
+  font-weight:700;
 }
 
 .title{
@@ -25,9 +24,13 @@ body{
   margin:6px 0;
 }
 
-.info{
-  margin:4px 0;
-  font-size:16px;
+.order-id{
+  font-size:13px;   /* nhỏ lại */
+}
+
+.ban{
+  font-size:14px;
+  font-weight:400;  /* không đậm */
 }
 
 hr{
@@ -39,28 +42,20 @@ hr{
 .item{
   padding:8px 0;
   border-bottom:1px dashed #000;
-}
-
-.name{
-  font-size:18px;
-  font-weight:900;
+  font-size:17px;
+  font-weight:800;
+  word-wrap: break-word;
 }
 
 .footer{
   text-align:center;
   margin-top:10px;
-  font-size:14px;
-  font-weight:600;
+  font-size:13px;
 }
 
 .button-box{
   text-align:center;
   margin-top:10px;
-}
-
-button{
-  padding:6px 12px;
-  font-size:14px;
 }
 
 @media print{
@@ -81,8 +76,8 @@ button{
 
 <div class="title">PHIẾU ORDER BẾP</div>
 
-<div class="info"><strong>Số HĐ:</strong> <span id="orderId"></span></div>
-<div class="info"><strong>Bàn:</strong> <span id="ban"></span></div>
+<div class="order-id">Số HĐ: <span id="orderId"></span></div>
+<div class="ban">Bàn: <span id="ban"></span></div>
 
 <hr>
 
@@ -95,7 +90,6 @@ button{
 <script>
 const params = new URLSearchParams(window.location.search);
 
-// ===== Thông tin cơ bản =====
 document.getElementById("storeName").textContent =
   params.get("tencuahang") || "";
 
@@ -105,7 +99,7 @@ document.getElementById("orderId").textContent =
 document.getElementById("ban").textContent =
   params.get("ban") || "";
 
-// ===== Danh sách món =====
+// ===== Format: Tên|Số lượng|Ghi chú =====
 const rawData = params.get("data") || "";
 const data = decodeURIComponent(rawData).split("_n_");
 
@@ -114,19 +108,26 @@ let container = document.getElementById("productList");
 data.forEach(row => {
   if (!row.trim()) return;
 
-  // Format hiện tại: "Tên món||"
   const parts = row.split("|");
+
   const name = parts[0] || "";
+  const qty  = parts[1] || "";
+  const note = parts[2] || "";
 
   if (!name) return;
 
+  let text = name;
+
+  if (qty) text += "  " + qty;
+  if (note) text += "  " + note;
+
   let div = document.createElement("div");
   div.className = "item";
-  div.innerHTML = `<div class="name">• ${name}</div>`;
+  div.textContent = text;
+
   container.appendChild(div);
 });
 
-// ===== Thời gian in =====
 document.getElementById("datetime").textContent =
   "Giờ in: " + new Date().toLocaleString("vi-VN");
 </script>
