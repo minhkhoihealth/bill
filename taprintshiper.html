@@ -116,7 +116,10 @@ button {
 </head>
 
 <body>
-
+<div class="button-box">
+  <button onclick="window.print()">🖨 In</button>
+  <button onclick="closePage()">❌ Đóng</button>
+</div>
 <div class="logo-box">
   <img id="logo">
 </div>
@@ -180,10 +183,7 @@ button {
 <div class="footer" id="datetime"></div>
 <div class="footer">Cảm ơn quý khách!</div>
 
-<div class="button-box">
-  <button onclick="window.print()">🖨 In</button>
-  <button onclick="closePage()">❌ Đóng</button>
-</div>
+
 
 <script>
 const params = new URLSearchParams(window.location.search);
