@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Phiếu Order Bếp</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  width: 76mm;
+  margin: 0 auto;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.title{
+  text-align:center;
+  font-size:16px;
+  font-weight:800;
+  margin:6px 0;
+}
+
+.info{
+  margin:4px 0;
+}
+
+hr{
+  border:none;
+  border-top:1px dashed #000;
+  margin:6px 0;
+}
+
+.item{
+  padding:6px 0;
+  border-bottom:1px dashed #000;
+}
+
+.name{
+  font-size:15px;
+  font-weight:700;
+}
+
+.note{
+  font-style:italic;
+  font-size:13px;
+  font-weight:500;
+}
+
+.footer{
+  text-align:center;
+  margin-top:8px;
+  font-size:13px;
+}
+
+.button-box{
+  text-align:center;
+  margin-top:10px;
+}
+
+@media print{
+  .button-box{ display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="button-box">
+  <button onclick="window.print()">🖨 In</button>
+</div>
+
+<div class="header">
+  <div id="storeName"></div>
+</div>
+
+<div class="title">PHIẾU ORDER BẾP</div>
+
+<div class="info"><strong>Số HĐ:</strong> <span id="orderId"></span></div>
+<div class="info"><strong>Bàn:</strong> <span id="ban"></span></div>
+
+<hr>
+
+<div id="productList"></div>
+
+<hr>
+
+<div class="footer" id="datetime"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("storeName").textContent =
+  params.get("tencuahang") || "";
+
+document.getElementById("orderId").textContent =
+  params.get("id") || "";
+
+document.getElementById("ban").textContent =
+  params.get("ban") || "";
+
+const data = decodeURIComponent(params.get("data") || "").split("_n_");
+
+let container = document.getElementById("productList");
+
+data.forEach(row => {
+  if (!row.trim()) return;
+
+  const parts = row.split("|");
+
+  const name = parts[1] || "";
+  const note = parts[2] || "";
+  const qty  = parts[3] || "";
+
+  let div = document.createElement("div");
+  div.className = "item";
+  div.innerHTML = `
+    <div class="name">${qty} x ${name}</div>
+    ${note ? `<div class="note">(${note})</div>` : ""}
+  `;
+  container.appendChild(div);
+});
+
+document.getElementById("datetime").textContent =
+  "Giờ in: " + new Date().toLocaleString("vi-VN");
+</script>
+
+</body>
+</html>
 
