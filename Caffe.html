@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Phiếu Order</title>
+
+<style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  width: 76mm;
+  margin: 0 auto;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:6px;
+  font-weight:700;
+}
+
+/* ===== TIÊU ĐỀ ===== */
+.title{
+  text-align:center;
+  font-size:18px;
+  font-weight:400;
+  margin:6px 0;
+}
+
+/* ===== SỐ HĐ + BÀN ===== */
+.info-line{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+hr{
+  border:none;
+  border-top:1px dashed #000;
+  margin:6px 0;
+}
+
+/* ===== DÒNG MÓN ===== */
+.item{
+  padding:8px 0;
+  border-bottom:1px dashed #000;
+  font-family: "Times New Roman", Times, serif; /* đổi sang Times */
+  font-size:25px;
+  font-weight:bold;
+  word-wrap: break-word;
+}
+
+.footer{
+  text-align:center;
+  margin-top:10px;
+  font-size:13px;
+}
+
+.button-box{
+  text-align:center;
+  margin-top:10px;
+}
+
+button{
+  padding:6px 12px;
+  margin:4px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+@media print{
+  .button-box{ display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="button-box">
+  <button onclick="window.print()">🖨 In</button>
+  <button onclick="closePage()">❌ Đóng</button>
+</div>
+
+<div class="header">
+  <div id="storeName"></div>
+</div>
+
+<div class="title">PHIẾU ORDER BẾP</div>
+
+<div class="info-line">
+  <div>Số HĐ: <span id="orderId"></span></div>
+  <div>Bàn: <span id="ban"></span></div>
+</div>
+
+<hr>
+
+<div id="productList"></div>
+
+<hr>
+
+<div class="footer" id="datetime"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("storeName").textContent =
+  params.get("tencuahang") || "";
+
+document.getElementById("orderId").textContent =
+  params.get("id") || "";
+
+document.getElementById("ban").textContent =
+  params.get("ban") || "";
+
+// Format: Tên|Số lượng|Ghi chú
+const rawData = params.get("data") || "";
+const data = decodeURIComponent(rawData).split("_n_");
+
+let container = document.getElementById("productList");
+
+data.forEach(row => {
+  if (!row.trim()) return;
+
+  const parts = row.split("|");
+
+  const name = parts[0] || "";
+  const qty  = parts[1] || "";
+  const note = parts[2] || "";
+
+  if (!name) return;
+
+  let text = "● " + name;
+
+  if (qty) text += " : " + qty;
+  if (note) text += " : " + note;
+
+  let div = document.createElement("div");
+  div.className = "item";
+  div.textContent = text;
+
+  container.appendChild(div);
+});
+
+document.getElementById("datetime").textContent =
+  "Giờ in: " + new Date().toLocaleString("vi-VN");
+
+function closePage(){
+  window.close();
+  setTimeout(() => {
+    window.history.back();
+  }, 300);
+}
+</script>
+
+</body>
+</html>
