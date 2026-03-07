@@ -114,7 +114,8 @@ document.getElementById("orderId").textContent =
 
 document.getElementById("ban").textContent =
   params.get("ban") || "";
-
+document.getElementById("Nhanvien").textContent =
+  params.get("Nhanvien") || "";
 // Format: Tên|Số lượng|Ghi chú
 const rawData = params.get("data") || "";
 const data = decodeURIComponent(rawData).split("_n_");
