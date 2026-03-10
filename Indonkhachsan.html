@@ -263,12 +263,14 @@ const qty  = Number(p[3] || 0);
 const price = Number(p[4] || 0);
 const total = Number(p[5] || qty * price);
 
-const total=qty*price;
-
 if(!groups[date]) groups[date]=[];
 
 groups[date].push({
-name,qty,price,total
+name,
+note,
+qty,
+price,
+total
 });
 
 });
@@ -298,9 +300,16 @@ html+=`<td rowspan="${items.length}" style="vertical-align:top;font-weight:bold"
 }
 
 html+=`<td class="center">${index+1}</td>`;
-html+=`<td>${item.name}${note ? "<br><small>"+note+"</small>" : ""}</td>`;
+
+html+=`<td>
+${item.name}
+${item.note ? "<br><small>"+item.note+"</small>" : ""}
+</td>`;
+
 html+=`<td class="center">${item.qty}</td>`;
+
 html+=`<td class="right">${item.price.toLocaleString()}</td>`;
+
 html+=`<td class="right">${item.total.toLocaleString()}</td>`;
 
 if(index==0){
@@ -321,7 +330,7 @@ document.getElementById("giamgia").textContent=(params.get("giamgia")||0);
 document.getElementById("phuthu").textContent=(params.get("phuthu")||0);
 document.getElementById("thue").textContent=(params.get("thue")||0);
 
-document.getElementById("tong").textContent=grandTotal.toLocaleString();
+document.getElementById("tong").textContent=(params.get("tongthanhtoan")||grandTotal).toLocaleString();
 
 /* BANK */
 
