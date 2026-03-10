@@ -18,8 +18,6 @@ margin:auto;
 color:#000;
 }
 
-/* HEADER */
-
 .header{
 text-align:center;
 margin-bottom:10px;
@@ -42,16 +40,12 @@ font-size:14px;
 font-size:14px;
 }
 
-/* TITLE */
-
 .title{
 text-align:center;
 font-size:24px;
 font-weight:bold;
 margin:15px 0;
 }
-
-/* INFO */
 
 .info{
 display:flex;
@@ -65,8 +59,6 @@ border:none;
 border-top:1px dashed #000;
 margin:10px 0;
 }
-
-/* TABLE */
 
 table{
 width:100%;
@@ -92,7 +84,10 @@ text-align:center;
 text-align:right;
 }
 
-/* TOTAL */
+.daytotal{
+background:#eee;
+font-weight:bold;
+}
 
 .summary{
 margin-top:10px;
@@ -107,8 +102,6 @@ padding:6px 0;
 font-size:18px;
 font-weight:bold;
 }
-
-/* FOOTER */
 
 .footer{
 text-align:center;
@@ -176,11 +169,13 @@ Nhân viên: <span id="nhanvien"></span>
 
 <thead>
 <tr>
+<th>Ngày</th>
 <th style="width:40px">STT</th>
 <th>Tên món</th>
 <th class="center">SL</th>
 <th class="right">Đơn giá</th>
 <th class="right">Thành tiền</th>
+<th class="right">Tổng tiền ngày</th>
 </tr>
 </thead>
 
@@ -232,135 +227,99 @@ const params = new URLSearchParams(window.location.search);
 
 /* STORE */
 
-const logo = params.get("logo");
-if(logo) document.getElementById("logo").src = logo;
+const logo=params.get("logo");
+if(logo) document.getElementById("logo").src=logo;
 
-document.getElementById("storeName").textContent =
-params.get("tencuahang") || "";
-
-document.getElementById("storeAddress").textContent =
-params.get("diachicuahang") || "";
-
-document.getElementById("storePhone").textContent =
-params.get("dienthoaicuahang") || "";
+document.getElementById("storeName").textContent=params.get("tencuahang")||"";
+document.getElementById("storeAddress").textContent=params.get("diachicuahang")||"";
+document.getElementById("storePhone").textContent=params.get("dienthoaicuahang")||"";
 
 /* INFO */
 
-document.getElementById("orderId").textContent =
-params.get("id") || "";
-
-document.getElementById("ban").textContent =
-params.get("ban") || "";
-
-document.getElementById("ten").textContent =
-params.get("ten") || "";
-
-document.getElementById("nhanvien").textContent =
-params.get("nhanvien") || "";
+document.getElementById("orderId").textContent=params.get("id")||"";
+document.getElementById("ban").textContent=params.get("ban")||"";
+document.getElementById("ten").textContent=params.get("ten")||"";
+document.getElementById("nhanvien").textContent=params.get("nhanvien")||"";
 
 /* PRODUCTS */
 
-const rawData = params.get("data") || "";
-const rows = decodeURIComponent(rawData).split("_n_");
+const rawData=params.get("data")||"";
+const rows=decodeURIComponent(rawData).split("_n_");
 
-let table = document.getElementById("productList");
+let table=document.getElementById("productList");
 
-let lastDate = "";
-let stt = 1;
-let dayTotal = 0;
+let groups={};
 
-let buffer = [];
-
-rows.forEach((row,i)=>{
+rows.forEach(row=>{
 
 if(!row.trim()) return;
 
-const parts = row.split("|");
+const p=row.split("|");
 
-const date = parts[0];
-const name = parts[1];
-const qty = Number(parts[2] || 0);
-const price = Number(parts[3] || 0);
+const date=p[0];
+const name=p[1];
+const qty=Number(p[2]||0);
+const price=Number(p[3]||0);
 
-const total = qty * price;
+const total=qty*price;
 
-/* Nếu sang ngày mới */
+if(!groups[date]) groups[date]=[];
 
-if(lastDate && date !== lastDate){
-
-buffer[buffer.length-1].dayTotal = dayTotal;
-
-renderRows(buffer);
-
-buffer = [];
-dayTotal = 0;
-stt = 1;
-
-}
-
-/* Lưu dòng */
-
-buffer.push({
-date: date,
-stt: stt++,
-name: name,
-qty: qty,
-price: price,
-total: total,
-dayTotal: ""
+groups[date].push({
+name,qty,price,total
 });
-
-dayTotal += total;
-
-lastDate = date;
 
 });
 
-/* ngày cuối */
+/* RENDER */
 
-if(buffer.length>0){
+let grandTotal=0;
 
-buffer[buffer.length-1].dayTotal = dayTotal;
+Object.keys(groups).forEach(date=>{
 
-renderRows(buffer);
+let items=groups[date];
 
+let dayTotal=0;
+
+items.forEach(i=>dayTotal+=i.total);
+
+grandTotal+=dayTotal;
+
+items.forEach((item,index)=>{
+
+let tr=document.createElement("tr");
+
+let html="";
+
+if(index==0){
+html+=`<td rowspan="${items.length}" style="vertical-align:top;font-weight:bold">${date}</td>`;
 }
 
-function renderRows(rows){
+html+=`<td class="center">${index+1}</td>`;
+html+=`<td>${item.name}</td>`;
+html+=`<td class="center">${item.qty}</td>`;
+html+=`<td class="right">${item.price.toLocaleString()}</td>`;
+html+=`<td class="right">${item.total.toLocaleString()}</td>`;
 
-rows.forEach((r,i)=>{
+if(index==0){
+html+=`<td rowspan="${items.length}" class="right daytotal">${dayTotal.toLocaleString()}</td>`;
+}
 
-let tr = document.createElement("tr");
-
-tr.innerHTML = `
-<td>${i==0 ? r.date : ""}</td>
-<td class="center">${r.stt}</td>
-<td>${r.name}</td>
-<td class="center">${r.qty}</td>
-<td class="right">${r.price.toLocaleString()}</td>
-<td class="right">${r.total.toLocaleString()}</td>
-<td class="right">${r.dayTotal ? r.dayTotal.toLocaleString() : ""}</td>
-`;
+tr.innerHTML=html;
 
 table.appendChild(tr);
 
 });
 
-}
+});
 
 /* SUMMARY */
 
-document.getElementById("giamgia").textContent =
-(params.get("giamgia")||0);
+document.getElementById("giamgia").textContent=(params.get("giamgia")||0);
+document.getElementById("phuthu").textContent=(params.get("phuthu")||0);
+document.getElementById("thue").textContent=(params.get("thue")||0);
 
-document.getElementById("phuthu").textContent =
-(params.get("phuthu")||0);
-
-document.getElementById("thue").textContent =
-(params.get("thue")||0);
-
-document.getElementById("tong").textContent =
-(params.get("tongthanhtoan")||0);
+document.getElementById("tong").textContent=grandTotal.toLocaleString();
 
 /* BANK */
 
