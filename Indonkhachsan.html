@@ -261,38 +261,92 @@ params.get("nhanvien") || "";
 /* PRODUCTS */
 
 const rawData = params.get("data") || "";
-
 const rows = decodeURIComponent(rawData).split("_n_");
 
 let table = document.getElementById("productList");
 
+let lastDate = "";
 let stt = 1;
+let dayTotal = 0;
 
-rows.forEach(row=>{
+let buffer = [];
+
+rows.forEach((row,i)=>{
 
 if(!row.trim()) return;
 
 const parts = row.split("|");
 
-const name = parts[0] || "";
-const qty = Number(parts[1] || 0);
-const price = Number(parts[2] || 0);
+const date = parts[0];
+const name = parts[1];
+const qty = Number(parts[2] || 0);
+const price = Number(parts[3] || 0);
 
 const total = qty * price;
+
+/* Nếu sang ngày mới */
+
+if(lastDate && date !== lastDate){
+
+buffer[buffer.length-1].dayTotal = dayTotal;
+
+renderRows(buffer);
+
+buffer = [];
+dayTotal = 0;
+stt = 1;
+
+}
+
+/* Lưu dòng */
+
+buffer.push({
+date: date,
+stt: stt++,
+name: name,
+qty: qty,
+price: price,
+total: total,
+dayTotal: ""
+});
+
+dayTotal += total;
+
+lastDate = date;
+
+});
+
+/* ngày cuối */
+
+if(buffer.length>0){
+
+buffer[buffer.length-1].dayTotal = dayTotal;
+
+renderRows(buffer);
+
+}
+
+function renderRows(rows){
+
+rows.forEach((r,i)=>{
 
 let tr = document.createElement("tr");
 
 tr.innerHTML = `
-<td class="center">${stt++}</td>
-<td>${name}</td>
-<td class="center">${qty}</td>
-<td class="right">${price.toLocaleString()}</td>
-<td class="right">${total.toLocaleString()}</td>
+<td>${i==0 ? r.date : ""}</td>
+<td class="center">${r.stt}</td>
+<td>${r.name}</td>
+<td class="center">${r.qty}</td>
+<td class="right">${r.price.toLocaleString()}</td>
+<td class="right">${r.total.toLocaleString()}</td>
+<td class="right">${r.dayTotal ? r.dayTotal.toLocaleString() : ""}</td>
 `;
 
 table.appendChild(tr);
 
 });
+
+}
 
 /* SUMMARY */
 
