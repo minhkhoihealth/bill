@@ -1,4 +1,11 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hóa đơn</title>
+
 <style>
+
 @page{
   size: A4 portrait;
   margin: 15mm;
@@ -8,26 +15,44 @@ body{
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   max-width: 210mm;
-  margin: auto;
+  margin:auto;
 }
 
 /* ===== HEADER ===== */
+
 .header{
   text-align:center;
   margin-bottom:10px;
-  font-weight:700;
-  font-size:20px;
+}
+
+.header img{
+  max-height:80px;
+}
+
+.store-name{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.address{
+  font-size:14px;
+}
+
+.phone{
+  font-size:14px;
 }
 
 /* ===== TIÊU ĐỀ ===== */
+
 .title{
   text-align:center;
-  font-size:24px;
-  font-weight:600;
-  margin:10px 0;
+  font-size:26px;
+  font-weight:bold;
+  margin:15px 0;
 }
 
-/* ===== SỐ HĐ + BÀN ===== */
+/* ===== THÔNG TIN ===== */
+
 .info-line{
   display:flex;
   justify-content:space-between;
@@ -38,27 +63,41 @@ body{
 hr{
   border:none;
   border-top:1px dashed #000;
-  margin:8px 0;
+  margin:10px 0;
 }
 
-/* ===== DÒNG MÓN ===== */
+/* ===== DANH SÁCH ===== */
+
 .item{
-  padding:10px 0;
+  padding:8px 0;
   border-bottom:1px dashed #000;
   font-family:"Times New Roman", Times, serif;
   font-size:20px;
   font-weight:bold;
 }
 
+/* ===== TỔNG ===== */
+
+.total{
+  text-align:right;
+  font-size:18px;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+/* ===== FOOTER ===== */
+
 .footer{
   text-align:center;
-  margin-top:15px;
+  margin-top:20px;
   font-size:14px;
 }
 
+/* ===== BUTTON ===== */
+
 .button-box{
   text-align:center;
-  margin-top:10px;
+  margin:10px;
 }
 
 button{
@@ -69,6 +108,158 @@ button{
 }
 
 @media print{
-  .button-box{display:none;}
+.button-box{display:none;}
 }
+
 </style>
+</head>
+
+<body>
+
+<div class="button-box">
+<button onclick="window.print()">🖨 In</button>
+<button onclick="closePage()">❌ Đóng</button>
+</div>
+
+<div class="header">
+
+<img id="logo">
+
+<div class="store-name" id="storeName"></div>
+
+<div class="address" id="storeAddress"></div>
+
+<div class="phone" id="storePhone"></div>
+
+</div>
+
+<div class="title">HÓA ĐƠN</div>
+
+<div class="info-line">
+<div>Số HĐ: <span id="orderId"></span></div>
+<div>Phòng/Bàn: <span id="ban"></span></div>
+</div>
+
+<div class="info-line">
+<div>Khách: <span id="ten"></span></div>
+<div>Nhân viên: <span id="nhanvien"></span></div>
+</div>
+
+<hr>
+
+<div id="productList"></div>
+
+<div class="total">
+Tổng thanh toán: <span id="tong"></span>
+</div>
+
+<hr>
+
+<div class="footer">
+
+<div id="bankInfo"></div>
+
+<div id="datetime"></div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+/* ===== THÔNG TIN CỬA HÀNG ===== */
+
+const logo = params.get("logo") || "";
+if(logo){
+document.getElementById("logo").src = logo;
+}
+
+document.getElementById("storeName").textContent =
+params.get("tencuahang") || "";
+
+document.getElementById("storeAddress").textContent =
+params.get("diachicuahang") || "";
+
+document.getElementById("storePhone").textContent =
+params.get("dienthoaicuahang") || "";
+
+/* ===== THÔNG TIN HÓA ĐƠN ===== */
+
+document.getElementById("orderId").textContent =
+params.get("id") || "";
+
+document.getElementById("ban").textContent =
+params.get("ban") || "";
+
+document.getElementById("ten").textContent =
+params.get("ten") || "";
+
+document.getElementById("nhanvien").textContent =
+params.get("nhanvien") || "";
+
+/* ===== DANH SÁCH MÓN ===== */
+
+const rawData = params.get("data") || "";
+
+const rows = decodeURIComponent(rawData).split("_n_");
+
+let container = document.getElementById("productList");
+
+rows.forEach(row => {
+
+if(!row.trim()) return;
+
+const parts = row.split("|");
+
+const name = parts[0] || "";
+const qty = parts[1] || "";
+const note = parts[2] || "";
+
+let text = "● " + name;
+
+if(qty) text += " : " + qty;
+
+if(note) text += " : " + note;
+
+let div = document.createElement("div");
+
+div.className = "item";
+
+div.textContent = text;
+
+container.appendChild(div);
+
+});
+
+/* ===== TỔNG TIỀN ===== */
+
+document.getElementById("tong").textContent =
+params.get("tongthanhtoan") || "0";
+
+/* ===== NGÂN HÀNG ===== */
+
+const bank = params.get("bank") || "";
+const stk = params.get("stk") || "";
+const chutk = params.get("chutk") || "";
+
+if(bank){
+document.getElementById("bankInfo").textContent =
+"Chuyển khoản: " + bank + " - " + stk + " - " + chutk;
+}
+
+/* ===== THỜI GIAN ===== */
+
+document.getElementById("datetime").textContent =
+"Giờ in: " + new Date().toLocaleString("vi-VN");
+
+/* ===== ĐÓNG ===== */
+
+function closePage(){
+window.close();
+setTimeout(()=>{window.history.back()},300);
+}
+
+</script>
+
+</body>
+</html>
