@@ -256,10 +256,12 @@ if(!row.trim()) return;
 
 const p=row.split("|");
 
-const date=p[0];
-const name=p[1];
-const qty=Number(p[2]||0);
-const price=Number(p[3]||0);
+const date = p[0];
+const name = p[1];
+const note = p[2] || "";
+const qty  = Number(p[3] || 0);
+const price = Number(p[4] || 0);
+const total = Number(p[5] || qty * price);
 
 const total=qty*price;
 
@@ -296,7 +298,7 @@ html+=`<td rowspan="${items.length}" style="vertical-align:top;font-weight:bold"
 }
 
 html+=`<td class="center">${index+1}</td>`;
-html+=`<td>${item.name}</td>`;
+html+=`<td>${item.name}${note ? "<br><small>"+note+"</small>" : ""}</td>`;
 html+=`<td class="center">${item.qty}</td>`;
 html+=`<td class="right">${item.price.toLocaleString()}</td>`;
 html+=`<td class="right">${item.total.toLocaleString()}</td>`;
