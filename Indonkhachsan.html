@@ -5,6 +5,15 @@
 <title>Hóa đơn</title>
 
 <style>
+  .summary td{
+border-bottom:1px dashed #999;
+padding:6px 0;
+}
+
+.total{
+font-size:18px;
+font-weight:bold;
+}
 th{
 border-bottom:2px solid #000;
 padding:8px 5px;
@@ -222,24 +231,28 @@ Thanh toán<br>Total Amount
 <table class="summary">
 
 <tr>
-<td class="right">Giảm giá:</td>
+<td colspan="8" class="right">Giảm giá</td>
 <td class="right" id="giamgia">0</td>
 </tr>
 
 <tr>
-<td class="right">Phụ thu:</td>
+<td colspan="8" class="right">Phụ thu</td>
 <td class="right" id="phuthu">0</td>
 </tr>
 
 <tr>
-<td class="right">Thuế:</td>
+<td colspan="8" class="right">Thuế</td>
 <td class="right" id="thue">0</td>
 </tr>
 
 <tr class="total">
-<td class="right">TỔNG THANH TOÁN:</td>
+<td colspan="8" class="right">
+TỔNG THANH TOÁN<br>
+<small>Total Amount</small>
+</td>
 <td class="right" id="tong"></td>
 </tr>
+
 
 </table>
 
