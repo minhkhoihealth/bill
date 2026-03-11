@@ -32,11 +32,7 @@ font-size:26px;
 font-weight:bold;
 }
 
-.address{
-font-size:14px;
-}
-
-.phone{
+.address,.phone{
 font-size:14px;
 }
 
@@ -177,7 +173,7 @@ Nhân viên: <span id="nhanvien"></span>
 <th class="right">Thành tiền</th>
 <th class="right">Giảm giá</th>
 <th class="right">Tổng tiền</th>
-<th class="right">Thanh toán </th>
+<th class="right">Thanh toán</th>
 </tr>
 </thead>
 
@@ -232,16 +228,16 @@ const params = new URLSearchParams(window.location.search);
 const logo=params.get("logo");
 if(logo) document.getElementById("logo").src=logo;
 
-document.getElementById("storeName").textContent=params.get("tencuahang")||"";
-document.getElementById("storeAddress").textContent=params.get("diachicuahang")||"";
-document.getElementById("storePhone").textContent=params.get("dienthoaicuahang")||"";
+storeName.textContent=params.get("tencuahang")||"";
+storeAddress.textContent=params.get("diachicuahang")||"";
+storePhone.textContent=params.get("dienthoaicuahang")||"";
 
 /* INFO */
 
-document.getElementById("orderId").textContent=params.get("id")||"";
-document.getElementById("ban").textContent=params.get("ban")||"";
-document.getElementById("ten").textContent=params.get("ten")||"";
-document.getElementById("nhanvien").textContent=params.get("nhanvien")||"";
+orderId.textContent=params.get("id")||"";
+ban.textContent=params.get("ban")||"";
+ten.textContent=params.get("ten")||"";
+nhanvien.textContent=params.get("nhanvien")||"";
 
 /* PRODUCTS */
 
@@ -258,14 +254,14 @@ if(!row.trim()) return;
 
 const p=row.split("|");
 
-const date = p[0];
-const name = p[1];
-const note = p[2] || "";
-const qty  = Number(p[3] || 0);
-const price = Number(p[4] || 0);
-const discount = Number(p[5] || 0);
-const total = qty * price;
-const finalTotal = total - discount;
+const date=p[0];
+const name=p[1];
+const note=p[2]||"";
+const qty=Number(p[3]||0);
+const price=Number(p[4]||0);
+const total=Number(p[5]||qty*price);
+const discount=Number(p[6]||0);
+const finalTotal=Number(p[7]||total-discount);
 
 if(!groups[date]) groups[date]=[];
 
@@ -316,7 +312,10 @@ html+=`<td class="center">${item.qty}</td>`;
 
 html+=`<td class="right">${item.price.toLocaleString()}</td>`;
 
+html+=`<td class="right">${item.total.toLocaleString()}</td>`;
+
 html+=`<td class="right">${item.discount.toLocaleString()}</td>`;
+
 html+=`<td class="right">${item.finalTotal.toLocaleString()}</td>`;
 
 if(index==0){
@@ -333,11 +332,11 @@ table.appendChild(tr);
 
 /* SUMMARY */
 
-document.getElementById("giamgia").textContent=(params.get("giamgia")||0);
-document.getElementById("phuthu").textContent=(params.get("phuthu")||0);
-document.getElementById("thue").textContent=(params.get("thue")||0);
+giamgia.textContent=(params.get("giamgia")||0);
+phuthu.textContent=(params.get("phuthu")||0);
+thue.textContent=(params.get("thue")||0);
 
-document.getElementById("tong").textContent=(params.get("tongthanhtoan")||grandTotal).toLocaleString();
+tong.textContent=(params.get("tongthanhtoan")||grandTotal).toLocaleString();
 
 /* BANK */
 
@@ -346,14 +345,12 @@ const stk=params.get("stk");
 const chutk=params.get("chutk");
 
 if(bank){
-document.getElementById("bankInfo").textContent=
-"Chuyển khoản: "+bank+" | STK: "+stk+" | "+chutk;
+bankInfo.textContent="Chuyển khoản: "+bank+" | STK: "+stk+" | "+chutk;
 }
 
 /* TIME */
 
-document.getElementById("datetime").textContent=
-"Thời gian: "+new Date().toLocaleString("vi-VN");
+datetime.textContent="Thời gian: "+new Date().toLocaleString("vi-VN");
 
 </script>
 
