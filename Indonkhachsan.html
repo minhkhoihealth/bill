@@ -5,6 +5,14 @@
 <title>Hóa đơn</title>
 
 <style>
+  table{
+page-break-inside:auto;
+}
+
+tr{
+page-break-inside:avoid;
+page-break-after:auto;
+}
   .summary td{
 border-bottom:1px dashed #999;
 padding:6px 0;
@@ -47,6 +55,8 @@ margin-bottom:10px;
 
 .logo{
 max-height:80px;
+display:block;
+margin:auto;
 }
 
 .store{
@@ -155,7 +165,8 @@ cursor:pointer;
 
 <div class="header">
 
-<img id="logo" class="logo">
+const logo=params.get("logo") || "logo.png";
+document.getElementById("logo").src=logo;
 
 <div class="store" id="storeName"></div>
 
