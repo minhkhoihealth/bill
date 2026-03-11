@@ -305,7 +305,18 @@ if(!row.trim()) return;
 
 const p=row.split("|");
 
-const date=p[0];
+const rawDate = p[0];
+
+let date = rawDate;
+
+if(rawDate.includes("/")){
+const parts = rawDate.split("/");
+if(parts.length === 3){
+date = parts[1].padStart(2,'0') + "/" +
+       parts[0].padStart(2,'0') + "/" +
+       parts[2];
+}
+}
 const name=p[1];
 const note=p[2]||"";
 const qty=Number(p[3]||0);
