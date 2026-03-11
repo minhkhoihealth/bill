@@ -175,7 +175,9 @@ Nhân viên: <span id="nhanvien"></span>
 <th class="center">SL</th>
 <th class="right">Đơn giá</th>
 <th class="right">Thành tiền</th>
-<th class="right">Tổng tiền ngày</th>
+<th class="right">Giảm giá</th>
+<th class="right">Tổng tiền</th>
+<th class="right">Thanh toán </th>
 </tr>
 </thead>
 
@@ -262,6 +264,8 @@ const note = p[2] || "";
 const qty  = Number(p[3] || 0);
 const price = Number(p[4] || 0);
 const total = Number(p[5] || qty * price);
+const discount = Number(p[6] || 0);
+const finalTotal = total - discount;
 
 if(!groups[date]) groups[date]=[];
 
@@ -270,7 +274,9 @@ name,
 note,
 qty,
 price,
-total
+total,
+discount,
+finalTotal
 });
 
 });
@@ -285,7 +291,7 @@ let items=groups[date];
 
 let dayTotal=0;
 
-items.forEach(i=>dayTotal+=i.total);
+items.forEach(i=>dayTotal+=i.finalTotal);
 
 grandTotal+=dayTotal;
 
@@ -310,7 +316,8 @@ html+=`<td class="center">${item.qty}</td>`;
 
 html+=`<td class="right">${item.price.toLocaleString()}</td>`;
 
-html+=`<td class="right">${item.total.toLocaleString()}</td>`;
+html+=`<td class="right">${item.discount.toLocaleString()}</td>`;
+html+=`<td class="right">${item.finalTotal.toLocaleString()}</td>`;
 
 if(index==0){
 html+=`<td rowspan="${items.length}" class="right daytotal">${dayTotal.toLocaleString()}</td>`;
