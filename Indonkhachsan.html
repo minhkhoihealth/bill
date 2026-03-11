@@ -263,8 +263,8 @@ const name = p[1];
 const note = p[2] || "";
 const qty  = Number(p[3] || 0);
 const price = Number(p[4] || 0);
-const total = Number(p[5] || qty * price);
-const discount = Number(p[6] || 0);
+const discount = Number(p[5] || 0);
+const total = qty * price;
 const finalTotal = total - discount;
 
 if(!groups[date]) groups[date]=[];
