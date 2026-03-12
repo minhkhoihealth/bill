@@ -5,6 +5,21 @@
 <title>Hóa đơn</title>
 
 <style>
+  table{
+width:100%;
+border-collapse:collapse;
+page-break-inside:auto;
+}
+
+tr{
+page-break-inside:avoid;
+page-break-after:auto;
+}
+  @media print{
+body{
+zoom:100%;
+}
+}
   .summary td{
 border-bottom:1px dashed #999;
 padding:6px 0;
@@ -188,36 +203,35 @@ Nhân viên: <span id="nhanvien"></span>
 <thead>
 <tr>
 
-<th style="width:90px">Ngày<br>Date</th>
+<th style="width:20mm">Ngày<br>Date</th>
 
-<th style="width:40px" class="center">
-</th>
+<th style="width:10mm" class="center"></th>
 
-<th style="width:220px">
+<th style="width:55mm">
 Tên sản phẩm<br>Item
 </th>
 
-<th style="width:35px" class="center">
+<th style="width:10mm" class="center">
 SL<br>Qty
 </th>
 
-<th style="width:90px" class="right">
+<th style="width:22mm" class="right">
 Đơn giá<br>Price
 </th>
 
-<th style="width:100px" class="right">
+<th style="width:22mm" class="right">
 Thành tiền<br>Sub Total
 </th>
 
-<th style="width:80px" class="right">
+<th style="width:15mm" class="right">
 Giảm giá<br>Discount
 </th>
 
-<th style="width:100px" class="right">
+<th style="width:18mm" class="right">
 Tổng tiền<br>Total
 </th>
 
-<th style="width:110px" class="right">
+<th style="width:18mm" class="right">
 Thanh toán<br>Total Amount
 </th>
 
