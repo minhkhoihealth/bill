@@ -246,17 +246,17 @@ Thanh toán<br>Total Amount
 <table class="summary">
 
 <tr>
-<td colspan="8" class="right">Giảm giá</td>
+<td colspan="8" class="right">Tổng tiền:</td>
 <td class="right" id="giamgia">0</td>
 </tr>
 
 <tr>
-<td colspan="8" class="right">Phụ thu</td>
+<td colspan="8" class="right">Phụ thu:</td>
 <td class="right" id="phuthu">0</td>
 </tr>
 
 <tr>
-<td colspan="8" class="right">Thuế</td>
+<td colspan="8" class="right">Thuế:</td>
 <td class="right" id="thue">0</td>
 </tr>
 
@@ -412,14 +412,11 @@ table.appendChild(tr);
 const giamGia = Number(params.get("giamgia") || 0);
 const phuThu = Number(params.get("phuthu") || 0);
 const thueValue = Number(params.get("thue") || 0);
+const tongThanhToan = Number(params.get("tongthanhtoan") || 0);
 
 giamgia.textContent = giamGia.toLocaleString("vi-VN");
 phuthu.textContent = phuThu.toLocaleString("vi-VN");
 thue.textContent = thueValue.toLocaleString("vi-VN");
-
-/* TÍNH TỔNG THANH TOÁN */
-
-const tongThanhToan = grandTotal + phuThu + thueValue;
 
 tong.textContent =
 tongThanhToan.toLocaleString("vi-VN") + " VND";
