@@ -153,10 +153,10 @@ ten.textContent = params.get("ten") || "";
 diachi.textContent = params.get("diachi") || "";
 
 /* ===== TIỀN ===== */
-const giamgia = toNumber((params.get("giamgia")||"").trim());
-const phuthu = toNumber((params.get("phuthu")||"").trim());
-const thue = toNumber((params.get("thue")||"").trim());
-const coc = toNumber((params.get("coc")||"").trim());
+const giamgia = toNumber(params.get("giamgia"));
+const phuthu = toNumber(params.get("phuthu"));
+const thue = toNumber(params.get("thue"));
+const coc = toNumber(params.get("coc")); // parse cọc chuẩn
 
 /* ===== SẢN PHẨM ===== */
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
@@ -192,29 +192,23 @@ let finalPay = tongThanhToan - coc;
 /* ===== HIỂN THỊ ===== */
 totalPrice.textContent = formatMoney(total);
 
-if(giamgia>0){
-    giamgia.textContent = formatMoney(giamgia);
-    giamgiaRow.style.display = "";
-}else giamgiaRow.style.display="none";
+giamgiaRow.style.display = giamgia>0 ? "" : "none";
+giamgia.textContent = giamgia>0 ? formatMoney(giamgia) : "";
 
-if(phuthu>0){
-    phuthu.textContent = formatMoney(phuthu);
-    phuthuRow.style.display = "";
-}else phuthuRow.style.display="none";
+phuthuRow.style.display = phuthu>0 ? "" : "none";
+phuthu.textContent = phuthu>0 ? formatMoney(phuthu) : "";
 
-if(thue>0){
-    thue.textContent = formatMoney(thue);
-    thueRow.style.display = "";
-}else thueRow.style.display="none";
+thueRow.style.display = thue>0 ? "" : "none";
+thue.textContent = thue>0 ? formatMoney(thue) : "";
 
-if(coc>0){
-    coc.textContent = formatMoney(coc);
-    cocRow.style.display = "";
-}else cocRow.style.display="none";
+// ✅ CỌC LUÔN HIỂN THỊ NẾU >0
+cocRow.style.display = coc>0 ? "" : "none";
+coc.textContent = coc>0 ? formatMoney(coc) : "";
 
-tongthanhtoan.textContent = finalPay >= 0 
-    ? formatMoney(finalPay) + " VND" 
-    : "Dư " + formatMoney(Math.abs(finalPay)) + " VND";
+// Hiển thị CẦN THANH TOÁN
+tongthanhtoan.textContent = finalPay>=0 
+  ? formatMoney(finalPay) + " VND"
+  : "Dư " + formatMoney(Math.abs(finalPay)) + " VND";
 
 /* ===== QR ===== */
 const bank = params.get("bank");
