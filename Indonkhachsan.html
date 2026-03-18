@@ -74,9 +74,9 @@ Nhân viên: <span id="nhanvien"></span>
 
 <table class="summary">
 
-<tr id="row_giamgia">
-<td colspan="8" class="right">Giảm giá:</td>
-<td class="right" id="giamgia">0</td>
+<tr id="row_tongtien">
+<td colspan="8" class="right">Tổng tiền:</td>
+<td class="right" id="tongtien">0</td>
 </tr>
 
 <tr id="row_phuthu">
@@ -172,17 +172,17 @@ Object.values(groups).forEach(items=>{
 });
 
 /* SUMMARY PARAM */
-const giamGia = toNumber(params.get("giamgia"));
+const tongtien = toNumber(params.get("tongtien"));
 const phuThu = toNumber(params.get("phuthu"));
 const thueValue = toNumber(params.get("thue"));
 const cocValue = toNumber(params.get("coc"));
 
-tongThanhToan = tongThanhToan - giamGia + phuThu + thueValue;
+tongThanhToan = tongThanhToan - tongtien + phuThu + thueValue;
 
 let finalPay = tongThanhToan - cocValue;
 
 /* HIỂN THỊ */
-giamgia.textContent = giamGia.toLocaleString("vi-VN");
+tongtien.textContent = tongtien.toLocaleString("vi-VN");
 phuthu.textContent = phuThu.toLocaleString("vi-VN");
 thue.textContent = thueValue.toLocaleString("vi-VN");
 coc.textContent = cocValue.toLocaleString("vi-VN");
@@ -195,7 +195,7 @@ if(finalPay < 0){
 }
 
 /* ẨN DÒNG = 0 */
-if(giamGia === 0) row_giamgia.style.display="none";
+if(tongtien === 0) row_tongtien.style.display="none";
 if(phuThu === 0) row_phuthu.style.display="none";
 if(thueValue === 0) row_thue.style.display="none";
 if(cocValue === 0) row_coc.style.display="none";
