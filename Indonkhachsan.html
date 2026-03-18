@@ -189,7 +189,7 @@ coc.textContent = cocValue.toLocaleString("vi-VN");
 
 /* HIỂN THỊ TIỀN */
 if(finalPay < 0){
-  tong.textContent = "Dư " + Math.abs(finalPay).toLocaleString("vi-VN") + " VND";
+  tong.textContent =  Math.abs(finalPay).toLocaleString("vi-VN") + " VND";
 }else{
   tong.textContent = finalPay.toLocaleString("vi-VN") + " VND";
 }
