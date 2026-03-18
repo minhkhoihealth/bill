@@ -74,22 +74,22 @@ Nhân viên: <span id="nhanvien"></span>
 
 <table class="summary">
 
-<tr>
+<tr id="row_giamgia">
 <td colspan="8" class="right">Tổng tiền:</td>
 <td class="right" id="giamgia">0</td>
 </tr>
 
-<tr>
+<tr id="row_phuthu">
 <td colspan="8" class="right">Phụ thu:</td>
 <td class="right" id="phuthu">0</td>
 </tr>
 
-<tr>
+<tr id="row_thue">
 <td colspan="8" class="right">Thuế:</td>
 <td class="right" id="thue">0</td>
 </tr>
 
-<tr>
+<tr id="row_coc">
 <td colspan="8" class="right">Cọc trước:</td>
 <td class="right" id="coc">0</td>
 </tr>
@@ -203,8 +203,14 @@ phuthu.textContent = phuThu.toLocaleString("vi-VN");
 thue.textContent = thueValue.toLocaleString("vi-VN");
 coc.textContent = cocValue.toLocaleString("vi-VN");
 
+/* ẨN DÒNG = 0 */
+if(giamGia === 0) document.getElementById("row_giamgia").style.display = "none";
+if(phuThu === 0) document.getElementById("row_phuthu").style.display = "none";
+if(thueValue === 0) document.getElementById("row_thue").style.display = "none";
+if(cocValue === 0) document.getElementById("row_coc").style.display = "none";
+
 /* TRỪ CỌC */
-const finalPay = tongThanhToan - cocValue;
+const finalPay = Math.max(0, tongThanhToan - cocValue);
 
 tong.textContent = finalPay.toLocaleString("vi-VN") + " VND";
 
