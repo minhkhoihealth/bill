@@ -5,160 +5,64 @@
 <title>Hóa đơn</title>
 
 <style>
-  table{
-width:100%;
-border-collapse:collapse;
-page-break-inside:auto;
-}
-
-tr{
-page-break-inside:avoid;
-page-break-after:auto;
-}
-  @media print{
-body{
-zoom:100%;
-}
-}
-  .summary td{
-border-bottom:1px dashed #999;
-padding:6px 0;
-}
-
-.total{
-font-size:18px;
-font-weight:bold;
-}
-th{
-border-bottom:2px solid #000;
-padding:6px 4px;
-font-size:11px;
-line-height:1.2;
-white-space:normal;
-}
-
-td{
-font-size:14px;
-}
-
 table{
-table-layout:fixed;
+  width:100%;
+  border-collapse:collapse;
+  page-break-inside:auto;
+}
+tr{
+  page-break-inside:avoid;
 }
 @page{
-size:A4;
-margin:10mm;
+  size:A4;
+  margin:10mm;
 }
-
 body{
-font-family:Arial, sans-serif;
-width:190mm;
-margin:auto;
-color:#000;
+  font-family:Arial, sans-serif;
+  width:190mm;
+  margin:auto;
 }
+th{
+  border-bottom:2px solid #000;
+  padding:6px 4px;
+  font-size:11px;
+}
+td{
+  border-bottom:1px dashed #999;
+  padding:6px 0;
+  font-size:14px;
+}
+.center{text-align:center;}
+.right{text-align:right;}
+.daytotal{background:#eee;font-weight:bold;}
 
-.header{
-text-align:center;
-margin-bottom:10px;
-}
+.header{text-align:center;margin-bottom:10px;}
+.logo{max-height:80px;}
+.store{font-size:26px;font-weight:bold;}
+.address,.phone{font-size:14px;}
 
-.logo{
-max-height:80px;
-}
-
-.store{
-font-size:26px;
-font-weight:bold;
-}
-
-.address,.phone{
-font-size:14px;
-}
-
-.title{
-text-align:center;
-font-size:24px;
-font-weight:bold;
-margin:15px 0;
-}
+.title{text-align:center;font-size:24px;font-weight:bold;margin:15px 0;}
 
 .info{
-display:flex;
-justify-content:space-between;
-margin-bottom:10px;
-font-size:15px;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
 }
 
-hr{
-border:none;
-border-top:1px dashed #000;
-margin:10px 0;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th{
-border-bottom:2px solid #000;
-padding:8px 0;
-text-align:left;
-}
-
-td{
-border-bottom:1px dashed #999;
-padding:6px 0;
-}
-
-.center{
-text-align:center;
-}
-
-.right{
-text-align:right;
-}
-
-.daytotal{
-background:#eee;
-font-weight:bold;
-}
-
-.summary{
-margin-top:10px;
-width:100%;
-}
-
-.summary td{
-padding:6px 0;
-}
+.summary td{border-bottom:1px dashed #999;}
 
 .total{
-font-size:18px;
-font-weight:bold;
+  font-size:18px;
+  font-weight:bold;
 }
 
 .footer{
-text-align:center;
-margin-top:20px;
-font-size:14px;
+  text-align:center;
+  margin-top:20px;
 }
 
-.button-box{
-text-align:center;
-margin-bottom:10px;
-}
-
-button{
-padding:8px 14px;
-margin:5px;
-font-size:15px;
-cursor:pointer;
-}
-
-@media print{
-.button-box{display:none;}
-}
-
+.button-box{text-align:center;margin-bottom:10px;}
+@media print{.button-box{display:none;}}
 </style>
 </head>
 
@@ -170,77 +74,42 @@ cursor:pointer;
 </div>
 
 <div class="header">
-
 <img id="logo" class="logo">
-
 <div class="store" id="storeName"></div>
-
 <div class="address" id="storeAddress"></div>
-
 <div class="phone" id="storePhone"></div>
-
 </div>
 
 <div class="title">HÓA ĐƠN THANH TOÁN</div>
 
 <div class="info">
-
 <div>
 Số HĐ: <span id="orderId"></span><br>
 Khách: <span id="ten"></span>
 </div>
-
 <div>
 Bàn/Phòng: <span id="ban"></span><br>
 Nhân viên: <span id="nhanvien"></span>
 </div>
-
 </div>
 
 <hr>
 
 <table>
-
 <thead>
 <tr>
-
-<th style="width:20mm">Ngày<br>Date</th>
-
-<th style="width:10mm" class="center"></th>
-
-<th style="width:55mm">
-Tên sản phẩm<br>Item
-</th>
-
-<th style="width:10mm" class="center">
-SL<br>Qty
-</th>
-
-<th style="width:22mm" class="right">
-Đơn giá<br>Price
-</th>
-
-<th style="width:22mm" class="right">
-Thành tiền<br>Total
-</th>
-
-<th style="width:15mm" class="right">
-Giảm giá<br>Disc.
-</th>
-
-<th style="width:18mm" class="right">
-Tổng tiền<br>Total
-</th>
-
-<th style="width:18mm" class="right">
-Thanh toán<br>Total Amount
-</th>
-
+<th style="width:20mm">Ngày</th>
+<th style="width:10mm"></th>
+<th style="width:55mm">Tên sản phẩm</th>
+<th style="width:10mm">SL</th>
+<th style="width:22mm">Đơn giá</th>
+<th style="width:22mm">Thành tiền</th>
+<th style="width:15mm">Giảm giá</th>
+<th style="width:18mm">Tổng</th>
+<th style="width:18mm">Thanh toán</th>
 </tr>
 </thead>
-
 <tbody id="productList"></tbody>
-
 </table>
 
 <table class="summary">
@@ -258,33 +127,28 @@ Thanh toán<br>Total Amount
 <tr>
 <td colspan="8" class="right">Thuế:</td>
 <td class="right" id="thue">0</td>
-<td class="right" id="coc">0</td>
+</tr>
 
+<tr>
+<td colspan="8" class="right">Cọc trước:</td>
+<td class="right" id="coc">0</td>
 </tr>
 
 <tr class="total">
 <td colspan="8" class="right">
-TỔNG THANH TOÁN<br>
-<small>Total Amount</small>
+CÒN PHẢI THANH TOÁN
 </td>
 <td class="right" id="tong"></td>
 </tr>
-
 
 </table>
 
 <hr>
 
 <div class="footer">
-
 <div id="bankInfo"></div>
-
 <div id="datetime"></div>
-
-<div style="margin-top:10px">
-Cảm ơn quý khách và hẹn gặp lại!
-</div>
-
+<div>Cảm ơn quý khách!</div>
 </div>
 
 <script>
@@ -292,7 +156,6 @@ Cảm ơn quý khách và hẹn gặp lại!
 const params = new URLSearchParams(window.location.search);
 
 /* STORE */
-
 const logo=params.get("logo");
 if(logo) document.getElementById("logo").src=logo;
 
@@ -301,39 +164,24 @@ storeAddress.textContent=params.get("diachicuahang")||"";
 storePhone.textContent=params.get("dienthoaicuahang")||"";
 
 /* INFO */
-
 orderId.textContent=params.get("id")||"";
 ban.textContent=params.get("ban")||"";
 ten.textContent=params.get("ten")||"";
 nhanvien.textContent=params.get("nhanvien")||"";
 
 /* PRODUCTS */
-
 const rawData=params.get("data")||"";
 const rows=decodeURIComponent(rawData).split("_n_");
 
 let table=document.getElementById("productList");
-
 let groups={};
 
 rows.forEach(row=>{
-
 if(!row.trim()) return;
 
 const p=row.split("|");
 
-const rawDate = p[0];
-
-let date = rawDate;
-
-if(rawDate.includes("/")){
-const parts = rawDate.split("/");
-if(parts.length === 3){
-date = parts[1].padStart(2,'0') + "/" +
-       parts[0].padStart(2,'0') + "/" +
-       parts[2];
-}
-}
+let date=p[0];
 const name=p[1];
 const note=p[2]||"";
 const qty=Number(p[3]||0);
@@ -344,57 +192,31 @@ const finalTotal=Number(p[7]||total-discount);
 
 if(!groups[date]) groups[date]=[];
 
-groups[date].push({
-name,
-note,
-qty,
-price,
-total,
-discount,
-finalTotal
-});
-
+groups[date].push({name,note,qty,price,total,discount,finalTotal});
 });
 
 /* RENDER */
-
-let grandTotal=0;
-
 Object.keys(groups).forEach(date=>{
-
 let items=groups[date];
-
 let dayTotal=0;
 
 items.forEach(i=>dayTotal+=i.finalTotal);
 
-grandTotal+=dayTotal;
-
 items.forEach((item,index)=>{
-
 let tr=document.createElement("tr");
 
 let html="";
 
 if(index==0){
-html+=`<td rowspan="${items.length}" style="vertical-align:top;font-weight:bold">${date}</td>`;
+html+=`<td rowspan="${items.length}">${date}</td>`;
 }
 
 html+=`<td class="center">${index+1}</td>`;
-
-html+=`<td>
-${item.name}
-${item.note ? "<br><small>"+item.note+"</small>" : ""}
-</td>`;
-
+html+=`<td>${item.name}${item.note?"<br><small>"+item.note+"</small>":""}</td>`;
 html+=`<td class="center">${item.qty}</td>`;
-
 html+=`<td class="right">${item.price.toLocaleString()}</td>`;
-
 html+=`<td class="right">${item.total.toLocaleString()}</td>`;
-
 html+=`<td class="right">${item.discount.toLocaleString()}</td>`;
-
 html+=`<td class="right">${item.finalTotal.toLocaleString()}</td>`;
 
 if(index==0){
@@ -402,31 +224,28 @@ html+=`<td rowspan="${items.length}" class="right daytotal">${dayTotal.toLocaleS
 }
 
 tr.innerHTML=html;
-
 table.appendChild(tr);
-
 });
-
 });
 
 /* SUMMARY */
-
 const giamGia = Number(params.get("giamgia") || 0);
 const phuThu = Number(params.get("phuthu") || 0);
 const thueValue = Number(params.get("thue") || 0);
 const tongThanhToan = Number(params.get("tongthanhtoan") || 0);
-  const cocValue = Number(params.get("coc") || 0);
+const cocValue = Number(params.get("coc") || 0);
 
 giamgia.textContent = giamGia.toLocaleString("vi-VN");
 phuthu.textContent = phuThu.toLocaleString("vi-VN");
 thue.textContent = thueValue.toLocaleString("vi-VN");
-  coc.textContent = cocValue.toLocaleString("vi-VN");
+coc.textContent = cocValue.toLocaleString("vi-VN");
 
-tong.textContent =
-tongThanhToan.toLocaleString("vi-VN") + " VND";
+/* TRỪ CỌC */
+const finalPay = tongThanhToan - cocValue;
+
+tong.textContent = finalPay.toLocaleString("vi-VN") + " VND";
 
 /* BANK */
-
 const bank=params.get("bank");
 const stk=params.get("stk");
 const chutk=params.get("chutk");
@@ -436,7 +255,6 @@ bankInfo.textContent="Chuyển khoản: "+bank+" | STK: "+stk+" | "+chutk;
 }
 
 /* TIME */
-
 datetime.textContent="Thời gian: "+new Date().toLocaleString("vi-VN");
 
 </script>
