@@ -3,30 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <title>In hóa đơn</title>
-
 <style>
-body {
-  font-family: Arial;
-  width: 76mm;
-  margin: 0 auto;
-  font-size: 13px;
-}
-.logo-box { text-align: center; margin: 8px 0; }
-.logo-box img { max-width: 150px; max-height: 80px; }
-.bill-title { text-align: center; font-weight: bold; font-size: 15px; margin: 8px 0; }
-.info { text-align: center; font-size: 13px; }
-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-th { font-size: 12px; border-bottom: 1px dashed #000; padding: 6px 0; }
-td { border-bottom: 1px dashed #000; padding: 6px 0; font-size: 12px; }
-.right { text-align: right; }
-.center { text-align: center; }
-.bold { font-weight: bold; }
-.button-box { text-align: center; margin-top: 10px; }
-@media print { .button-box { display: none; } }
+body { font-family: Arial; width: 76mm; margin:0 auto; font-size:13px;}
+.logo-box{text-align:center;margin:8px 0;}
+.logo-box img{max-width:150px; max-height:80px;}
+.bill-title{text-align:center;font-weight:bold;font-size:15px;margin:8px 0;}
+.info{text-align:center;font-size:13px;}
+table{width:100%; border-collapse:collapse; margin-top:8px;}
+th{font-size:12px;border-bottom:1px dashed #000;padding:6px 0;}
+td{border-bottom:1px dashed #000;padding:6px 0;font-size:12px;}
+.right{text-align:right;}
+.center{text-align:center;}
+.bold{font-weight:bold;}
+.button-box{text-align:center;margin-top:10px;}
+@media print{.button-box{display:none;}}
 </style>
 </head>
-
 <body>
+
 <div class="button-box">
   <button onclick="window.print()">🖨 In</button>
   <button onclick="window.close()">❌ Đóng</button>
@@ -105,97 +99,82 @@ td { border-bottom: 1px dashed #000; padding: 6px 0; font-size: 12px; }
 <script>
 const params = new URLSearchParams(window.location.search);
 
-function toNumber(v){
-  if(!v) return 0;
-  return Number(v.toString().replace(/[^0-9.-]/g,'')) || 0;
-}
+function toNumber(v){ return Number(v?.toString().replace(/[^0-9.-]/g,'')||0); }
+function formatMoney(n){ return Number(n||0).toLocaleString("vi-VN"); }
 
-function formatMoney(n){
-  return Number(n || 0).toLocaleString("vi-VN");
-}
+/* STORE INFO */
+logo=params.get("logo");
+if(logo) document.getElementById("logo").src=logo;
 
-/* ===== STORE ===== */
-const logo = params.get("logo");
-if(logo) document.getElementById("logo").src = logo;
+storeName.textContent=params.get("tencuahang")||"";
+storeAddress.textContent=params.get("diachicuahang")||"";
+storePhone.textContent=params.get("dienthoaicuahang")||"";
 
-storeName.textContent = params.get("tencuahang") || "";
-storeAddress.textContent = params.get("diachicuahang") || "";
-storePhone.textContent = params.get("dienthoaicuahang") || "";
+/* ORDER INFO */
+orderId.textContent=params.get("id")||"";
+ban.textContent=params.get("ban")||"";
+nhanvien.textContent=params.get("nhanvien")||"";
+ten.textContent=params.get("ten")||"";
+diachi.textContent=params.get("diachi")||"";
 
-/* ===== INFO ===== */
-orderId.textContent = params.get("id") || "";
-ban.textContent = params.get("ban") || "";
-nhanvien.textContent = params.get("nhanvien") || "";
-ten.textContent = params.get("ten") || "";
-diachi.textContent = params.get("diachi") || "";
+/* TIỀN */
+const giamgia=toNumber(params.get("giamgia"));
+const phuthu=toNumber(params.get("phuthu"));
+const thue=toNumber(params.get("thue"));
+const coc=toNumber(params.get("coc")); // luôn lấy giá trị dù rỗng => 0
 
-/* ===== TIỀN ===== */
-const giamgia = toNumber(params.get("giamgia"));
-const phuthu = toNumber(params.get("phuthu"));
-const thue = toNumber(params.get("thue"));
-
-// xử lý CỌC trước: nếu rỗng, set 0
-let cocParam = params.get("coc");
-const coc = cocParam && cocParam.trim() !== "" ? toNumber(cocParam) : 0;
-
-/* ===== SẢN PHẨM ===== */
-const data = decodeURIComponent(params.get("data") || "").split("_n_");
-let total = 0;
-let tbody = document.getElementById("productBody");
+/* SẢN PHẨM */
+const data=decodeURIComponent(params.get("data")||"").split("_n_");
+let total=0;
+let tbody=document.getElementById("productBody");
 
 data.forEach(row=>{
   if(!row.trim()) return;
-  const p = row.split("|");
-  const name = p[1] || "";
-  const note = p[2] || "";
-  const qty = toNumber(p[3]);
-  const price = toNumber(p[4]);
-  const amount = toNumber(p[5]) || qty*price;
+  const p=row.split("|");
+  const name=p[1]||"";
+  const note=p[2]||"";
+  const qty=toNumber(p[3]);
+  const price=toNumber(p[4]);
+  const amount=toNumber(p[5]) || qty*price;
+  total+=amount;
 
-  total += amount;
-
-  let tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td>${name}${note ? `<div style="font-size:11px">(${note})</div>`:""}</td>
-    <td class="center">${qty}</td>
-    <td class="right">${formatMoney(price)}</td>
-    <td class="right">${formatMoney(amount)}</td>
-  `;
+  let tr=document.createElement("tr");
+  tr.innerHTML=`<td>${name}${note?`<div style="font-size:11px">(${note})</div>`:""}</td>
+                  <td class="center">${qty}</td>
+                  <td class="right">${formatMoney(price)}</td>
+                  <td class="right">${formatMoney(amount)}</td>`;
   tbody.appendChild(tr);
 });
 
-/* ===== TÍNH TỔNG ===== */
+/* TÍNH TỔNG */
 let tongThanhToan = total - giamgia + phuthu + thue;
 let finalPay = tongThanhToan - coc;
 
-/* ===== HIỂN THỊ ===== */
-totalPrice.textContent = formatMoney(total);
-giamgia.textContent = formatMoney(giamgia);
-phuthu.textContent = formatMoney(phuthu);
-thue.textContent = formatMoney(thue);
-coc.textContent = coc > 0 ? formatMoney(coc) : "";
+/* HIỂN THỊ */
+totalPrice.textContent=formatMoney(total);
+giamgia.textContent=formatMoney(giamgia);
+phuthu.textContent=formatMoney(phuthu);
+thue.textContent=formatMoney(thue);
+coc.textContent=coc>0?formatMoney(coc):"";
 
-// ẩn dòng nếu bằng 0
+// ẩn dòng nếu =0
 if(giamgia===0) giamgiaRow.style.display="none";
 if(phuthu===0) phuthuRow.style.display="none";
 if(thue===0) thueRow.style.display="none";
 if(coc===0) cocRow.style.display="none";
 
-tongthanhtoan.textContent = formatMoney(finalPay) + " VND";
+tongthanhtoan.textContent=formatMoney(finalPay)+" VND";
 
-/* ===== QR ===== */
-const bank = params.get("bank");
-const stk = params.get("stk");
-const chutk = params.get("chutk");
+/* QR */
+const bank=params.get("bank");
+const stk=params.get("stk");
+const chutk=params.get("chutk");
 if(bank && stk && chutk && finalPay>0){
-  qrcode.src = `https://img.vietqr.io/image/${bank}-${stk}-compact2.jpg?amount=${finalPay}&addInfo=${orderId}&accountName=${encodeURIComponent(chutk)}`;
-}else{
-  qrcode.style.display="none";
-}
+  qrcode.src=`https://img.vietqr.io/image/${bank}-${stk}-compact2.jpg?amount=${finalPay}&addInfo=${orderId}&accountName=${encodeURIComponent(chutk)}`;
+}else qrcode.style.display="none";
 
-/* ===== TIME ===== */
-datetime.textContent = "Ngày in: " + new Date().toLocaleString("vi-VN");
+/* TIME */
+datetime.textContent="Ngày in: "+new Date().toLocaleString("vi-VN");
 </script>
-
 </body>
 </html>
