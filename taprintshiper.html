@@ -11,31 +11,22 @@ body {
   margin: 0 auto;
   font-size: 13px;
 }
-
 .logo-box { text-align: center; margin: 8px 0; }
 .logo-box img { max-width: 150px; max-height: 80px; }
-
 .bill-title { text-align: center; font-weight: bold; font-size: 15px; margin: 8px 0; }
-
 .info { text-align: center; font-size: 13px; }
-
 table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-
 th { font-size: 12px; border-bottom: 1px dashed #000; padding: 6px 0; }
 td { border-bottom: 1px dashed #000; padding: 6px 0; font-size: 12px; }
-
 .right { text-align: right; }
 .center { text-align: center; }
 .bold { font-weight: bold; }
-
 .button-box { text-align: center; margin-top: 10px; }
-
 @media print { .button-box { display: none; } }
 </style>
 </head>
 
 <body>
-
 <div class="button-box">
   <button onclick="window.print()">🖨 In</button>
   <button onclick="window.close()">❌ Đóng</button>
@@ -142,7 +133,10 @@ diachi.textContent = params.get("diachi") || "";
 const giamgia = toNumber(params.get("giamgia"));
 const phuthu = toNumber(params.get("phuthu"));
 const thue = toNumber(params.get("thue"));
-const coc = toNumber(params.get("coc"));
+
+// xử lý CỌC trước: nếu rỗng, set 0
+let cocParam = params.get("coc");
+const coc = cocParam && cocParam.trim() !== "" ? toNumber(cocParam) : 0;
 
 /* ===== SẢN PHẨM ===== */
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
@@ -151,7 +145,6 @@ let tbody = document.getElementById("productBody");
 
 data.forEach(row=>{
   if(!row.trim()) return;
-
   const p = row.split("|");
   const name = p[1] || "";
   const note = p[2] || "";
@@ -180,25 +173,20 @@ totalPrice.textContent = formatMoney(total);
 giamgia.textContent = formatMoney(giamgia);
 phuthu.textContent = formatMoney(phuthu);
 thue.textContent = formatMoney(thue);
-coc.textContent = formatMoney(coc);
+coc.textContent = coc > 0 ? formatMoney(coc) : "";
 
-if(finalPay < 0){
-  tongthanhtoan.textContent = "Dư " + formatMoney(Math.abs(finalPay)) + " VND";
-}else{
-  tongthanhtoan.textContent = formatMoney(finalPay) + " VND";
-}
+// ẩn dòng nếu bằng 0
+if(giamgia===0) giamgiaRow.style.display="none";
+if(phuthu===0) phuthuRow.style.display="none";
+if(thue===0) thueRow.style.display="none";
+if(coc===0) cocRow.style.display="none";
 
-/* ===== ẨN DÒNG 0 ===== */
-giamgiaRow.style.display = (giamgia===0 ? "none" : "");
-phuthuRow.style.display = (phuthu===0 ? "none" : "");
-thueRow.style.display = (thue===0 ? "none" : "");
-cocRow.style.display = (coc===0 ? "none" : "");
+tongthanhtoan.textContent = formatMoney(finalPay) + " VND";
 
 /* ===== QR ===== */
 const bank = params.get("bank");
 const stk = params.get("stk");
 const chutk = params.get("chutk");
-
 if(bank && stk && chutk && finalPay>0){
   qrcode.src = `https://img.vietqr.io/image/${bank}-${stk}-compact2.jpg?amount=${finalPay}&addInfo=${orderId}&accountName=${encodeURIComponent(chutk)}`;
 }else{
