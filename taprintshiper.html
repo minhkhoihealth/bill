@@ -6,72 +6,138 @@
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, Helvetica, sans-serif;
   width: 76mm;
   margin: 0 auto;
   font-size: 13px;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
-.logo-box { text-align: center; margin: 8px 0; }
-.logo-box img { max-width: 150px; max-height: 80px; }
-
-.bill-title {
+/* ===== Logo ===== */
+.logo-box {
   text-align: center;
-  font-weight: bold;
-  font-size: 15px;
   margin: 8px 0;
 }
+.right {
+  text-align: right;
+  padding-right: 8px;
+}
+.logo-box img {
+  max-width: 150px;
+  max-height: 80px;
+}
 
-.info { text-align: center; font-size: 13px; }
+/* ===== Tiêu đề ===== */
+.bill-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 15px;
+  margin: 8px 0;
+  letter-spacing: 0.5px;
+}
 
-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+h2 {
+  text-align: center;
+  margin: 6px 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.info {
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+/* ===== Bảng ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
 
 th {
   font-size: 12px;
-  border-bottom: 1px dashed #000;
-  padding: 6px 0;
+  border-bottom: 1.5px dashed #000;
+  padding: 8px 0;
+  font-weight: 700;
 }
 
 td {
   border-bottom: 1px dashed #000;
-  padding: 6px 0;
-  font-size: 12px;
+  padding: 8px 0;
+  font-size: 11px;
+  vertical-align: top;
+  font-family: Tahoma, sans-serif; /* đổi sang Tahoma */
 }
 
 .right { text-align: right; }
 .center { text-align: center; }
-.bold { font-weight: bold; }
+.bold { font-weight: 800; }
 
-.button-box { text-align: center; margin-top: 10px; }
+.note {
+  font-size: 13px;
+  font-style: italic;
+}
 
-@media print { .button-box { display: none; } }
+/* ===== Tổng thanh toán nổi bật ===== */
+tfoot tr:last-child {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+/* ===== QR ===== */
+.qrcode-box {
+  text-align: center;
+  margin-top: 14px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.button-box {
+  text-align: center;
+  margin-top: 16px;
+}
+
+button {
+  padding: 6px 12px;
+  font-size: 13px;
+  margin: 4px;
+}
+
+@media print {
+  .button-box { display: none; }
+}
 </style>
 </head>
 
 <body>
-
 <div class="button-box">
   <button onclick="window.print()">🖨 In</button>
-  <button onclick="window.close()">❌ Đóng</button>
+  <button onclick="closePage()">❌ Đóng</button>
 </div>
-
 <div class="logo-box">
   <img id="logo">
 </div>
 
-<h3 class="center" id="storeName"></h3>
+<h2 id="storeName"></h2>
 <div class="info" id="storeAddress"></div>
 <div class="info" id="storePhone"></div>
 
 <hr>
 
-<div class="bill-title">HÓA ĐƠN</div>
+<div class="bill-title">HÓA ĐƠN THANH TOÁN</div>
 
-<div>Mã đơn: <span id="orderId"></span></div>
-<div>Bàn: <span id="ban"></span></div>
-<div>NV: <span id="nhanvien"></span></div>
-<div>Khách: <span id="ten"></span></div>
-<div>Địa chỉ: <span id="diachi"></span></div>
+<div><strong>Mã đơn:</strong> <span id="orderId"></span></div>
+<div><strong>Bàn:</strong> <span id="ban"></span></div>
+  <div><strong>Nhân viên:</strong> <span id="nhanvien"></span></div>
+<div><strong>Khách:</strong> <span id="customerName"></span></div>
+<div><strong>Địa chỉ:</strong> <span id="customerAddress"></span></div>
 
 <table>
 <thead>
@@ -79,7 +145,7 @@ td {
 <th>SP</th>
 <th class="center">SL</th>
 <th class="right">ĐG</th>
-<th class="right">TT</th>
+<th class="center">TT</th>
 </tr>
 </thead>
 
@@ -87,142 +153,143 @@ td {
 
 <tfoot>
 <tr class="bold">
-<td colspan="3">Tổng tiền:</td>
-<td class="right" id="totalPrice"></td>
+  <td colspan="3">TỔNG CỘNG:</td>
+  <td class="right" id="totalPrice"></td>
 </tr>
 
 <tr id="giamgiaRow">
-<td colspan="3">Giảm giá:</td>
-<td class="right" id="giamgia"></td>
+  <td colspan="3">Giảm giá:</td>
+  <td class="right" id="giamgia"></td>
 </tr>
 
 <tr id="phuthuRow">
-<td colspan="3">Phụ thu:</td>
-<td class="right" id="phuthu"></td>
+  <td colspan="3">Phụ thu:</td>
+  <td class="right" id="phuthu"></td>
 </tr>
-
 <tr id="thueRow">
-<td colspan="3">Thuế:</td>
-<td class="right" id="thue"></td>
+  <td colspan="3">Thuế:</td>
+  <td class="right" id="thue"></td>
+  <td class="right" id="coc"></td>
 </tr>
-
-<tr id="cocRow">
-<td colspan="3">Cọc trước:</td>
-<td class="right" id="coc"></td>
-</tr>
-
 <tr class="bold">
-<td colspan="3">CẦN THANH TOÁN:</td>
-<td class="right" id="tongthanhtoan"></td>
+  <td colspan="3">TỔNG THANH TOÁN:</td>
+  <td class="right" id="tongthanhtoan"></td>
 </tr>
 </tfoot>
 </table>
 
-<div style="text-align:center;margin-top:10px">
-<img id="qrcode" width="180">
+<div class="qrcode-box">
+  <img id="qrcode" width="200">
 </div>
 
-<div style="text-align:center;margin-top:10px" id="datetime"></div>
-<div style="text-align:center">Cảm ơn quý khách!</div>
+<div class="footer" id="datetime"></div>
+<div class="footer">Cảm ơn quý khách!</div>
+
+
 
 <script>
 const params = new URLSearchParams(window.location.search);
 
-function toNumber(v){
-  if(!v) return 0;
-  return Number(v.toString().replace(/[^0-9.-]/g,'')) || 0;
-}
-
-function formatMoney(n){
+function formatMoney(n) {
   return Number(n || 0).toLocaleString("vi-VN");
 }
 
-/* ===== STORE ===== */
+/* ===== Logo ===== */
 const logo = params.get("logo");
-if(logo) document.getElementById("logo").src = logo;
+if (logo && logo.startsWith("http")) {
+  document.getElementById("logo").src = logo;
+} else {
+  document.getElementById("logo").style.display = "none";
+}
 
-storeName.textContent = params.get("tencuahang") || "";
-storeAddress.textContent = params.get("diachicuahang") || "";
-storePhone.textContent = params.get("dienthoaicuahang") || "";
+/* ===== Thông tin cửa hàng ===== */
+document.getElementById("storeName").textContent = params.get("tencuahang") || "";
+document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
+document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
 
-/* ===== INFO ===== */
-orderId.textContent = params.get("id") || "";
-ban.textContent = params.get("ban") || "";
-nhanvien.textContent = params.get("nhanvien") || "";
-ten.textContent = params.get("ten") || "";
-diachi.textContent = params.get("diachi") || "";
+/* ===== Đơn hàng ===== */
+const orderId = params.get("id") || "";
+document.getElementById("orderId").textContent = orderId;
+document.getElementById("ban").textContent = params.get("ban") || "";
+document.getElementById("nhanvien").textContent = params.get("nhanvien") || "";
+document.getElementById("customerName").textContent = params.get("ten") || "";
+document.getElementById("customerAddress").textContent = params.get("diachi") || "";
 
-/* ===== TIỀN ===== */
-const giamgia = toNumber(params.get("giamgia"));
-const phuthu = toNumber(params.get("phuthu"));
-const thue = toNumber(params.get("thue"));
-const coc = toNumber(params.get("coc")); // parse cọc chuẩn
+/* ===== Tiền ===== */
+const giamgia = params.get("giamgia");
+const phuthu = params.get("phuthu");
+  const thue = params.get("thue");
+  const thue = params.get("coc");
+const tongThanhToan = params.get("tongthanhtoan");
 
-/* ===== SẢN PHẨM ===== */
+
+document.getElementById("giamgia").textContent = formatMoney(giamgia);
+document.getElementById("phuthu").textContent = formatMoney(phuthu);
+  document.getElementById("thue").textContent = formatMoney(thue);
+document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
+
+if (!giamgia || Number(giamgia) == 0)
+  document.getElementById("giamgiaRow").style.display = "none";
+
+if (!phuthu || Number(phuthu) == 0)
+  document.getElementById("phuthuRow").style.display = "none";
+
+if (!thue || Number(thue) == 0)
+  document.getElementById("thueRow").style.display = "none";
+
+
+/* ===== Sản phẩm ===== */
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
 let total = 0;
 let tbody = document.getElementById("productBody");
 
-data.forEach(row=>{
-  if(!row.trim()) return;
+data.forEach(row => {
+  if (!row.trim()) return;
 
-  const p = row.split("|");
-  const name = p[1] || "";
-  const note = p[2] || "";
-  const qty = toNumber(p[3]);
-  const price = toNumber(p[4]);
-  const amount = toNumber(p[5]) || qty*price;
+  const parts = row.split("|");
+  const name = parts[1] || "";
+  const note = parts[2] || "";
+  const qty = parts[3] || 0;
+  const price = parts[4] || 0;
+  const amount = parts[5] || 0;
 
-  total += amount;
+  total += Number(amount);
 
   let tr = document.createElement("tr");
   tr.innerHTML = `
-    <td>${name}${note ? `<div style="font-size:11px">(${note})</div>`:""}</td>
+    <td>${name}${note ? `<div class="note">(${note})</div>` : ""}</td>
     <td class="center">${qty}</td>
     <td class="right">${formatMoney(price)}</td>
-    <td class="right">${formatMoney(amount)}</td>
+   <td class="center">${formatMoney(amount)}</td>
   `;
   tbody.appendChild(tr);
 });
 
-/* ===== TÍNH TỔNG ===== */
-let tongThanhToan = total - giamgia + phuthu + thue;
-let finalPay = tongThanhToan - coc;
-
-/* ===== HIỂN THỊ ===== */
-totalPrice.textContent = formatMoney(total);
-
-giamgiaRow.style.display = giamgia>0 ? "" : "none";
-giamgia.textContent = giamgia>0 ? formatMoney(giamgia) : "";
-
-phuthuRow.style.display = phuthu>0 ? "" : "none";
-phuthu.textContent = phuthu>0 ? formatMoney(phuthu) : "";
-
-thueRow.style.display = thue>0 ? "" : "none";
-thue.textContent = thue>0 ? formatMoney(thue) : "";
-
-// ✅ CỌC LUÔN HIỂN THỊ NẾU >0
-cocRow.style.display = coc>0 ? "" : "none";
-coc.textContent = coc>0 ? formatMoney(coc) : "";
-
-// Hiển thị CẦN THANH TOÁN
-tongthanhtoan.textContent = finalPay>=0 
-  ? formatMoney(finalPay) + " VND"
-  : "Dư " + formatMoney(Math.abs(finalPay)) + " VND";
+document.getElementById("totalPrice").textContent = formatMoney(total);
 
 /* ===== QR ===== */
 const bank = params.get("bank");
 const stk = params.get("stk");
 const chutk = params.get("chutk");
 
-if(bank && stk && chutk && finalPay>0){
-  qrcode.src = `https://img.vietqr.io/image/${bank}-${stk}-compact2.jpg?amount=${finalPay}&addInfo=${orderId}&accountName=${encodeURIComponent(chutk)}`;
-}else{
-  qrcode.style.display="none";
+if (bank && stk && chutk && tongThanhToan) {
+  document.getElementById("qrcode").src =
+    `https://img.vietqr.io/image/${bank}-${stk}-compact2.jpg?amount=${tongThanhToan}&addInfo=${orderId}&accountName=${encodeURIComponent(chutk)}`;
+} else {
+  document.getElementById("qrcode").style.display = "none";
 }
 
-/* ===== TIME ===== */
-datetime.textContent = "Ngày in: " + new Date().toLocaleString("vi-VN");
+/* ===== Ngày giờ ===== */
+document.getElementById("datetime").textContent =
+"Ngày in: " + new Date().toLocaleString("vi-VN");
+
+/* ===== Đóng trang ===== */
+function closePage() {
+  window.close();
+  setTimeout(() => {
+    window.history.back();
+  }, 300);
+}
 </script>
 
 </body>
