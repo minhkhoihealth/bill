@@ -75,7 +75,7 @@ Nhân viên: <span id="nhanvien"></span>
 <table class="summary">
 
 <tr id="row_giamgia">
-<td colspan="8" class="right">Tổng tiền:</td>
+<td colspan="8" class="right">Giảm giá:</td>
 <td class="right" id="giamgia">0</td>
 </tr>
 
@@ -111,7 +111,7 @@ Nhân viên: <span id="nhanvien"></span>
 
 <script>
 
-/* ===== FIX NaN ===== */
+/* ===== FIX NUMBER ===== */
 function toNumber(value){
   if(!value) return 0;
   return Number(value.toString().replace(/[^0-9.-]/g,'')) || 0;
@@ -158,16 +158,20 @@ if(!groups[date]) groups[date]=[];
 groups[date].push({name,note,qty,price,total,discount,finalTotal});
 });
 
-/* RENDER */
+/* RENDER + TÍNH TỔNG */
+let calculatedTotal = 0;
+
 Object.keys(groups).forEach(date=>{
 let items=groups[date];
 let dayTotal=0;
 
-items.forEach(i=>dayTotal+=i.finalTotal);
+items.forEach(i=>{
+  dayTotal+=i.finalTotal;
+  calculatedTotal+=i.finalTotal;
+});
 
 items.forEach((item,index)=>{
 let tr=document.createElement("tr");
-
 let html="";
 
 if(index==0){
@@ -191,28 +195,31 @@ table.appendChild(tr);
 });
 });
 
-/* SUMMARY */
+/* ===== SUMMARY ===== */
 const giamGia = toNumber(params.get("giamgia"));
 const phuThu = toNumber(params.get("phuthu"));
 const thueValue = toNumber(params.get("thue"));
-const tongThanhToan = toNumber(params.get("tongthanhtoan"));
 const cocValue = toNumber(params.get("coc"));
 
+// tổng chuẩn
+let tongThanhToan = calculatedTotal - giamGia + phuThu + thueValue;
+
+// còn phải trả
+let finalPay = tongThanhToan - cocValue;
+if(finalPay < 0) finalPay = 0;
+
+/* HIỂN THỊ */
 giamgia.textContent = giamGia.toLocaleString("vi-VN");
 phuthu.textContent = phuThu.toLocaleString("vi-VN");
 thue.textContent = thueValue.toLocaleString("vi-VN");
 coc.textContent = cocValue.toLocaleString("vi-VN");
+tong.textContent = finalPay.toLocaleString("vi-VN") + " VND";
 
 /* ẨN DÒNG = 0 */
-if(giamGia === 0) document.getElementById("row_giamgia").style.display = "none";
-if(phuThu === 0) document.getElementById("row_phuthu").style.display = "none";
-if(thueValue === 0) document.getElementById("row_thue").style.display = "none";
-if(cocValue === 0) document.getElementById("row_coc").style.display = "none";
-
-/* TRỪ CỌC */
-const finalPay = Math.max(0, tongThanhToan - cocValue);
-
-tong.textContent = finalPay.toLocaleString("vi-VN") + " VND";
+if(giamGia === 0) row_giamgia.style.display="none";
+if(phuThu === 0) row_phuthu.style.display="none";
+if(thueValue === 0) row_thue.style.display="none";
+if(cocValue === 0) row_coc.style.display="none";
 
 /* BANK */
 const bank=params.get("bank");
