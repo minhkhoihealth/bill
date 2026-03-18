@@ -5,62 +5,22 @@
 <title>Hóa đơn</title>
 
 <style>
-table{
-  width:100%;
-  border-collapse:collapse;
-  page-break-inside:auto;
-}
-tr{
-  page-break-inside:avoid;
-}
-@page{
-  size:A4;
-  margin:10mm;
-}
-body{
-  font-family:Arial, sans-serif;
-  width:190mm;
-  margin:auto;
-}
-th{
-  border-bottom:2px solid #000;
-  padding:6px 4px;
-  font-size:11px;
-}
-td{
-  border-bottom:1px dashed #999;
-  padding:6px 0;
-  font-size:14px;
-}
+table{width:100%;border-collapse:collapse;}
+tr{page-break-inside:avoid;}
+body{font-family:Arial;width:190mm;margin:auto;}
+th{border-bottom:2px solid #000;padding:6px;font-size:11px;}
+td{border-bottom:1px dashed #999;padding:6px;font-size:14px;}
 .center{text-align:center;}
 .right{text-align:right;}
 .daytotal{background:#eee;font-weight:bold;}
-
 .header{text-align:center;margin-bottom:10px;}
 .logo{max-height:80px;}
 .store{font-size:26px;font-weight:bold;}
-.address,.phone{font-size:14px;}
-
-.title{text-align:center;font-size:24px;font-weight:bold;margin:15px 0;}
-
-.info{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
+.title{text-align:center;font-size:24px;margin:15px 0;}
+.info{display:flex;justify-content:space-between;}
 .summary td{border-bottom:1px dashed #999;}
-
-.total{
-  font-size:18px;
-  font-weight:bold;
-}
-
-.footer{
-  text-align:center;
-  margin-top:20px;
-}
-
+.total{font-size:18px;font-weight:bold;}
+.footer{text-align:center;margin-top:20px;}
 .button-box{text-align:center;margin-bottom:10px;}
 @media print{.button-box{display:none;}}
 </style>
@@ -76,8 +36,8 @@ td{
 <div class="header">
 <img id="logo" class="logo">
 <div class="store" id="storeName"></div>
-<div class="address" id="storeAddress"></div>
-<div class="phone" id="storePhone"></div>
+<div id="storeAddress"></div>
+<div id="storePhone"></div>
 </div>
 
 <div class="title">HÓA ĐƠN THANH TOÁN</div>
@@ -98,15 +58,15 @@ Nhân viên: <span id="nhanvien"></span>
 <table>
 <thead>
 <tr>
-<th style="width:20mm">Ngày</th>
-<th style="width:10mm"></th>
-<th style="width:55mm">Tên sản phẩm</th>
-<th style="width:10mm">SL</th>
-<th style="width:22mm">Đơn giá</th>
-<th style="width:22mm">Thành tiền</th>
-<th style="width:15mm">Giảm giá</th>
-<th style="width:18mm">Tổng</th>
-<th style="width:18mm">Thanh toán</th>
+<th>Ngày</th>
+<th></th>
+<th>Tên sản phẩm</th>
+<th>SL</th>
+<th>Đơn giá</th>
+<th>Thành tiền</th>
+<th>Giảm</th>
+<th>Tổng</th>
+<th>Thanh toán</th>
 </tr>
 </thead>
 <tbody id="productList"></tbody>
@@ -135,9 +95,7 @@ Nhân viên: <span id="nhanvien"></span>
 </tr>
 
 <tr class="total">
-<td colspan="8" class="right">
-CÒN PHẢI THANH TOÁN
-</td>
+<td colspan="8" class="right">CÒN PHẢI THANH TOÁN</td>
 <td class="right" id="tong"></td>
 </tr>
 
@@ -152,6 +110,12 @@ CÒN PHẢI THANH TOÁN
 </div>
 
 <script>
+
+/* ===== FIX NaN ===== */
+function toNumber(value){
+  if(!value) return 0;
+  return Number(value.toString().replace(/[^0-9.-]/g,'')) || 0;
+}
 
 const params = new URLSearchParams(window.location.search);
 
@@ -184,14 +148,13 @@ const p=row.split("|");
 let date=p[0];
 const name=p[1];
 const note=p[2]||"";
-const qty=Number(p[3]||0);
-const price=Number(p[4]||0);
-const total=Number(p[5]||qty*price);
-const discount=Number(p[6]||0);
-const finalTotal=Number(p[7]||total-discount);
+const qty=toNumber(p[3]);
+const price=toNumber(p[4]);
+const total=toNumber(p[5]) || qty*price;
+const discount=toNumber(p[6]);
+const finalTotal=toNumber(p[7]) || (total-discount);
 
 if(!groups[date]) groups[date]=[];
-
 groups[date].push({name,note,qty,price,total,discount,finalTotal});
 });
 
@@ -229,11 +192,11 @@ table.appendChild(tr);
 });
 
 /* SUMMARY */
-const giamGia = Number(params.get("giamgia") || 0);
-const phuThu = Number(params.get("phuthu") || 0);
-const thueValue = Number(params.get("thue") || 0);
-const tongThanhToan = Number(params.get("tongthanhtoan") || 0);
-const cocValue = Number(params.get("coc") || 0);
+const giamGia = toNumber(params.get("giamgia"));
+const phuThu = toNumber(params.get("phuthu"));
+const thueValue = toNumber(params.get("thue"));
+const tongThanhToan = toNumber(params.get("tongthanhtoan"));
+const cocValue = toNumber(params.get("coc"));
 
 giamgia.textContent = giamGia.toLocaleString("vi-VN");
 phuthu.textContent = phuThu.toLocaleString("vi-VN");
