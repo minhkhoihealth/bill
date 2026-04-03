@@ -6,48 +6,49 @@
 
 <style>
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Times New Roman", serif;
   width: 148mm;
   height: 210mm;
-  margin: 0 auto;
+  margin: auto;
   padding: 10mm;
   font-size: 13px;
 }
 
-.header {
+.top {
   display: flex;
   justify-content: space-between;
 }
 
-.left {
-  width: 60%;
+.left, .right {
+  width: 48%;
 }
 
 .right {
-  width: 40%;
   text-align: right;
 }
 
-.logo {
-  max-height: 60px;
-  margin-bottom: 5px;
-}
-
-.title {
+.center {
   text-align: center;
-  font-size: 22px;
-  font-weight: bold;
   margin: 10px 0;
 }
 
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .line {
-  border-bottom: 1px dotted #000;
+  border-bottom: 1px dotted black;
   display: inline-block;
   width: 100%;
 }
 
 .row {
   margin: 6px 0;
+}
+
+.inline {
+  display: inline-block;
 }
 
 .sign {
@@ -65,63 +66,106 @@ body {
   font-size: 11px;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="header">
+<!-- Header -->
+<div class="top">
   <div class="left">
-    <img id="logo" class="logo">
-    <div id="tencuahang"></div>
-    <div id="diachicuahang"></div>
+    <b>Đơn vị:</b> <span class="line" id="DonVi"></span><br>
+    <b>Địa chỉ:</b> <span class="line" id="DiaChiCT"></span>
   </div>
 
   <div class="right">
-    Mẫu số 01 - TT<br>
-    TT 133/2016/TT-BTC
+    <b>Mẫu số 01 - TT</b><br>
+    (Ban hành theo TT số 133/2016/TT-BTC)<br>
+    Ngày 26/08/2016
   </div>
 </div>
 
-<div class="title">PHIẾU CHI</div>
-
-<div style="text-align:right;">
-  Số: <b id="SoPhieu"></b><br>
+<!-- Title -->
+<div class="center">
+  <div class="title">PHIẾU CHI</div>
+  Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span>
 </div>
 
-<div style="margin-top:10px;">
-  Ngày <b id="Ngay"></b> tháng <b id="Thang"></b> năm <b id="Nam"></b>
+<!-- Right info -->
+<div style="float:right; width:40%">
+  Quyển số: <span class="line" id="QuyenSo"></span><br>
+  Số: <span class="line" id="SoPhieu"></span><br>
+  Nợ: <span class="line"></span><br>
+  Có: <span class="line"></span>
+</div>
+
+<div style="clear:both"></div>
+
+<!-- Nội dung -->
+<div class="row">
+  Họ và tên người nhận tiền:
+  <span class="line" id="NguoiNhan"></span>
 </div>
 
 <div class="row">
-  Họ tên người nhận: <span class="line" id="NguoiNhan"></span>
+  Địa chỉ:
+  <span class="line" id="DiaChi"></span>
 </div>
 
 <div class="row">
-  Địa chỉ: <span class="line" id="DiaChi"></span>
+  Lý do chi:
+  <span class="line" id="LyDo"></span>
 </div>
 
 <div class="row">
-  Lý do chi: <span class="line" id="LyDo"></span>
+  Số tiền:
+  <span class="line" id="SoTien"></span>
 </div>
 
 <div class="row">
-  Số tiền: <span class="line" id="SoTien"></span>
+  (Viết bằng chữ):
+  <span class="line" id="SoTienChu"></span>
 </div>
 
 <div class="row">
-  (Viết bằng chữ): <span class="line" id="SoTienChu"></span>
+  Kèm theo:
+  <span class="line" id="ChungTu"></span>
 </div>
 
-<div class="row">
-  Kèm theo: <span class="line" id="ChungTu"></span>
-</div>
-
+<!-- Ký -->
 <div class="sign">
-  <div>Giám đốc<br><span class="small">(Ký)</span></div>
-  <div>Kế toán<br><span class="small">(Ký)</span></div>
-  <div>Người nhận<br><span class="small">(Ký)</span></div>
-  <div>Người lập<br><span class="small">(Ký)</span></div>
-  <div>Thủ quỹ<br><span class="small">(Ký)</span></div>
+  <div>
+    Giám đốc<br>
+    <span class="small">(Ký, họ tên)</span>
+  </div>
+  <div>
+    Kế toán trưởng<br>
+    <span class="small">(Ký, họ tên)</span>
+  </div>
+  <div>
+    Người nhận tiền<br>
+    <span class="small">(Ký, họ tên)</span>
+  </div>
+  <div>
+    Người lập<br>
+    <span class="small">(Ký, họ tên)</span>
+  </div>
+  <div>
+    Thủ quỹ<br>
+    <span class="small">(Ký, họ tên)</span>
+  </div>
+</div>
+
+<!-- Footer -->
+<div style="margin-top:30px;">
+  Đã nhận đủ số tiền (viết bằng chữ):
+  <span class="line" id="SoTienChu2"></span><br><br>
+
+  Tỷ giá ngoại tệ:
+  <span class="line"></span><br><br>
+
+  Số tiền quy đổi:
+  <span class="line"></span>
 </div>
 
 <script>
@@ -130,23 +174,18 @@ function getParam(name) {
   return url.get(name) || "";
 }
 
-// format tiền
 function formatMoney(n) {
-  return Number(n || 0).toLocaleString("vi-VN") + " đ";
-}
-
-// đọc số thành chữ đơn giản
-function numberToText(n) {
-  return formatMoney(n) + " (bằng chữ)";
+  return Number(n || 0).toLocaleString("vi-VN") + " đồng";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  document.getElementById("logo").src = getParam("logo");
-  document.getElementById("tencuahang").innerText = getParam("tencuahang");
-  document.getElementById("diachicuahang").innerText = getParam("diachicuahang");
+  document.getElementById("DonVi").innerText = getParam("DonVi");
+  document.getElementById("DiaChiCT").innerText = getParam("DiaChiCT");
 
   document.getElementById("SoPhieu").innerText = getParam("SoPhieu");
+  document.getElementById("QuyenSo").innerText = getParam("QuyenSo");
+
   document.getElementById("Ngay").innerText = getParam("Ngay");
   document.getElementById("Thang").innerText = getParam("Thang");
   document.getElementById("Nam").innerText = getParam("Nam");
@@ -158,11 +197,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let money = getParam("SoTien");
 
   document.getElementById("SoTien").innerText = formatMoney(money);
-  document.getElementById("SoTienChu").innerText = numberToText(money);
+  document.getElementById("SoTienChu").innerText = formatMoney(money);
+  document.getElementById("SoTienChu2").innerText = formatMoney(money);
 
   document.getElementById("ChungTu").innerText = getParam("ChungTu");
 
-  // auto in
+  // auto print
   setTimeout(() => window.print(), 500);
 
 });
