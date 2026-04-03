@@ -5,6 +5,33 @@
 <title>Phiếu Chi</title>
 
 <style>
+
+  .btn-group {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.btn-group button {
+  padding: 8px 14px;
+  margin-left: 5px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-group button:hover {
+  background: #0056b3;
+}
+
+/* 🔥 Ẩn khi in */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
 body {
   font-family: "Times New Roman", serif;
   width: 148mm;
@@ -84,6 +111,10 @@ body {
 </head>
 
 <body>
+  <div class="no-print btn-group">
+  <button onclick="window.print()">🖨️ In</button>
+  <button onclick="window.close()">❌ Đóng</button>
+</div>
 
 <div class="top">
   <div class="left">
@@ -126,12 +157,12 @@ body {
 </div>
 
 <div style="margin-top:30px;">
-  <div class="row">
-    <div class="label">Đã nhận đủ số tiền (viết bằng chữ): …………………………………………………………………………………</div>
-  </div>
-  <div class="row">
-    <div class="label">Tỷ giá ngoại tệ (vàng bạc, đá quý): ………………………………………………………………………………….</div>
-  </div>
+  <div class="row"><div class="label">Đã nhận đủ số tiền (viết bằng chữ):</div><div class="line"></div></div>
+  <div class="row"><div class="label">Tỷ giá ngoại tệ (vàng bạc, đá quý):</div><div class="line"></div></div>
+   <div class="row"><div class="label">Số tiền quy đổi:</div><div class="line"></div></div>
+  <div class="row"><div class="label"> (Liên gửi ra ngoài phải đóng dấu)</div><div class="line"></div></div>
+
+ 
 </div>
 
 <script>
@@ -217,7 +248,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("ChungTu").innerText = getParam("ChungTu");
 
-  setTimeout(() => window.print(), 500);
 });
 </script>
 
