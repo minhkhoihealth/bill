@@ -14,6 +14,7 @@ body {
   font-size: 13px;
 }
 
+/* Header */
 .top {
   display: flex;
   justify-content: space-between;
@@ -27,6 +28,7 @@ body {
   text-align: right;
 }
 
+/* Title */
 .center {
   text-align: center;
   margin: 10px 0;
@@ -37,20 +39,36 @@ body {
   font-weight: bold;
 }
 
-.line {
-  border-bottom: 1px dotted black;
-  display: inline-block;
-  width: 100%;
-}
-
+/* Row chuẩn */
 .row {
+  display: flex;
   margin: 6px 0;
 }
 
-.inline {
-  display: inline-block;
+.label {
+  min-width: 180px;
 }
 
+.line {
+  flex: 1;
+  border-bottom: 1px dotted #000;
+}
+
+/* Right info */
+.right-info {
+  width: 300px;
+  margin-left: auto;
+}
+
+.right-info .row {
+  display: flex;
+}
+
+.right-info .label {
+  min-width: 80px;
+}
+
+/* Ký tên */
 .sign {
   display: flex;
   justify-content: space-between;
@@ -74,13 +92,13 @@ body {
 <!-- Header -->
 <div class="top">
   <div class="left">
-    <b>Đơn vị:</b> <span class="line" id="DonVi"></span><br>
-    <b>Địa chỉ:</b> <span class="line" id="DiaChiCT"></span>
+    <b>Đơn vị:</b> <span id="DonVi"></span><br>
+    <b>Địa chỉ:</b> <span id="DiaChiCT"></span>
   </div>
 
   <div class="right">
     <b>Mẫu số 01 - TT</b><br>
-    (Ban hành theo TT số 133/2016/TT-BTC)<br>
+    (TT 133/2016/TT-BTC)<br>
     Ngày 26/08/2016
   </div>
 </div>
@@ -92,80 +110,71 @@ body {
 </div>
 
 <!-- Right info -->
-<div style="float:right; width:40%">
-  Quyển số: <span class="line" id="QuyenSo"></span><br>
-  Số: <span class="line" id="SoPhieu"></span><br>
-  Nợ: <span class="line"></span><br>
-  Có: <span class="line"></span>
+<div class="right-info">
+  <div class="row">
+    <div class="label">Quyển số:</div>
+    <div class="line" id="QuyenSo"></div>
+  </div>
+  <div class="row">
+    <div class="label">Số:</div>
+    <div class="line" id="SoPhieu"></div>
+  </div>
+  <div class="row">
+    <div class="label">Nợ:</div>
+    <div class="line"></div>
+  </div>
+  <div class="row">
+    <div class="label">Có:</div>
+    <div class="line"></div>
+  </div>
 </div>
-
-<div style="clear:both"></div>
 
 <!-- Nội dung -->
 <div class="row">
-  Họ và tên người nhận tiền:
-  <span class="line" id="NguoiNhan"></span>
+  <div class="label">Họ và tên người nhận:</div>
+  <div class="line" id="NguoiNhan"></div>
 </div>
 
 <div class="row">
-  Địa chỉ:
-  <span class="line" id="DiaChi"></span>
+  <div class="label">Địa chỉ:</div>
+  <div class="line" id="DiaChi"></div>
 </div>
 
 <div class="row">
-  Lý do chi:
-  <span class="line" id="LyDo"></span>
+  <div class="label">Lý do chi:</div>
+  <div class="line" id="LyDo"></div>
 </div>
 
 <div class="row">
-  Số tiền:
-  <span class="line" id="SoTien"></span>
+  <div class="label">Số tiền:</div>
+  <div class="line" id="SoTien"></div>
 </div>
 
 <div class="row">
-  (Viết bằng chữ):
-  <span class="line" id="SoTienChu"></span>
+  <div class="label">(Viết bằng chữ):</div>
+  <div class="line" id="SoTienChu"></div>
 </div>
 
 <div class="row">
-  Kèm theo:
-  <span class="line" id="ChungTu"></span>
+  <div class="label">Kèm theo:</div>
+  <div class="line" id="ChungTu"></div>
 </div>
 
 <!-- Ký -->
 <div class="sign">
-  <div>
-    Giám đốc<br>
-    <span class="small">(Ký, họ tên)</span>
-  </div>
-  <div>
-    Kế toán trưởng<br>
-    <span class="small">(Ký, họ tên)</span>
-  </div>
-  <div>
-    Người nhận tiền<br>
-    <span class="small">(Ký, họ tên)</span>
-  </div>
-  <div>
-    Người lập<br>
-    <span class="small">(Ký, họ tên)</span>
-  </div>
-  <div>
-    Thủ quỹ<br>
-    <span class="small">(Ký, họ tên)</span>
-  </div>
+  <div>Giám đốc<br><span class="small">(Ký, họ tên)</span></div>
+  <div>Kế toán trưởng<br><span class="small">(Ký, họ tên)</span></div>
+  <div>Người nhận tiền<br><span class="small">(Ký, họ tên)</span></div>
+  <div>Người lập<br><span class="small">(Ký, họ tên)</span></div>
+  <div>Thủ quỹ<br><span class="small">(Ký, họ tên)</span></div>
 </div>
 
 <!-- Footer -->
 <div style="margin-top:30px;">
-  Đã nhận đủ số tiền (viết bằng chữ):
-  <span class="line" id="SoTienChu2"></span><br><br>
-
-  Tỷ giá ngoại tệ:
-  <span class="line"></span><br><br>
-
-  Số tiền quy đổi:
-  <span class="line"></span>
+  <div class="row">
+    <div class="label">Đã nhận đủ số tiền:</div>
+    <div class="line" id="SoTienChu2"></div>
+  </div>
 </div>
 
 <script>
@@ -202,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("ChungTu").innerText = getParam("ChungTu");
 
-  // auto print
+  // auto in
   setTimeout(() => window.print(), 500);
 
 });
