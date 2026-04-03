@@ -39,7 +39,7 @@ body {
   font-weight: bold;
 }
 
-/* Row chuẩn */
+/* Row */
 .row {
   display: flex;
   margin: 6px 0;
@@ -60,15 +60,11 @@ body {
   margin-left: auto;
 }
 
-.right-info .row {
-  display: flex;
-}
-
 .right-info .label {
   min-width: 80px;
 }
 
-/* Ký tên */
+/* Sign */
 .sign {
   display: flex;
   justify-content: space-between;
@@ -89,78 +85,38 @@ body {
 
 <body>
 
-<!-- Header -->
 <div class="top">
   <div class="left">
     <b>Đơn vị:</b> <span id="DonVi"></span><br>
     <b>Địa chỉ:</b> <span id="DiaChiCT"></span>
   </div>
 
-  <div class="center">
+  <div class="right">
     <b>Mẫu số 01 - TT</b><br>
-    ((Ban hành theo TT số 133/2016/TT-BTC<br>
-   Ngày 26/08/2016 của Bộ trưởng BTC)
+    (Ban hành theo TT 133/2016/TT-BTC)<br>
+    Ngày 26/08/2016
   </div>
 </div>
 
-<!-- Title -->
 <div class="center">
   <div class="title">PHIẾU CHI</div>
   Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span>
 </div>
 
-<!-- Right info -->
 <div class="right-info">
-  <div class="row">
-    <div class="label">Quyển số:</div>
-    <div class="line" id="QuyenSo"></div>
-  </div>
-  <div class="row">
-    <div class="label">Số:</div>
-    <div class="line" id="SoPhieu"></div>
-  </div>
-  <div class="row">
-    <div class="label">Nợ:</div>
-    <div class="line"></div>
-  </div>
-  <div class="row">
-    <div class="label">Có:</div>
-    <div class="line"></div>
-  </div>
+  <div class="row"><div class="label">Quyển số:</div><div class="line" id="QuyenSo"></div></div>
+  <div class="row"><div class="label">Số:</div><div class="line" id="SoPhieu"></div></div>
+  <div class="row"><div class="label">Nợ:</div><div class="line"></div></div>
+  <div class="row"><div class="label">Có:</div><div class="line"></div></div>
 </div>
 
-<!-- Nội dung -->
-<div class="row">
-  <div class="label">Họ và tên người nhận:</div>
-  <div class="line" id="NguoiNhan"></div>
-</div>
+<div class="row"><div class="label">Họ và tên người nhận:</div><div class="line" id="NguoiNhan"></div></div>
+<div class="row"><div class="label">Địa chỉ:</div><div class="line" id="DiaChi"></div></div>
+<div class="row"><div class="label">Lý do chi:</div><div class="line" id="LyDo"></div></div>
+<div class="row"><div class="label">Số tiền:</div><div class="line" id="SoTien"></div></div>
+<div class="row"><div class="label">(Viết bằng chữ):</div><div class="line" id="SoTienChu"></div></div>
+<div class="row"><div class="label">Kèm theo chứng từ gốc:</div><div class="line" id="ChungTu"></div></div>
 
-<div class="row">
-  <div class="label">Địa chỉ:</div>
-  <div class="line" id="DiaChi"></div>
-</div>
-
-<div class="row">
-  <div class="label">Lý do chi:</div>
-  <div class="line" id="LyDo"></div>
-</div>
-
-<div class="row">
-  <div class="label">Số tiền:</div>
-  <div class="line" id="SoTien"></div>
-</div>
-
-<div class="row">
-  <div class="label">(Viết bằng chữ):</div>
-  <div class="line" id="SoTienChu"></div>
-</div>
-
-<div class="row">
-  <div class="label">Kèm theo:</div>
-  <div class="line" id="ChungTu"></div>
-</div>
-
-<!-- Ký -->
 <div class="sign">
   <div>Giám đốc<br><span class="small">(Ký, họ tên)</span></div>
   <div>Kế toán trưởng<br><span class="small">(Ký, họ tên)</span></div>
@@ -169,7 +125,6 @@ body {
   <div>Thủ quỹ<br><span class="small">(Ký, họ tên)</span></div>
 </div>
 
-<!-- Footer -->
 <div style="margin-top:30px;">
   <div class="row">
     <div class="label">Đã nhận đủ số tiền:</div>
@@ -185,6 +140,55 @@ function getParam(name) {
 
 function formatMoney(n) {
   return Number(n || 0).toLocaleString("vi-VN") + " đồng";
+}
+
+// 🔥 HÀM ĐỌC SỐ THÀNH CHỮ
+function numberToVietnameseText(number) {
+  if (!number || number == 0) return "Không đồng";
+
+  const ChuSo = ["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  const DonVi = [""," nghìn"," triệu"," tỷ"];
+
+  function doc3so(num) {
+    let tram = Math.floor(num / 100);
+    let chuc = Math.floor((num % 100) / 10);
+    let dv = num % 10;
+    let str = "";
+
+    if (tram > 0) {
+      str += ChuSo[tram] + " trăm";
+      if (chuc == 0 && dv > 0) str += " linh";
+    }
+
+    if (chuc > 1) {
+      str += " " + ChuSo[chuc] + " mươi";
+      if (dv == 1) str += " mốt";
+      else if (dv == 5) str += " lăm";
+      else if (dv > 0) str += " " + ChuSo[dv];
+    } else if (chuc == 1) {
+      str += " mười";
+      if (dv == 5) str += " lăm";
+      else if (dv > 0) str += " " + ChuSo[dv];
+    } else if (dv > 0) {
+      str += " " + ChuSo[dv];
+    }
+
+    return str.trim();
+  }
+
+  let i = 0, str = "", num = Math.floor(number);
+
+  while (num > 0) {
+    let block = num % 1000;
+    if (block > 0) {
+      str = doc3so(block) + DonVi[i] + " " + str;
+    }
+    num = Math.floor(num / 1000);
+    i++;
+  }
+
+  str = str.trim();
+  return str.charAt(0).toUpperCase() + str.slice(1) + " đồng";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -206,14 +210,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let money = getParam("SoTien");
 
   document.getElementById("SoTien").innerText = formatMoney(money);
-  document.getElementById("SoTienChu").innerText = formatMoney(money);
-  document.getElementById("SoTienChu2").innerText = formatMoney(money);
+  document.getElementById("SoTienChu").innerText = numberToVietnameseText(money);
+  document.getElementById("SoTienChu2").innerText = numberToVietnameseText(money);
 
   document.getElementById("ChungTu").innerText = getParam("ChungTu");
 
-  // auto in
   setTimeout(() => window.print(), 500);
-
 });
 </script>
 
