@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Phiếu Chi</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  width: 148mm;
+  height: 210mm;
+  margin: 0 auto;
+  padding: 10mm;
+  font-size: 13px;
+}
+
+.container {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.left, .right {
+  width: 48%;
+}
+
+.center {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.line {
+  border-bottom: 1px dotted #000;
+  display: inline-block;
+  width: 100%;
+}
+
+.row {
+  margin: 6px 0;
+}
+
+.label {
+  display: inline-block;
+  width: 160px;
+}
+
+.sign {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.sign div {
+  width: 18%;
+}
+
+.small {
+  font-size: 11px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="left">
+      <b>Đơn vị:</b> <span class="line">{{DonVi}}</span><br>
+      <b>Địa chỉ:</b> <span class="line">{{DiaChi}}</span>
+    </div>
+
+    <div class="right" style="text-align:right">
+      <b>Mẫu số 01 - TT</b><br>
+      (Ban hành theo TT 133/2016/TT-BTC)<br>
+      Ngày 26/08/2016
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="center">
+    <div class="title">PHIẾU CHI</div>
+    Ngày <b>{{Ngay}}</b> tháng <b>{{Thang}}</b> năm <b>{{Nam}}</b>
+  </div>
+
+  <!-- Info right -->
+  <div style="text-align:right; margin-bottom:10px;">
+    Quyển số: <span class="line" style="width:120px">{{QuyenSo}}</span><br>
+    Số: <span class="line" style="width:120px">{{SoPhieu}}</span><br>
+    Nợ: <span class="line" style="width:120px"></span><br>
+    Có: <span class="line" style="width:120px"></span>
+  </div>
+
+  <!-- Nội dung -->
+  <div class="row">
+    Họ tên người nhận tiền:
+    <span class="line">{{NguoiNhan}}</span>
+  </div>
+
+  <div class="row">
+    Địa chỉ:
+    <span class="line">{{DiaChiNhan}}</span>
+  </div>
+
+  <div class="row">
+    Lý do chi:
+    <span class="line">{{LyDo}}</span>
+  </div>
+
+  <div class="row">
+    Số tiền:
+    <span class="line">{{SoTien}}</span>
+  </div>
+
+  <div class="row">
+    (Viết bằng chữ):
+    <span class="line">{{SoTienChu}}</span>
+  </div>
+
+  <div class="row">
+    Kèm theo:
+    <span class="line">{{ChungTu}}</span>
+  </div>
+
+  <!-- Ký -->
+  <div class="sign">
+    <div>
+      Giám đốc<br>
+      <span class="small">(Ký, họ tên)</span>
+    </div>
+    <div>
+      Kế toán trưởng<br>
+      <span class="small">(Ký, họ tên)</span>
+    </div>
+    <div>
+      Người nhận tiền<br>
+      <span class="small">(Ký, họ tên)</span>
+    </div>
+    <div>
+      Người lập<br>
+      <span class="small">(Ký, họ tên)</span>
+    </div>
+    <div>
+      Thủ quỹ<br>
+      <span class="small">(Ký, họ tên)</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:40px;">
+    Đã nhận đủ số tiền (viết bằng chữ):
+    <span class="line">{{SoTienChu}}</span><br><br>
+
+    Tỷ giá ngoại tệ:
+    <span class="line"></span><br><br>
+
+    Số tiền quy đổi:
+    <span class="line"></span>
+  </div>
+
+</div>
+</body>
+</html>
