@@ -137,8 +137,8 @@ body {
 <div class="right-info">
   <div class="row"><div class="label">Quyển số:</div><div class="line" id="QuyenSo"></div></div>
   <div class="row"><div class="label">Số:</div><div class="line" id="SoPhieu"></div></div>
-  <div class="row"><div class="label">Nợ:</div><div class="line"></div></div>
-  <div class="row"><div class="label">Có:</div><div class="line"></div></div>
+  <div class="row"><div class="label">Nợ TK:</div><div class="line" id="Notk"></div></div>
+  <div class="row"><div class="label">Có TK:</div><div class="line"id="Cotk"></div></div>
 </div>
 
 <div class="row"><div class="label">Họ và tên người nhận:</div><div class="line" id="NguoiNhan"></div></div>
@@ -231,6 +231,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("SoPhieu").innerText = getParam("SoPhieu");
   document.getElementById("QuyenSo").innerText = getParam("QuyenSo");
+  document.getElementById("Notk").innerText = getParam("Notk");
+  document.getElementById("Cotk").innerText = getParam("Cotk");
 
   document.getElementById("Ngay").innerText = getParam("Ngay");
   document.getElementById("Thang").innerText = getParam("Thang");
