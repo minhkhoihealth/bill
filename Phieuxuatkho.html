@@ -6,10 +6,10 @@
 
 <style>
 body{
-  font-family: "Times New Roman", serif;
-  font-size: 14px;
-  width: 210mm;
-  margin: auto;
+  font-family:"Times New Roman";
+  font-size:14px;
+  width:210mm;
+  margin:auto;
 }
 
 .container{ padding:20px; }
@@ -20,8 +20,8 @@ body{
 }
 
 .center{text-align:center;}
+.right{text-align:right;}
 .bold{font-weight:bold;}
-.left{text-align:left;}
 
 .table{
   width:100%;
@@ -34,19 +34,16 @@ body{
 }
 
 .table th, .table td{
-  padding:5px;
+  padding:4px;
   text-align:center;
 }
 
 .sign{
   display:flex;
   justify-content:space-between;
-  margin-top:60px;
+  margin-top:40px;
   text-align:center;
 }
-
-.logo{ height:60px; }
-.small{ font-size:12px; }
 </style>
 </head>
 
@@ -56,56 +53,75 @@ body{
 <!-- HEADER -->
 <div class="header">
   <div>
-    <img id="logo" class="logo"><br>
-    <b id="DonVi"></b><br>
-    <span id="DiaChiCT"></span>
+    Đơn vị: <span id="DonVi"></span><br>
+    Bộ phận: .....................
   </div>
 
   <div class="center">
     <b>Mẫu số 02 - VT</b><br>
-    <span class="small">(TT 133/2016/TT-BTC)</span>
+    <i>(TT 133/2016/TT-BTC)</i>
   </div>
 </div>
 
 <!-- TITLE -->
 <div class="center">
-  <h2>PHIẾU XUẤT KHO</h2>
-  Ngày <span id="Ngay"></span>
-  tháng <span id="Thang"></span>
-  năm <span id="Nam"></span><br>
+  <h3>PHIẾU XUẤT KHO</h3>
+  Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
   Số: <b id="SoPhieu"></b>
 </div>
 
-<!-- INFO -->
-<p>- Người nhận: <span id="NguoiNhan"></span></p>
-<p>- Lý do xuất: <span id="LyDo"></span></p>
+<div>
+  Nợ: ..................... &nbsp;&nbsp;&nbsp; Có: .....................
+</div>
+
+<p>- Họ tên người nhận: <span id="NguoiNhan"></span></p>
+<p>- Lý do xuất kho: <span id="LyDo"></span></p>
+<p>- Xuất tại kho: <span id="Kho"></span> &nbsp;&nbsp; Địa điểm: ....................</p>
 
 <!-- TABLE -->
 <table class="table">
 <tr>
-  <th>STT</th>
-  <th>Tên hàng</th>
-  <th>SL</th>
-  <th>Đơn giá</th>
-  <th>Thành tiền</th>
+  <th rowspan="2">STT</th>
+  <th rowspan="2">Tên hàng hóa, quy cách</th>
+  <th rowspan="2">Mã số</th>
+  <th rowspan="2">ĐVT</th>
+  <th colspan="2">Số lượng</th>
+  <th rowspan="2">Đơn giá</th>
+  <th rowspan="2">Thành tiền</th>
+</tr>
+<tr>
+  <th>Yêu cầu</th>
+  <th>Thực nhập</th>
+</tr>
+
+<tr>
+  <td>A</td>
+  <td>B</td>
+  <td>C</td>
+  <td>D</td>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
 </tr>
 
 <tbody id="dsHang"></tbody>
 
 <tr>
-  <td colspan="4" class="bold">Cộng</td>
+  <td colspan="7" class="bold">Cộng</td>
   <td id="TongTien"></td>
 </tr>
 </table>
 
-<p><b>Tổng tiền (viết bằng chữ):</b> <span id="TienChu"></span></p>
+<p>- Tổng số tiền (viết bằng chữ): <span id="TienChu"></span></p>
+<p>- Số chứng từ gốc kèm theo: ....................................................</p>
 
 <!-- SIGN -->
 <div class="sign">
-  <div>Người lập<br>(Ký, họ tên)</div>
-  <div>Người nhận<br>(Ký, họ tên)</div>
+  <div>Người lập phiếu<br>(Ký, họ tên)</div>
+  <div>Người nhận hàng<br>(Ký, họ tên)</div>
   <div>Thủ kho<br>(Ký, họ tên)</div>
-  <div>Kế toán<br>(Ký, họ tên)</div>
+  <div>Kế toán trưởng<br>(Ký, họ tên)</div>
   <div>Giám đốc<br>(Ký, họ tên)</div>
 </div>
 
@@ -113,82 +129,44 @@ body{
 
 <script>
 
-// ===== GET PARAM =====
+// ===== PARAM =====
 function getParam(name){
   let url = new URL(window.location.href);
   return url.searchParams.get(name) || "";
 }
 
-// ===== FORMAT MONEY =====
-function formatMoney(x){
-  return Number(x || 0).toLocaleString("vi-VN");
+// ===== FORMAT =====
+function money(x){
+  return Number(x||0).toLocaleString("vi-VN");
 }
 
-// ===== ĐỔI SỐ THÀNH CHỮ (FULL TIẾNG VIỆT) =====
-function numberToText(n){
-  let t=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
-  let r="",i=0;
-  if(n==0) return "Không đồng";
-
-  while(n>0){
-    let a=n%1000;
-    let tr=Math.floor(a/100);
-    let ch=Math.floor((a%100)/10);
-    let dv=a%10;
-
-    if(a>0){
-      let str="";
-      if(tr>0) str+=t[tr]+" trăm ";
-      if(ch>1) str+=t[ch]+" mươi ";
-      else if(ch==1) str+="mười ";
-      else if(ch==0 && dv>0 && tr>0) str+="lẻ ";
-
-      if(dv>0){
-        if(ch>=1 && dv==1) str+="mốt ";
-        else if(dv==5 && ch>=1) str+="lăm ";
-        else str+=t[dv]+" ";
-      }
-
-      if(i==1) str+="nghìn ";
-      if(i==2) str+="triệu ";
-      if(i==3) str+="tỷ ";
-
-      r=str+r;
-    }
-
-    n=Math.floor(n/1000);
-    i++;
-  }
-
-  return r.trim()+" đồng";
+// ===== SỐ → CHỮ =====
+function docSo(n){
+  return money(n) + " đồng";
 }
 
-// ===== GÁN DỮ LIỆU =====
+// ===== GÁN =====
 document.getElementById("DonVi").innerText = getParam("DonVi");
-document.getElementById("DiaChiCT").innerText = getParam("DiaChiCT");
 document.getElementById("SoPhieu").innerText = getParam("SoPhieu");
-
 document.getElementById("Ngay").innerText = getParam("Ngay");
 document.getElementById("Thang").innerText = getParam("Thang");
 document.getElementById("Nam").innerText = getParam("Nam");
-
 document.getElementById("NguoiNhan").innerText = getParam("NguoiNhan");
 document.getElementById("LyDo").innerText = getParam("LyDo");
-
-document.getElementById("logo").src = getParam("logo");
+document.getElementById("Kho").innerText = getParam("Khoxuat");
 
 // ===== DATA PIPE =====
 let raw = decodeURIComponent(getParam("data"));
 let arr = raw.split("|");
 
-let html = "";
-let tong = 0;
+let html="";
+let tong=0;
 
 for(let i=0;i<arr.length;i+=3){
 
   let ten = arr[i];
-  let sl = Number(arr[i+1] || 0);
-  let gia = Number(arr[i+2] || 0);
+  let sl = Number(arr[i+1]||0);
+  let gia = Number(arr[i+2]||0);
 
   if(!ten) continue;
 
@@ -198,23 +176,25 @@ for(let i=0;i<arr.length;i+=3){
   html += `
   <tr>
     <td>${(i/3)+1}</td>
-    <td class="left">${ten}</td>
+    <td style="text-align:left">${ten}</td>
+    <td></td>
+    <td></td>
     <td>${sl}</td>
-    <td>${formatMoney(gia)}</td>
-    <td>${formatMoney(tt)}</td>
+    <td>${sl}</td>
+    <td>${money(gia)}</td>
+    <td>${money(tt)}</td>
   </tr>`;
 }
 
-// render
 document.getElementById("dsHang").innerHTML = html;
 
-// tổng tiền
+// tổng
 if(getParam("SoTien")){
   tong = Number(getParam("SoTien"));
 }
 
-document.getElementById("TongTien").innerText = formatMoney(tong);
-document.getElementById("TienChu").innerText = numberToText(tong);
+document.getElementById("TongTien").innerText = money(tong);
+document.getElementById("TienChu").innerText = docSo(tong);
 
 </script>
 
