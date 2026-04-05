@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Phiếu xuất kho</title>
+
 <style>
 body{
   font-family: "Times New Roman", serif;
@@ -20,42 +21,34 @@ body{
   justify-content: space-between;
 }
 
-.center{
-  text-align: center;
-}
-
-.bold{
-  font-weight: bold;
-}
+.center{text-align:center;}
+.bold{font-weight:bold;}
+.left{text-align:left;}
 
 .table{
-  width: 100%;
+  width:100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top:10px;
 }
 
 .table, .table th, .table td{
-  border: 1px solid black;
+  border:1px solid black;
 }
 
 .table th, .table td{
-  padding: 5px;
-  text-align: center;
-}
-
-.left{
-  text-align: left;
+  padding:5px;
+  text-align:center;
 }
 
 .sign{
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-  text-align: center;
+  display:flex;
+  justify-content:space-between;
+  margin-top:50px;
+  text-align:center;
 }
 
-.small{
-  font-size: 12px;
+.logo{
+  height:60px;
 }
 </style>
 </head>
@@ -63,79 +56,64 @@ body{
 <body>
 <div class="container">
 
-<!-- Header -->
+<!-- HEADER -->
 <div class="header">
   <div>
-    <div>Đơn vị: .........................</div>
-    <div>Bộ phận: .......................</div>
+    <img id="logo" class="logo">
+    <div id="DonVi" class="bold"></div>
+    <div id="DiaChiCT"></div>
   </div>
 
   <div class="center">
     <div class="bold">Mẫu số 02 - VT</div>
-    <div class="small">(Ban hành theo Thông tư số 133/2016/TT-BTC)</div>
+    <div>(TT 133/2016/TT-BTC)</div>
   </div>
 </div>
 
-<!-- Title -->
-<div class="center" style="margin-top:20px;">
+<!-- TITLE -->
+<div class="center">
   <h2>PHIẾU XUẤT KHO</h2>
-  <div>Ngày ... tháng ... năm ....</div>
-  <div>Số: .......................</div>
+  <div>
+    Ngày <span id="Ngay"></span>
+    tháng <span id="Thang"></span>
+    năm <span id="Nam"></span>
+  </div>
+  <div>Số: <b id="SoPhieu"></b></div>
 </div>
 
-<!-- Info -->
-<p>- Họ và tên người nhận hàng: ............................................................</p>
-<p>- Lý do xuất kho: .................................................................................</p>
-<p>- Xuất tại kho: ............................................. Địa điểm: ............................</p>
+<!-- INFO -->
+<p>- Người nhận: <span id="NguoiNhan"></span></p>
+<p>- Lý do xuất: <span id="LyDo"></span></p>
 
-<!-- Table -->
+<!-- TABLE -->
 <table class="table">
-  <tr>
-    <th rowspan="2">STT</th>
-    <th rowspan="2">Tên hàng hóa</th>
-    <th rowspan="2">Mã số</th>
-    <th rowspan="2">ĐVT</th>
-    <th colspan="2">Số lượng</th>
-    <th rowspan="2">Đơn giá</th>
-    <th rowspan="2">Thành tiền</th>
-  </tr>
-  <tr>
-    <th>Yêu cầu</th>
-    <th>Thực nhập</th>
-  </tr>
+<tr>
+  <th>STT</th>
+  <th>Tên hàng</th>
+  <th>SL</th>
+  <th>Đơn giá</th>
+  <th>Thành tiền</th>
+</tr>
 
-  <!-- Dữ liệu -->
-  <tr>
-    <td>1</td>
-    <td class="left">Nước suối</td>
-    <td>SP01</td>
-    <td>Chai</td>
-    <td>10</td>
-    <td>10</td>
-    <td>5,000</td>
-    <td>50,000</td>
-  </tr>
+<tbody id="dsHang"></tbody>
 
-  <!-- Tổng -->
-  <tr>
-    <td colspan="7" class="bold">Cộng</td>
-    <td>50,000</td>
-  </tr>
+<tr>
+  <td colspan="4" class="bold">Cộng</td>
+  <td id="TongTien"></td>
+</tr>
 </table>
 
-<!-- Footer -->
-<p>- Tổng số tiền (viết bằng chữ): .......................................................</p>
-<p>- Số chứng từ gốc kèm theo: .........................................................</p>
+<p><b>Tổng tiền (viết bằng chữ):</b> <span id="TienChu"></span></p>
 
-<!-- Sign -->
+<!-- SIGN -->
 <div class="sign">
   <div>
-    <div class="bold">Người lập phiếu</div>
+    <div class="bold">Người lập</div>
     <div>(Ký, họ tên)</div>
   </div>
 
   <div>
-    <div class="bold">Người nhận hàng</div>
+    <div class="bold">Người nhận</div>
     <div>(Ký, họ tên)</div>
   </div>
 
@@ -145,7 +123,7 @@ body{
   </div>
 
   <div>
-    <div class="bold">Kế toán trưởng</div>
+    <div class="bold">Kế toán</div>
     <div>(Ký, họ tên)</div>
   </div>
 
@@ -156,5 +134,74 @@ body{
 </div>
 
 </div>
+
+<script>
+// ===== LẤY PARAM =====
+function getParam(name){
+  let url = new URL(window.location.href);
+  return url.searchParams.get(name) || "";
+}
+
+// ===== FORMAT TIỀN =====
+function formatMoney(x){
+  return Number(x || 0).toLocaleString("vi-VN");
+}
+
+// ===== ĐỔI SỐ THÀNH CHỮ (ĐƠN GIẢN) =====
+function numberToText(n){
+  return formatMoney(n) + " đồng";
+}
+
+// ===== GÁN DỮ LIỆU =====
+document.getElementById("DonVi").innerText = getParam("DonVi");
+document.getElementById("DiaChiCT").innerText = getParam("DiaChiCT");
+document.getElementById("SoPhieu").innerText = getParam("SoPhieu");
+
+document.getElementById("Ngay").innerText = getParam("Ngay");
+document.getElementById("Thang").innerText = getParam("Thang");
+document.getElementById("Nam").innerText = getParam("Nam");
+
+document.getElementById("NguoiNhan").innerText = getParam("NguoiNhan");
+document.getElementById("LyDo").innerText = getParam("LyDo");
+
+document.getElementById("logo").src = getParam("logo");
+
+// ===== DANH SÁCH HÀNG (JSON) =====
+// truyền dạng:
+// &ds=[{"ten":"Nước","sl":2,"gia":5000},{"ten":"Bia","sl":1,"gia":10000}]
+let ds = getParam("ds");
+
+let tong = 0;
+if(ds){
+  let arr = JSON.parse(decodeURIComponent(ds));
+  let html = "";
+
+  arr.forEach((item, i)=>{
+    let tt = item.sl * item.gia;
+    tong += tt;
+
+    html += `
+    <tr>
+      <td>${i+1}</td>
+      <td class="left">${item.ten}</td>
+      <td>${item.sl}</td>
+      <td>${formatMoney(item.gia)}</td>
+      <td>${formatMoney(tt)}</td>
+    </tr>`;
+  });
+
+  document.getElementById("dsHang").innerHTML = html;
+}
+
+// ===== TỔNG =====
+if(getParam("SoTien")){
+  tong = Number(getParam("SoTien"));
+}
+
+document.getElementById("TongTien").innerText = formatMoney(tong);
+document.getElementById("TienChu").innerText = numberToText(tong);
+
+</script>
+
 </body>
 </html>
