@@ -12,13 +12,11 @@ body{
   margin: auto;
 }
 
-.container{
-  padding: 20px;
-}
+.container{ padding:20px; }
 
 .header{
-  display: flex;
-  justify-content: space-between;
+  display:flex;
+  justify-content:space-between;
 }
 
 .center{text-align:center;}
@@ -27,7 +25,7 @@ body{
 
 .table{
   width:100%;
-  border-collapse: collapse;
+  border-collapse:collapse;
   margin-top:10px;
 }
 
@@ -43,13 +41,12 @@ body{
 .sign{
   display:flex;
   justify-content:space-between;
-  margin-top:50px;
+  margin-top:60px;
   text-align:center;
 }
 
-.logo{
-  height:60px;
-}
+.logo{ height:60px; }
+.small{ font-size:12px; }
 </style>
 </head>
 
@@ -59,26 +56,24 @@ body{
 <!-- HEADER -->
 <div class="header">
   <div>
-    <img id="logo" class="logo">
-    <div id="DonVi" class="bold"></div>
-    <div id="DiaChiCT"></div>
+    <img id="logo" class="logo"><br>
+    <b id="DonVi"></b><br>
+    <span id="DiaChiCT"></span>
   </div>
 
   <div class="center">
-    <div class="bold">Mẫu số 02 - VT</div>
-    <div>(TT 133/2016/TT-BTC)</div>
+    <b>Mẫu số 02 - VT</b><br>
+    <span class="small">(TT 133/2016/TT-BTC)</span>
   </div>
 </div>
 
 <!-- TITLE -->
 <div class="center">
   <h2>PHIẾU XUẤT KHO</h2>
-  <div>
-    Ngày <span id="Ngay"></span>
-    tháng <span id="Thang"></span>
-    năm <span id="Nam"></span>
-  </div>
-  <div>Số: <b id="SoPhieu"></b></div>
+  Ngày <span id="Ngay"></span>
+  tháng <span id="Thang"></span>
+  năm <span id="Nam"></span><br>
+  Số: <b id="SoPhieu"></b>
 </div>
 
 <!-- INFO -->
@@ -107,49 +102,65 @@ body{
 
 <!-- SIGN -->
 <div class="sign">
-  <div>
-    <div class="bold">Người lập</div>
-    <div>(Ký, họ tên)</div>
-  </div>
-
-  <div>
-    <div class="bold">Người nhận</div>
-    <div>(Ký, họ tên)</div>
-  </div>
-
-  <div>
-    <div class="bold">Thủ kho</div>
-    <div>(Ký, họ tên)</div>
-  </div>
-
-  <div>
-    <div class="bold">Kế toán</div>
-    <div>(Ký, họ tên)</div>
-  </div>
-
-  <div>
-    <div class="bold">Giám đốc</div>
-    <div>(Ký, họ tên)</div>
-  </div>
+  <div>Người lập<br>(Ký, họ tên)</div>
+  <div>Người nhận<br>(Ký, họ tên)</div>
+  <div>Thủ kho<br>(Ký, họ tên)</div>
+  <div>Kế toán<br>(Ký, họ tên)</div>
+  <div>Giám đốc<br>(Ký, họ tên)</div>
 </div>
 
 </div>
 
 <script>
-// ===== LẤY PARAM =====
+
+// ===== GET PARAM =====
 function getParam(name){
   let url = new URL(window.location.href);
   return url.searchParams.get(name) || "";
 }
 
-// ===== FORMAT TIỀN =====
+// ===== FORMAT MONEY =====
 function formatMoney(x){
   return Number(x || 0).toLocaleString("vi-VN");
 }
 
-// ===== ĐỔI SỐ THÀNH CHỮ (ĐƠN GIẢN) =====
+// ===== ĐỔI SỐ THÀNH CHỮ (FULL TIẾNG VIỆT) =====
 function numberToText(n){
-  return formatMoney(n) + " đồng";
+  let t=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  let r="",i=0;
+  if(n==0) return "Không đồng";
+
+  while(n>0){
+    let a=n%1000;
+    let tr=Math.floor(a/100);
+    let ch=Math.floor((a%100)/10);
+    let dv=a%10;
+
+    if(a>0){
+      let str="";
+      if(tr>0) str+=t[tr]+" trăm ";
+      if(ch>1) str+=t[ch]+" mươi ";
+      else if(ch==1) str+="mười ";
+      else if(ch==0 && dv>0 && tr>0) str+="lẻ ";
+
+      if(dv>0){
+        if(ch>=1 && dv==1) str+="mốt ";
+        else if(dv==5 && ch>=1) str+="lăm ";
+        else str+=t[dv]+" ";
+      }
+
+      if(i==1) str+="nghìn ";
+      if(i==2) str+="triệu ";
+      if(i==3) str+="tỷ ";
+
+      r=str+r;
+    }
+
+    n=Math.floor(n/1000);
+    i++;
+  }
+
+  return r.trim()+" đồng";
 }
 
 // ===== GÁN DỮ LIỆU =====
@@ -166,34 +177,38 @@ document.getElementById("LyDo").innerText = getParam("LyDo");
 
 document.getElementById("logo").src = getParam("logo");
 
-// ===== DANH SÁCH HÀNG (JSON) =====
-// truyền dạng:
-// &ds=[{"ten":"Nước","sl":2,"gia":5000},{"ten":"Bia","sl":1,"gia":10000}]
-let ds = getParam("ds");
+// ===== DATA PIPE =====
+let raw = decodeURIComponent(getParam("data"));
+let arr = raw.split("|");
 
+let html = "";
 let tong = 0;
-if(ds){
-  let arr = JSON.parse(decodeURIComponent(ds));
-  let html = "";
 
-  arr.forEach((item, i)=>{
-    let tt = item.sl * item.gia;
-    tong += tt;
+for(let i=0;i<arr.length;i+=3){
 
-    html += `
-    <tr>
-      <td>${i+1}</td>
-      <td class="left">${item.ten}</td>
-      <td>${item.sl}</td>
-      <td>${formatMoney(item.gia)}</td>
-      <td>${formatMoney(tt)}</td>
-    </tr>`;
-  });
+  let ten = arr[i];
+  let sl = Number(arr[i+1] || 0);
+  let gia = Number(arr[i+2] || 0);
 
-  document.getElementById("dsHang").innerHTML = html;
+  if(!ten) continue;
+
+  let tt = sl * gia;
+  tong += tt;
+
+  html += `
+  <tr>
+    <td>${(i/3)+1}</td>
+    <td class="left">${ten}</td>
+    <td>${sl}</td>
+    <td>${formatMoney(gia)}</td>
+    <td>${formatMoney(tt)}</td>
+  </tr>`;
 }
 
-// ===== TỔNG =====
+// render
+document.getElementById("dsHang").innerHTML = html;
+
+// tổng tiền
 if(getParam("SoTien")){
   tong = Number(getParam("SoTien"));
 }
