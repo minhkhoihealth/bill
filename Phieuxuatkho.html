@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Phiếu xuất kho</title>
+<style>
+body{
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  width: 210mm;
+  margin: auto;
+}
+
+.container{
+  padding: 20px;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.center{
+  text-align: center;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table, .table th, .table td{
+  border: 1px solid black;
+}
+
+.table th, .table td{
+  padding: 5px;
+  text-align: center;
+}
+
+.left{
+  text-align: left;
+}
+
+.sign{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.small{
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div>
+    <div>Đơn vị: .........................</div>
+    <div>Bộ phận: .......................</div>
+  </div>
+
+  <div class="center">
+    <div class="bold">Mẫu số 02 - VT</div>
+    <div class="small">(Ban hành theo Thông tư số 133/2016/TT-BTC)</div>
+  </div>
+</div>
+
+<!-- Title -->
+<div class="center" style="margin-top:20px;">
+  <h2>PHIẾU XUẤT KHO</h2>
+  <div>Ngày ... tháng ... năm ....</div>
+  <div>Số: .......................</div>
+</div>
+
+<!-- Info -->
+<p>- Họ và tên người nhận hàng: ............................................................</p>
+<p>- Lý do xuất kho: .................................................................................</p>
+<p>- Xuất tại kho: ............................................. Địa điểm: ............................</p>
+
+<!-- Table -->
+<table class="table">
+  <tr>
+    <th rowspan="2">STT</th>
+    <th rowspan="2">Tên hàng hóa</th>
+    <th rowspan="2">Mã số</th>
+    <th rowspan="2">ĐVT</th>
+    <th colspan="2">Số lượng</th>
+    <th rowspan="2">Đơn giá</th>
+    <th rowspan="2">Thành tiền</th>
+  </tr>
+  <tr>
+    <th>Yêu cầu</th>
+    <th>Thực nhập</th>
+  </tr>
+
+  <!-- Dữ liệu -->
+  <tr>
+    <td>1</td>
+    <td class="left">Nước suối</td>
+    <td>SP01</td>
+    <td>Chai</td>
+    <td>10</td>
+    <td>10</td>
+    <td>5,000</td>
+    <td>50,000</td>
+  </tr>
+
+  <!-- Tổng -->
+  <tr>
+    <td colspan="7" class="bold">Cộng</td>
+    <td>50,000</td>
+  </tr>
+</table>
+
+<!-- Footer -->
+<p>- Tổng số tiền (viết bằng chữ): .......................................................</p>
+<p>- Số chứng từ gốc kèm theo: .........................................................</p>
+
+<!-- Sign -->
+<div class="sign">
+  <div>
+    <div class="bold">Người lập phiếu</div>
+    <div>(Ký, họ tên)</div>
+  </div>
+
+  <div>
+    <div class="bold">Người nhận hàng</div>
+    <div>(Ký, họ tên)</div>
+  </div>
+
+  <div>
+    <div class="bold">Thủ kho</div>
+    <div>(Ký, họ tên)</div>
+  </div>
+
+  <div>
+    <div class="bold">Kế toán trưởng</div>
+    <div>(Ký, họ tên)</div>
+  </div>
+
+  <div>
+    <div class="bold">Giám đốc</div>
+    <div>(Ký, họ tên)</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
