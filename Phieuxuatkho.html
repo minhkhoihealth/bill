@@ -11,10 +11,7 @@ body{
   width:210mm;
   margin:auto;
 }
-.line {
-  flex: 1;
-  border-bottom: 1px dotted #000;
-}
+
 .container{ padding:20px; }
 
 .header{
@@ -26,6 +23,38 @@ body{
 .right{text-align:right;}
 .bold{font-weight:bold;}
 
+/* ===== TITLE ===== */
+.title-block{
+  display:flex;
+  justify-content:space-between;
+  margin-top:5px;
+}
+
+.title-block .left{
+  width:60%;
+}
+
+.title-block .right{
+  width:40%;
+}
+
+.row-line{
+  display:flex;
+  align-items:center;
+  margin-bottom:4px;
+}
+
+.row-line span:first-child{
+  width:70px;
+}
+
+.line{
+  flex:1;
+  border-bottom:1px dotted #000;
+  padding-left:5px;
+}
+
+/* ===== TABLE ===== */
 .table{
   width:100%;
   border-collapse:collapse;
@@ -39,14 +68,6 @@ body{
 .table th, .table td{
   padding:4px;
   text-align:center;
-}
-
-/* ===== TITLE ROW ===== */
-.title-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:5px;
 }
 
 /* ===== BUTTON ===== */
@@ -79,12 +100,8 @@ body{
 
 /* ===== PRINT ===== */
 @media print{
-  body{
-    margin:0;
-  }
-  .no-print{
-    display:none;
-  }
+  body{ margin:0; }
+  .no-print{ display:none; }
 }
 </style>
 </head>
@@ -108,7 +125,7 @@ body{
 
   <div class="center">
     <b>Mẫu số 02 - VT</b><br>
-    <i>(Ban hành theo Thông tư số 133/2016/TT-BTC </i><br>
+    <i>(Ban hành theo Thông tư số 133/2016/TT-BTC</i><br>
     <i>ngày 26/8/2016 của Bộ Tài chính)</i>
   </div>
 </div>
@@ -119,17 +136,21 @@ body{
 </div>
 
 <div class="title-block">
-  
-  <div class="center">
+  <div class="left">
     Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
     Số: <b id="SoPhieu"></b>
   </div>
 
   <div class="right">
-<div class="label">Nợ TK:</div><div class="line" id="Notk"></div></div><br>
-  <div class="label">Có TK:</div><div class="line" id="CoTK"></div></div>
+    <div class="row-line">
+      <span>Nợ TK:</span>
+      <span class="line" id="NoTK"></span>
+    </div>
+    <div class="row-line">
+      <span>Có TK:</span>
+      <span class="line" id="CoTK"></span>
+    </div>
   </div>
-
 </div>
 
 <p>- Họ tên người nhận: <span id="NguoiNhan"></span></p>
@@ -212,6 +233,10 @@ document.getElementById("NguoiNhan").innerText = getParam("NguoiNhan");
 document.getElementById("LyDo").innerText = getParam("LyDo");
 document.getElementById("Kho").innerText = getParam("Khoxuat");
 
+// ===== NỢ / CÓ =====
+document.getElementById("NoTK").innerText = getParam("Notk") || "";
+document.getElementById("CoTK").innerText = getParam("Cotk") || "";
+
 // ===== DATA =====
 let raw = decodeURIComponent(getParam("data") || "");
 let arr = raw.split("|");
@@ -225,7 +250,7 @@ for(let i=0;i<arr.length;i+=5){
   let dvt = arr[i+1];
   let sl = Number(arr[i+2]||0);
   let gia = Number(arr[i+3]||0);
-  let tt = Number(arr[i+4]||0);
+  let tt = sl * gia; // tự tính luôn
 
   if(!ten) continue;
 
