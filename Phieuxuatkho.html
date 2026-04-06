@@ -20,7 +20,6 @@ body{
 }
 
 .center{text-align:center;}
-.right{text-align:right;}
 .bold{font-weight:bold;}
 
 /* ===== TITLE ===== */
@@ -38,20 +37,29 @@ body{
   width:40%;
 }
 
+/* ===== NỢ CÓ ===== */
 .row-line{
   display:flex;
-  align-items:center;
-  margin-bottom:4px;
+  align-items:flex-start;
+  margin-bottom:6px;
 }
 
-.row-line span:first-child{
+.row-line .label{
   width:70px;
 }
 
+.line-wrap{
+  width:150px; /* 👉 chỉnh độ dài tại đây */
+}
+
+.line-wrap span{
+  display:block;
+  text-align:right;
+}
+
 .line{
-  flex:1;
   border-bottom:1px dotted #000;
-  padding-left:5px;
+  margin-top:2px;
 }
 
 /* ===== TABLE ===== */
@@ -125,8 +133,7 @@ body{
 
   <div class="center">
     <b>Mẫu số 02 - VT</b><br>
-    <i>(Ban hành theo Thông tư số 133/2016/TT-BTC</i><br>
-    <i>ngày 26/8/2016 của Bộ Tài chính)</i>
+    <i>(Ban hành theo Thông tư 133/2016/TT-BTC)</i>
   </div>
 </div>
 
@@ -136,72 +143,66 @@ body{
 </div>
 
 <div class="title-block">
+
   <div class="left">
     Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
     Số: <b id="SoPhieu"></b>
   </div>
 
   <div class="right">
+    
     <div class="row-line">
-      <span>Nợ TK:</span>
-      <span class="line" id="NoTK"></span>
+      <div class="label">Nợ TK:</div>
+      <div class="line-wrap">
+        <span id="NoTK"></span>
+        <div class="line"></div>
+      </div>
     </div>
+
     <div class="row-line">
-      <span>Có TK:</span>
-      <span class="line" id="CoTK"></span>
+      <div class="label">Có TK:</div>
+      <div class="line-wrap">
+        <span id="CoTK"></span>
+        <div class="line"></div>
+      </div>
     </div>
+
   </div>
+
 </div>
 
 <p>- Họ tên người nhận: <span id="NguoiNhan"></span></p>
 <p>- Lý do xuất kho: <span id="LyDo"></span></p>
-<p>- Xuất tại kho: <span id="Kho"></span> &nbsp;&nbsp; Địa điểm: ....................</p>
+<p>- Xuất tại kho: <span id="Kho"></span></p>
 
 <!-- TABLE -->
 <table class="table">
 <tr>
-  <th rowspan="2">STT</th>
-  <th rowspan="2">Tên hàng hóa, quy cách</th>
-  <th rowspan="2">Mã số</th>
-  <th rowspan="2">ĐVT</th>
-  <th colspan="2">Số lượng</th>
-  <th rowspan="2">Đơn giá</th>
-  <th rowspan="2">Thành tiền</th>
-</tr>
-<tr>
-  <th>Yêu cầu</th>
-  <th>Thực nhập</th>
-</tr>
-
-<tr>
-  <td>A</td>
-  <td>B</td>
-  <td>C</td>
-  <td>D</td>
-  <td>1</td>
-  <td>2</td>
-  <td>3</td>
-  <td>4</td>
+  <th>STT</th>
+  <th>Tên hàng</th>
+  <th>ĐVT</th>
+  <th>Số lượng</th>
+  <th>Đơn giá</th>
+  <th>Thành tiền</th>
 </tr>
 
 <tbody id="dsHang"></tbody>
 
 <tr>
-  <td colspan="7" class="bold">Cộng</td>
+  <td colspan="5" class="bold">Cộng</td>
   <td id="TongTien"></td>
 </tr>
 </table>
 
-<p>- Tổng số tiền (viết bằng chữ): <span id="TienChu"></span></p>
-<p>- Số chứng từ gốc kèm theo: ....................................................</p>
+<p>- Tổng tiền: <span id="TienChu"></span></p>
 
 <!-- SIGN -->
 <div class="sign">
-  <div>Người lập phiếu<br>(Ký, họ tên)</div>
-  <div>Người nhận hàng<br>(Ký, họ tên)</div>
-  <div>Thủ kho<br>(Ký, họ tên)</div>
-  <div>Kế toán trưởng<br>(Ký, họ tên)</div>
-  <div>Giám đốc<br>(Ký, họ tên)</div>
+  <div>Người lập phiếu</div>
+  <div>Người nhận</div>
+  <div>Thủ kho</div>
+  <div>Kế toán trưởng</div>
+  <div>Giám đốc</div>
 </div>
 
 </div>
@@ -218,11 +219,6 @@ function money(x){
   return Number(x||0).toLocaleString("vi-VN");
 }
 
-// ===== SỐ → CHỮ =====
-function docSo(n){
-  return money(n) + " đồng";
-}
-
 // ===== GÁN =====
 document.getElementById("DonVi").innerText = getParam("DonVi");
 document.getElementById("SoPhieu").innerText = getParam("SoPhieu");
@@ -234,8 +230,8 @@ document.getElementById("LyDo").innerText = getParam("LyDo");
 document.getElementById("Kho").innerText = getParam("Khoxuat");
 
 // ===== NỢ / CÓ =====
-document.getElementById("NoTK").innerText = getParam("Notk") || "";
-document.getElementById("CoTK").innerText = getParam("Cotk") || "";
+document.getElementById("NoTK").innerText = getParam("Notk");
+document.getElementById("CoTK").innerText = getParam("Cotk");
 
 // ===== DATA =====
 let raw = decodeURIComponent(getParam("data") || "");
@@ -250,7 +246,7 @@ for(let i=0;i<arr.length;i+=5){
   let dvt = arr[i+1];
   let sl = Number(arr[i+2]||0);
   let gia = Number(arr[i+3]||0);
-  let tt = sl * gia; // tự tính luôn
+  let tt = sl * gia;
 
   if(!ten) continue;
 
@@ -260,9 +256,7 @@ for(let i=0;i<arr.length;i+=5){
   <tr>
     <td>${(i/5)+1}</td>
     <td style="text-align:left">${ten}</td>
-    <td></td>
     <td>${dvt}</td>
-    <td>${sl}</td>
     <td>${sl}</td>
     <td>${money(gia)}</td>
     <td>${money(tt)}</td>
@@ -270,14 +264,8 @@ for(let i=0;i<arr.length;i+=5){
 }
 
 document.getElementById("dsHang").innerHTML = html;
-
-// tổng
-if(getParam("SoTien")){
-  tong = Number(getParam("SoTien"));
-}
-
 document.getElementById("TongTien").innerText = money(tong);
-document.getElementById("TienChu").innerText = docSo(tong);
+document.getElementById("TienChu").innerText = money(tong) + " đồng";
 </script>
 
 </body>
