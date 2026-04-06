@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Phiếu xuất kho</title>
+<title>Phiếu nhập kho</title>
 
 <style>
 body{
@@ -22,15 +22,6 @@ body{
 .center{text-align:center;}
 .bold{font-weight:bold;}
 
-.title-block{
-  display:flex;
-  justify-content:space-between;
-  margin-top:5px;
-}
-
-.title-block .left{ width:60%; }
-.title-block .right{ width:40%; }
-
 .line{
   display:inline-block;
   border-bottom:1px dotted #000;
@@ -38,7 +29,23 @@ body{
 }
 
 .row{
-  margin:4px 0;
+  margin:10px 0;
+}
+
+/* TITLE */
+.title{
+  position:relative;
+  margin-top:5px;
+}
+
+.title-center{
+  text-align:center;
+}
+
+.title-right{
+  position:absolute;
+  right:0;
+  top:5px;
 }
 
 /* TABLE */
@@ -65,11 +72,9 @@ body{
   text-align:center;
 }
 
-.sign div{
-  width:19%;
-}
+.sign div{ width:19%; }
 
-/* PRINT */
+/* BUTTON */
 .actions{
   text-align:right;
   margin-bottom:10px;
@@ -84,23 +89,7 @@ body{
   border-radius:4px;
   cursor:pointer;
 }
-  .title{
-  position:relative;
-  margin-top:5px;
-}
 
-.title-center{
-  text-align:center;
-}
-
-.title-right{
-  position:absolute;
-  right:0;
-  top:5px;
-  text-align:left;
-
-}
-  
 @media print{
   .no-print{ display:none; }
 }
@@ -125,7 +114,7 @@ body{
 
   <div class="center">
     <b>Mẫu số 02 - VT</b><br>
-    <i>(Ban hành theo Thông tư 133/2016/TT-BTC)</i>
+    <i>(Thông tư 133/2016/TT-BTC)</i>
   </div>
 </div>
 
@@ -133,10 +122,8 @@ body{
   <h3>PHIẾU NHẬP KHO</h3>
 </div>
 
-
 <!-- TITLE -->
 <div class="title">
-
   <div class="title-center">
     Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
     Số: <span class="line" id="SoPhieu"></span>
@@ -146,20 +133,19 @@ body{
     Nợ: <span class="line" id="NoTK"></span><br>
     Có: <span class="line" id="CoTK"></span>
   </div>
-
 </div>
 
 <div class="row">
-- Họ và tên người nhận hàng: <span class="line" id="NguoiNhan"></span> &nbsp;&nbsp; 
-Địa chỉ (bộ phận): <span  class="line"></span>
+- Họ và tên người nhận hàng: <span id="NguoiNhan"></span>  
+Địa chỉ: <span class="line"></span>
 </div>
 
 <div class="row">
-- Lý do xuất kho: <span class="line" id="LyDo"></span>
+- Lý do nhập kho: <span id="LyDo"></span>
 </div>
 
 <div class="row">
-- Xuất tại kho (ngăn lô): <span  class="line" id="Kho"></span> &nbsp;&nbsp;
+- Nhập tại kho: <span id="Kho"></span>  
 Địa điểm: <span class="line"></span>
 </div>
 
@@ -167,8 +153,8 @@ body{
 <table class="table">
 <tr>
   <th>STT</th>
-  <th>Tên, nhãn hiệu, quy cách</th>
-  <th>Mã số</th>
+  <th>Tên hàng</th>
+  <th>Mã</th>
   <th>ĐVT</th>
   <th>Số lượng</th>
   <th>Đơn giá</th>
@@ -193,43 +179,28 @@ body{
 
 <!-- SIGN -->
 <div class="sign">
-  <div>
-    Người lập phiếu<br>
-    (Ký, họ tên)
-  </div>
-  <div>
-    Người nhận hàng<br>
-    (Ký, họ tên)
-  </div>
-  <div>
-    Thủ kho<br>
-    (Ký, họ tên)
-  </div>
-  <div>
-    Kế toán trưởng<br>
-    (Ký, họ tên)
-  </div>
-  <div>
-    Giám đốc<br>
-    (Ký, họ tên)
-  </div>
+  <div>Người lập phiếu<br>(Ký, họ tên)</div>
+  <div>Người giao hàng<br>(Ký, họ tên)</div>
+  <div>Thủ kho<br>(Ký, họ tên)</div>
+  <div>Kế toán trưởng<br>(Ký, họ tên)</div>
+  <div>Giám đốc<br>(Ký, họ tên)</div>
 </div>
 
 </div>
 
 <script>
-// ===== PARAM =====
+// PARAM
 function getParam(name){
   let url = new URL(window.location.href);
   return url.searchParams.get(name) || "";
 }
 
-// ===== FORMAT =====
+// FORMAT
 function money(x){
   return Number(x||0).toLocaleString("vi-VN");
 }
 
-// ===== GÁN =====
+// GÁN
 document.getElementById("DonVi").innerText = getParam("DonVi");
 document.getElementById("SoPhieu").innerText = getParam("SoPhieu");
 document.getElementById("Ngay").innerText = getParam("Ngay");
@@ -237,13 +208,13 @@ document.getElementById("Thang").innerText = getParam("Thang");
 document.getElementById("Nam").innerText = getParam("Nam");
 document.getElementById("NguoiNhan").innerText = getParam("NguoiNhan");
 document.getElementById("LyDo").innerText = getParam("LyDo");
-document.getElementById("Kho").innerText = getParam("Khoxuat");
+document.getElementById("Kho").innerText = getParam("Khonhap");
 
 // NỢ CÓ
 document.getElementById("NoTK").innerText = getParam("Notk");
 document.getElementById("CoTK").innerText = getParam("Cotk");
 
-// ===== DATA =====
+// DATA
 let raw = decodeURIComponent(getParam("data") || "");
 let arr = raw.split("|");
 
@@ -252,16 +223,16 @@ let tong=0;
 
 for(let i=0;i<arr.length;i+=8){
 
-  let ten = arr[i];
+  let ten = (arr[i]||"").replace(/_n_/g,"").trim();
   let ma  = arr[i+1];
-
-  // bỏ 2 cột quy đổi
   let dvt = arr[i+4];
   let sl  = Number(arr[i+5]||0);
   let gia = Number(arr[i+6]||0);
   let tt  = Number(arr[i+7]||0);
 
   if(!ten) continue;
+
+  tong += tt;
 
   html += `
   <tr>
@@ -277,61 +248,52 @@ for(let i=0;i<arr.length;i+=8){
 
 document.getElementById("dsHang").innerHTML = html;
 
+// tổng
 if(getParam("SoTien")){
   tong = Number(getParam("SoTien"));
 }
 
 document.getElementById("TongTien").innerText = money(tong);
-document.getElementById("TienChu").innerText = numberToWords(tong);
-  function numberToWords(num){
-  const ones = ["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
-  const tens = ["","","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+
+// đọc tiền
+function numberToWords(num){
+  const ones=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  const tens=["","","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
 
   function read3(n){
-    let tr = Math.floor(n/100);
-    let ch = Math.floor((n%100)/10);
-    let dv = n%10;
-    let str = "";
-
-    if(tr > 0){
-      str += ones[tr] + " trăm";
-      if(ch == 0 && dv > 0) str += " lẻ";
-    }
-
-    if(ch > 1){
-      str += " " + tens[ch] + " mươi";
-      if(dv == 1) str += " mốt";
-      else if(dv == 5) str += " lăm";
-      else if(dv > 0) str += " " + ones[dv];
-    } 
-    else if(ch == 1){
-      str += " mười";
-      if(dv == 5) str += " lăm";
-      else if(dv > 0) str += " " + ones[dv];
-    } 
-    else if(ch == 0 && dv > 0){
-      str += " " + ones[dv];
-    }
-
+    let tr=Math.floor(n/100),ch=Math.floor((n%100)/10),dv=n%10,str="";
+    if(tr){ str+=ones[tr]+" trăm"; if(ch==0&&dv) str+=" lẻ"; }
+    if(ch>1){
+      str+=" "+tens[ch]+" mươi";
+      if(dv==1) str+=" mốt";
+      else if(dv==5) str+=" lăm";
+      else if(dv) str+=" "+ones[dv];
+    }else if(ch==1){
+      str+=" mười";
+      if(dv==5) str+=" lăm";
+      else if(dv) str+=" "+ones[dv];
+    }else if(dv) str+=" "+ones[dv];
     return str.trim();
   }
 
-  if(num == 0) return "Không đồng";
+  if(num==0) return "Không đồng";
 
-  let ty = Math.floor(num / 1e9);
-  let trieu = Math.floor((num % 1e9)/1e6);
-  let nghin = Math.floor((num % 1e6)/1e3);
-  let tram = num % 1e3;
+  let t=Math.floor(num/1e9),
+      tr=Math.floor((num%1e9)/1e6),
+      ng=Math.floor((num%1e6)/1e3),
+      trm=num%1e3;
 
-  let result = "";
+  let r="";
+  if(t) r+=read3(t)+" tỷ ";
+  if(tr) r+=read3(tr)+" triệu ";
+  if(ng) r+=read3(ng)+" nghìn ";
+  if(trm) r+=read3(trm);
 
-  if(ty) result += read3(ty) + " tỷ ";
-  if(trieu) result += read3(trieu) + " triệu ";
-  if(nghin) result += read3(nghin) + " nghìn ";
-  if(tram) result += read3(tram);
-
-  return result.trim() + " đồng";
+  r=r.trim()+" đồng";
+  return r.charAt(0).toUpperCase()+r.slice(1);
 }
+
+document.getElementById("TienChu").innerText = numberToWords(tong);
 
 </script>
 
