@@ -84,6 +84,22 @@ body{
   border-radius:4px;
   cursor:pointer;
 }
+  .title{
+  position:relative;
+  margin-top:5px;
+}
+
+.title-center{
+  text-align:center;
+}
+
+.title-right{
+  position:absolute;
+  right:0;
+  top:5px;
+  text-align:left;
+
+}
   
 @media print{
   .no-print{ display:none; }
@@ -118,17 +134,19 @@ body{
 </div>
 
 <!-- TITLE -->
-<div class="title-block">
+<!-- TITLE -->
+<div class="title">
 
-  <div class="center">
+  <div class="title-center">
     Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
     Số: <span class="line" id="SoPhieu"></span>
   </div>
 
-  <div class="right">
+  <div class="title-right">
     Nợ: <span class="line" id="NoTK"></span><br>
     Có: <span class="line" id="CoTK"></span>
   </div>
+
 </div>
 
 <div class="row">
