@@ -38,23 +38,21 @@ body{
   text-align:center;
 }
 
-.sign{
+/* ===== TITLE ROW ===== */
+.title-row{
   display:flex;
   justify-content:space-between;
-  margin-top:40px;
-  text-align:center;
-}
-</style>
-</head>
-
-<body>
-  @media print{
-  body{
-    margin:0;
-  }
+  align-items:center;
+  margin-top:5px;
 }
 
-  actions button{
+/* ===== BUTTON ===== */
+.actions{
+  text-align:right;
+  margin-bottom:10px;
+}
+
+.actions button{
   padding:6px 12px;
   margin-left:5px;
   border:none;
@@ -68,23 +66,36 @@ body{
   background:#0056b3;
 }
 
-/* Ẩn khi in */
+/* ===== SIGN ===== */
+.sign{
+  display:flex;
+  justify-content:space-between;
+  margin-top:40px;
+  text-align:center;
+}
+
+/* ===== PRINT ===== */
 @media print{
+  body{
+    margin:0;
+  }
   .no-print{
     display:none;
   }
 }
-  .title-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:5px;
-}
+</style>
+</head>
+
+<body>
+
 <div class="container">
+
+<!-- BUTTON -->
 <div class="no-print actions">
   <button onclick="window.print()">🖨️ In</button>
   <button onclick="window.close()">❌ Đóng</button>
 </div>
+
 <!-- HEADER -->
 <div class="header">
   <div>
@@ -95,7 +106,7 @@ body{
   <div class="center">
     <b>Mẫu số 02 - VT</b><br>
     <i>(Ban hành theo Thông tư số 133/2016/TT-BTC </i><br>
-    <i>ngày 26/8/2016 của Bộ Tài chính) </i>
+    <i>ngày 26/8/2016 của Bộ Tài chính)</i>
   </div>
 </div>
 
@@ -118,7 +129,6 @@ body{
     Có: .....................
   </div>
 </div>
-
 
 <p>- Họ tên người nhận: <span id="NguoiNhan"></span></p>
 <p>- Lý do xuất kho: <span id="LyDo"></span></p>
@@ -174,7 +184,6 @@ body{
 </div>
 
 <script>
-
 // ===== PARAM =====
 function getParam(name){
   let url = new URL(window.location.href);
@@ -201,15 +210,14 @@ document.getElementById("NguoiNhan").innerText = getParam("NguoiNhan");
 document.getElementById("LyDo").innerText = getParam("LyDo");
 document.getElementById("Kho").innerText = getParam("Khoxuat");
 
-// ===== DATA PIPE =====
-let raw = decodeURIComponent(getParam("data"));
+// ===== DATA =====
+let raw = decodeURIComponent(getParam("data") || "");
 let arr = raw.split("|");
 
 let html="";
 let tong=0;
 
 for(let i=0;i<arr.length;i+=3){
-
   let ten = arr[i];
   let sl = Number(arr[i+1]||0);
   let gia = Number(arr[i+2]||0);
@@ -241,7 +249,6 @@ if(getParam("SoTien")){
 
 document.getElementById("TongTien").innerText = money(tong);
 document.getElementById("TienChu").innerText = docSo(tong);
-
 </script>
 
 </body>
