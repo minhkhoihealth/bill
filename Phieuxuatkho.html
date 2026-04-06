@@ -115,18 +115,23 @@ body{
   <h3>PHIẾU XUẤT KHO</h3>
 </div>
 
-<div class="title-row">
-  <div>
-    Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span>
+<div class="title-block">
+  <div class="row">
+    <div>
+      Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span>
+    </div>
+    <div>
+      Nợ: .....................
+    </div>
   </div>
 
-  <div>
-    Số: <b id="SoPhieu"></b>
-  </div>
-
-  <div>
-    Nợ: ..................... &nbsp;&nbsp;
-    Có: .....................
+  <div class="row">
+    <div>
+      Số: <b id="SoPhieu"></b>
+    </div>
+    <div>
+      Có: .....................
+    </div>
   </div>
 </div>
 
@@ -217,22 +222,24 @@ let arr = raw.split("|");
 let html="";
 let tong=0;
 
-for(let i=0;i<arr.length;i+=3){
+for(let i=0;i<arr.length;i+=5){
+
   let ten = arr[i];
-  let sl = Number(arr[i+1]||0);
-  let gia = Number(arr[i+2]||0);
+  let dvt = arr[i+1];
+  let sl = Number(arr[i+2]||0);
+  let gia = Number(arr[i+3]||0);
+  let tt = Number(arr[i+4]||0);
 
   if(!ten) continue;
 
-  let tt = sl * gia;
   tong += tt;
 
   html += `
   <tr>
-    <td>${(i/3)+1}</td>
+    <td>${(i/5)+1}</td>
     <td style="text-align:left">${ten}</td>
     <td></td>
-    <td></td>
+    <td>${dvt}</td>
     <td>${sl}</td>
     <td>${sl}</td>
     <td>${money(gia)}</td>
