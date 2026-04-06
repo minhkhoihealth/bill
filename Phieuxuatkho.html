@@ -70,6 +70,21 @@ body{
 }
 
 /* PRINT */
+.actions{
+  text-align:right;
+  margin-bottom:10px;
+}
+
+.actions button{
+  padding:6px 12px;
+  margin-left:5px;
+  border:none;
+  background:#007bff;
+  color:#fff;
+  border-radius:4px;
+  cursor:pointer;
+}
+  
 @media print{
   .no-print{ display:none; }
 }
@@ -80,8 +95,9 @@ body{
 
 <div class="container">
 
-<div class="no-print" style="text-align:right">
+<div class="no-print actions">
   <button onclick="window.print()">🖨️ In</button>
+  <button onclick="window.close()">❌ Đóng</button>
 </div>
 
 <!-- HEADER -->
@@ -104,7 +120,7 @@ body{
 <!-- TITLE -->
 <div class="title-block">
 
-  <div class="left">
+  <div class="center">
     Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
     Số: <span class="line" id="SoPhieu"></span>
   </div>
@@ -116,16 +132,16 @@ body{
 </div>
 
 <div class="row">
-- Họ và tên người nhận hàng: <span id="NguoiNhan"></span> &nbsp;&nbsp; 
-Địa chỉ (bộ phận): <span class="line"></span>
+- Họ và tên người nhận hàng: <span class="line" id="NguoiNhan"></span> &nbsp;&nbsp; 
+Địa chỉ (bộ phận): <span  class="line"></span>
 </div>
 
 <div class="row">
-- Lý do xuất kho: <span id="LyDo"></span>
+- Lý do xuất kho: <span class="line" id="LyDo"></span>
 </div>
 
 <div class="row">
-- Xuất tại kho (ngăn lô): <span id="Kho"></span> &nbsp;&nbsp;
+- Xuất tại kho (ngăn lô): <span  class="line" id="Kho"></span> &nbsp;&nbsp;
 Địa điểm: <span class="line"></span>
 </div>
 
