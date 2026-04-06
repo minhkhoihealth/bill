@@ -29,32 +29,27 @@ body{
   margin-top:5px;
 }
 
-.title-block .left{
-  width:60%;
-}
-
-.title-block .right{
-  width:40%;
-}
+.title-block .left{ width:60%; }
+.title-block .right{ width:40%; }
 
 /* ===== NỢ CÓ ===== */
 .row-line{
   display:flex;
-  align-items:flex-start;
+  justify-content:flex-end;
   margin-bottom:6px;
 }
 
-.row-line .label{
-  width:70px;
+.label{
+  margin-right:5px;
 }
 
 .line-wrap{
-  width:50px; /* 👉 chỉnh độ dài tại đây */
+  width:120px; /* 👉 độ dài dòng chấm */
+  text-align:right;
 }
 
 .line-wrap span{
   display:block;
-  text-align:right;
 }
 
 .line{
@@ -94,10 +89,6 @@ body{
   cursor:pointer;
 }
 
-.actions button:hover{
-  background:#0056b3;
-}
-
 /* ===== SIGN ===== */
 .sign{
   display:flex;
@@ -108,7 +99,6 @@ body{
 
 /* ===== PRINT ===== */
 @media print{
-  body{ margin:0; }
   .no-print{ display:none; }
 }
 </style>
@@ -118,10 +108,8 @@ body{
 
 <div class="container">
 
-<!-- BUTTON -->
 <div class="no-print actions">
   <button onclick="window.print()">🖨️ In</button>
-  <button onclick="window.close()">❌ Đóng</button>
 </div>
 
 <!-- HEADER -->
@@ -133,24 +121,24 @@ body{
 
   <div class="center">
     <b>Mẫu số 02 - VT</b><br>
-    <i>(Ban hành theo Thông tư 133/2016/TT-BTC)</i>
+    <i>(Thông tư 133/2016/TT-BTC)</i>
   </div>
 </div>
 
-<!-- TITLE -->
 <div class="center">
   <h3>PHIẾU XUẤT KHO</h3>
 </div>
 
+<!-- TITLE -->
 <div class="title-block">
 
-  <div class="center">
+  <div class="left">
     Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
     Số: <b id="SoPhieu"></b>
   </div>
 
   <div class="right">
-    
+
     <div class="row-line">
       <div class="label">Nợ TK:</div>
       <div class="line-wrap">
@@ -168,7 +156,6 @@ body{
     </div>
 
   </div>
-
 </div>
 
 <p>- Họ tên người nhận: <span id="NguoiNhan"></span></p>
@@ -180,6 +167,7 @@ body{
 <tr>
   <th>STT</th>
   <th>Tên hàng</th>
+  <th>Mã</th>
   <th>ĐVT</th>
   <th>Số lượng</th>
   <th>Đơn giá</th>
@@ -189,14 +177,13 @@ body{
 <tbody id="dsHang"></tbody>
 
 <tr>
-  <td colspan="5" class="bold">Cộng</td>
+  <td colspan="6" class="bold">Cộng</td>
   <td id="TongTien"></td>
 </tr>
 </table>
 
 <p>- Tổng tiền: <span id="TienChu"></span></p>
 
-<!-- SIGN -->
 <div class="sign">
   <div>Người lập phiếu</div>
   <div>Người nhận</div>
@@ -229,7 +216,7 @@ document.getElementById("NguoiNhan").innerText = getParam("NguoiNhan");
 document.getElementById("LyDo").innerText = getParam("LyDo");
 document.getElementById("Kho").innerText = getParam("Khoxuat");
 
-// ===== NỢ / CÓ =====
+// NỢ CÓ
 document.getElementById("NoTK").innerText = getParam("Notk");
 document.getElementById("CoTK").innerText = getParam("Cotk");
 
@@ -240,13 +227,15 @@ let arr = raw.split("|");
 let html="";
 let tong=0;
 
-for(let i=0;i<arr.length;i+=5){
+// 👉 format mới: Tên | Mã | ĐVT | SL | Giá | TT
+for(let i=0;i<arr.length;i+=6){
 
   let ten = arr[i];
-  let dvt = arr[i+1];
-  let sl = Number(arr[i+2]||0);
-  let gia = Number(arr[i+3]||0);
-  let tt = sl * gia;
+  let ma  = arr[i+1];
+  let dvt = arr[i+2];
+  let sl  = Number(arr[i+3]||0);
+  let gia = Number(arr[i+4]||0);
+  let tt  = Number(arr[i+5]||0);
 
   if(!ten) continue;
 
@@ -254,8 +243,9 @@ for(let i=0;i<arr.length;i+=5){
 
   html += `
   <tr>
-    <td>${(i/5)+1}</td>
+    <td>${(i/6)+1}</td>
     <td style="text-align:left">${ten}</td>
+    <td>${ma}</td>
     <td>${dvt}</td>
     <td>${sl}</td>
     <td>${money(gia)}</td>
@@ -264,8 +254,15 @@ for(let i=0;i<arr.length;i+=5){
 }
 
 document.getElementById("dsHang").innerHTML = html;
+
+// tổng
+if(getParam("SoTien")){
+  tong = Number(getParam("SoTien"));
+}
+
 document.getElementById("TongTien").innerText = money(tong);
 document.getElementById("TienChu").innerText = money(tong) + " đồng";
+
 </script>
 
 </body>
