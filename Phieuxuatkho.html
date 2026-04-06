@@ -22,7 +22,6 @@ body{
 .center{text-align:center;}
 .bold{font-weight:bold;}
 
-/* ===== TITLE ===== */
 .title-block{
   display:flex;
   justify-content:space-between;
@@ -32,32 +31,17 @@ body{
 .title-block .left{ width:60%; }
 .title-block .right{ width:40%; }
 
-/* ===== NỢ CÓ ===== */
-.row-line{
-  display:flex;
-  justify-content:flex-end;
-  margin-bottom:6px;
-}
-
-.label{
-  margin-right:5px;
-}
-
-.line-wrap{
-  width:120px; /* 👉 độ dài dòng chấm */
-  text-align:right;
-}
-
-.line-wrap span{
-  display:block;
-}
-
 .line{
+  display:inline-block;
   border-bottom:1px dotted #000;
-  margin-top:2px;
+  min-width:120px;
 }
 
-/* ===== TABLE ===== */
+.row{
+  margin:4px 0;
+}
+
+/* TABLE */
 .table{
   width:100%;
   border-collapse:collapse;
@@ -73,31 +57,19 @@ body{
   text-align:center;
 }
 
-/* ===== BUTTON ===== */
-.actions{
-  text-align:right;
-  margin-bottom:10px;
-}
-
-.actions button{
-  padding:6px 12px;
-  margin-left:5px;
-  border:none;
-  background:#007bff;
-  color:white;
-  border-radius:4px;
-  cursor:pointer;
-}
-
-/* ===== SIGN ===== */
+/* SIGN */
 .sign{
   display:flex;
   justify-content:space-between;
-  margin-top:40px;
+  margin-top:30px;
   text-align:center;
 }
 
-/* ===== PRINT ===== */
+.sign div{
+  width:19%;
+}
+
+/* PRINT */
 @media print{
   .no-print{ display:none; }
 }
@@ -108,7 +80,7 @@ body{
 
 <div class="container">
 
-<div class="no-print actions">
+<div class="no-print" style="text-align:right">
   <button onclick="window.print()">🖨️ In</button>
 </div>
 
@@ -116,12 +88,12 @@ body{
 <div class="header">
   <div>
     Đơn vị: <span id="DonVi"></span><br>
-    Bộ phận: .....................
+    Bộ phận: <span class="line"></span>
   </div>
 
   <div class="center">
     <b>Mẫu số 02 - VT</b><br>
-    <i>(Thông tư 133/2016/TT-BTC)</i>
+    <i>(Ban hành theo Thông tư 133/2016/TT-BTC)</i>
   </div>
 </div>
 
@@ -134,40 +106,35 @@ body{
 
   <div class="left">
     Ngày <span id="Ngay"></span> tháng <span id="Thang"></span> năm <span id="Nam"></span><br>
-    Số: <b id="SoPhieu"></b>
+    Số: <span class="line" id="SoPhieu"></span>
   </div>
 
   <div class="right">
-
-    <div class="row-line">
-      <div class="label">Nợ TK:</div>
-      <div class="line-wrap">
-        <span id="NoTK"></span>
-        <div class="line"></div>
-      </div>
-    </div>
-
-    <div class="row-line">
-      <div class="label">Có TK:</div>
-      <div class="line-wrap">
-        <span id="CoTK"></span>
-        <div class="line"></div>
-      </div>
-    </div>
-
+    Nợ: <span class="line" id="NoTK"></span><br>
+    Có: <span class="line" id="CoTK"></span>
   </div>
 </div>
 
-<p>- Họ tên người nhận: <span id="NguoiNhan"></span></p>
-<p>- Lý do xuất kho: <span id="LyDo"></span></p>
-<p>- Xuất tại kho: <span id="Kho"></span></p>
+<div class="row">
+- Họ và tên người nhận hàng: <span id="NguoiNhan"></span> &nbsp;&nbsp; 
+Địa chỉ (bộ phận): <span class="line"></span>
+</div>
+
+<div class="row">
+- Lý do xuất kho: <span id="LyDo"></span>
+</div>
+
+<div class="row">
+- Xuất tại kho (ngăn lô): <span id="Kho"></span> &nbsp;&nbsp;
+Địa điểm: <span class="line"></span>
+</div>
 
 <!-- TABLE -->
 <table class="table">
 <tr>
   <th>STT</th>
-  <th>Tên hàng</th>
-  <th>Mã</th>
+  <th>Tên, nhãn hiệu, quy cách</th>
+  <th>Mã số</th>
   <th>ĐVT</th>
   <th>Số lượng</th>
   <th>Đơn giá</th>
@@ -182,14 +149,37 @@ body{
 </tr>
 </table>
 
-<p>- Tổng tiền: <span id="TienChu"></span></p>
+<div class="row">
+- Tổng số tiền (viết bằng chữ): <span id="TienChu"></span>
+</div>
 
+<div class="row">
+- Số chứng từ gốc kèm theo: <span class="line"></span>
+</div>
+
+<!-- SIGN -->
 <div class="sign">
-  <div>Người lập phiếu</div>
-  <div>Người nhận</div>
-  <div>Thủ kho</div>
-  <div>Kế toán trưởng</div>
-  <div>Giám đốc</div>
+  <div>
+    Người lập phiếu<br>
+    (Ký, họ tên)
+  </div>
+  <div>
+    Người nhận hàng<br>
+    (Ký, họ tên)
+  </div>
+  <div>
+    Thủ kho<br>
+    (Ký, họ tên)
+  </div>
+  <div>
+    Kế toán trưởng<br>
+    (Hoặc bộ phận có nhu cầu nhập)<br>
+    (Ký, họ tên)
+  </div>
+  <div>
+    Giám đốc<br>
+    (Ký, họ tên)
+  </div>
 </div>
 
 </div>
@@ -227,7 +217,6 @@ let arr = raw.split("|");
 let html="";
 let tong=0;
 
-// 👉 format mới: Tên | Mã | ĐVT | SL | Giá | TT
 for(let i=0;i<arr.length;i+=6){
 
   let ten = arr[i];
@@ -255,7 +244,6 @@ for(let i=0;i<arr.length;i+=6){
 
 document.getElementById("dsHang").innerHTML = html;
 
-// tổng
 if(getParam("SoTien")){
   tong = Number(getParam("SoTien"));
 }
