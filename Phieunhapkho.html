@@ -250,25 +250,22 @@ let arr = raw.split("|");
 let html="";
 let tong=0;
 
-for(let i=0;i<arr.length;i+=6){
+for(let i=0;i<arr.length;i+=8){
 
-let ten = arr[i]
-  .replace(/_n_/g, "")
-  .replace(/\n/g, "")
-  .trim();
+  let ten = arr[i];
   let ma  = arr[i+1];
-  let dvt = arr[i+2];
-  let sl  = Number(arr[i+3]||0);
-  let gia = Number(arr[i+4]||0);
-  let tt  = Number(arr[i+5]||0);
+
+  // bỏ 2 cột quy đổi
+  let dvt = arr[i+4];
+  let sl  = Number(arr[i+5]||0);
+  let gia = Number(arr[i+6]||0);
+  let tt  = Number(arr[i+7]||0);
 
   if(!ten) continue;
 
-  tong += tt;
-
   html += `
   <tr>
-    <td>${(i/6)+1}</td>
+    <td>${(i/8)+1}</td>
     <td style="text-align:left">${ten}</td>
     <td>${ma}</td>
     <td>${dvt}</td>
