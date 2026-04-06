@@ -283,7 +283,56 @@ if(getParam("SoTien")){
 }
 
 document.getElementById("TongTien").innerText = money(tong);
-document.getElementById("TienChu").innerText = money(tong) + " đồng";
+document.getElementById("TienChu").innerText = numberToWords(tong);
+  function numberToWords(num){
+  const ones = ["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  const tens = ["","","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+
+  function read3(n){
+    let tr = Math.floor(n/100);
+    let ch = Math.floor((n%100)/10);
+    let dv = n%10;
+    let str = "";
+
+    if(tr > 0){
+      str += ones[tr] + " trăm";
+      if(ch == 0 && dv > 0) str += " lẻ";
+    }
+
+    if(ch > 1){
+      str += " " + tens[ch] + " mươi";
+      if(dv == 1) str += " mốt";
+      else if(dv == 5) str += " lăm";
+      else if(dv > 0) str += " " + ones[dv];
+    } 
+    else if(ch == 1){
+      str += " mười";
+      if(dv == 5) str += " lăm";
+      else if(dv > 0) str += " " + ones[dv];
+    } 
+    else if(ch == 0 && dv > 0){
+      str += " " + ones[dv];
+    }
+
+    return str.trim();
+  }
+
+  if(num == 0) return "Không đồng";
+
+  let ty = Math.floor(num / 1e9);
+  let trieu = Math.floor((num % 1e9)/1e6);
+  let nghin = Math.floor((num % 1e6)/1e3);
+  let tram = num % 1e3;
+
+  let result = "";
+
+  if(ty) result += read3(ty) + " tỷ ";
+  if(trieu) result += read3(trieu) + " triệu ";
+  if(nghin) result += read3(nghin) + " nghìn ";
+  if(tram) result += read3(tram);
+
+  return result.trim() + " đồng";
+}
 
 </script>
 
