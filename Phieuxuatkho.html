@@ -252,7 +252,10 @@ let tong=0;
 
 for(let i=0;i<arr.length;i+=6){
 
-  let ten = arr[i];
+let ten = arr[i]
+  .replace(/_n_/g, "")
+  .replace(/\n/g, "")
+  .trim();
   let ma  = arr[i+1];
   let dvt = arr[i+2];
   let sl  = Number(arr[i+3]||0);
