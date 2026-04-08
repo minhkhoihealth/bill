@@ -172,7 +172,8 @@ body{
   <th>ĐVT</th>
   <th>Số lượng</th>
   <th>Đơn giá</th>
-  <th>Thành tiền</th>
+ <th>Thành tiền</th>
+  <th>Ghi chú</th> <!-- THÊM -->
 </tr>
 
 <tbody id="dsHang"></tbody>
@@ -250,7 +251,7 @@ let arr = raw.split("|");
 let html="";
 let tong=0;
 
-for(let i=0;i<arr.length;i+=6){
+for(let i=0;i<arr.length;i+=7){
 
 let ten = arr[i]
   .replace(/_n_/g, "")
@@ -261,21 +262,23 @@ let ten = arr[i]
   let sl  = Number(arr[i+3]||0);
   let gia = Number(arr[i+4]||0);
   let tt  = Number(arr[i+5]||0);
+  let note = arr[i+6] || "";
 
   if(!ten) continue;
 
   tong += tt;
 
   html += `
-  <tr>
-    <td>${(i/6)+1}</td>
-    <td style="text-align:left">${ten}</td>
-    <td>${ma}</td>
-    <td>${dvt}</td>
-    <td>${sl}</td>
-    <td>${money(gia)}</td>
-    <td>${money(tt)}</td>
-  </tr>`;
+ <tr>
+  <td>${(i/7)+1}</td>
+  <td style="text-align:left">${ten}</td>
+  <td>${ma}</td>
+  <td>${dvt}</td>
+  <td>${sl}</td>
+  <td>${money(gia)}</td>
+  <td>${money(tt)}</td>
+  <td style="text-align:left">${note}</td> <!-- THÊM -->
+</tr>`;
 }
 
 document.getElementById("dsHang").innerHTML = html;
