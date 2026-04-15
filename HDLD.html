@@ -5,6 +5,35 @@
 <title>Hợp đồng lao động - Chuẩn A4</title>
 
 <style>
+
+ function closePage() {
+  if (window.history.length > 1) {
+    history.back();
+  } else {
+    window.close();
+  }
+}
+function formatDateVN(dateStr) {
+  if (!dateStr) return "";
+
+  // Nếu dạng yyyy-mm-dd (AppSheet hay dùng)
+  if (dateStr.includes("-")) {
+    let [y, m, d] = dateStr.split("-");
+    return `${d.padStart(2,"0")}/${m.padStart(2,"0")}/${y}`;
+  }
+
+  // Nếu dạng mm/dd/yyyy hoặc dd/mm/yyyy → normalize
+  let parts = dateStr.split("/");
+  if (parts.length === 3) {
+    let [d, m, y] = parts;
+
+    // đảm bảo 2 số
+    return `${d.padStart(2,"0")}/${m.padStart(2,"0")}/${y}`;
+  }
+
+  return dateStr;
+}
+  
 .section {
   margin-top: 12px;
   text-align: justify;
@@ -369,7 +398,8 @@ const map = {
   tungay: "thoigianlamviectu",
   denngay: "thoigianlamviecden"
 };
-
+let ns = get("ngaysinh");
+document.getElementById("ngaysinh").innerText = formatDateVN(ns);
 document.querySelectorAll("[id]").forEach(el => {
   let key = map[el.id] || el.id;
   if(get(key)) el.innerText = get(key);
@@ -453,14 +483,7 @@ if (tongPC > 0) {
 if (count === 0) {
   document.getElementById("list_phucap").style.display = "none";
 }
-  function closePage() {
-  if (window.history.length > 1) {
-    history.back();
-  } else {
-    window.close();
-  }
-}
-
+ 
 </script>
 </body>
 </html>
