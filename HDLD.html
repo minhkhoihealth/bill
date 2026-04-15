@@ -5,6 +5,42 @@
 <title>Hợp đồng lao động - Chuẩn A4</title>
 
 <style>
+  .section {
+  margin-top: 12px;
+  text-align: justify;
+  text-indent: 30px; /* thụt đầu dòng chuẩn */
+}
+
+/* TIÊU ĐỀ ĐIỀU */
+.section > b {
+  display: block;
+  text-indent: 0;
+  margin-bottom: 5px;
+}
+
+/* DANH SÁCH */
+ul {
+  margin: 5px 0 10px 0;
+  padding-left: 25px;
+}
+
+li {
+  margin-bottom: 5px;
+  text-align: justify;
+}
+
+/* CHỮ a, b, c... */
+.sub-title {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+/* BỎ THỤT DÒNG CHO LIST */
+ul, li {
+  text-indent: 0;
+}
 @page {
   size: A4;
   margin: 20mm 15mm 20mm 20mm;
@@ -195,7 +231,7 @@ button {
    
    <div class="section">
       <b>Điều 4: Quyền lợi và nghĩa vụ của Người lao động</b><br>
-    <div style="margin-left: 15px;">
+    <div >
      <b>1. Quyền lợi của Người lao động</b><br>
       </div>
          <div style="margin-left: 20px;">
@@ -204,7 +240,7 @@ button {
     Lương cơ bản: <span id="luong"></span> VNĐ/tháng<br> 
     (Bằng chữ: <i id="luongchu"></i>)<br>
              
-    <b>b. Các khoản phụ cấp:</b><br>
+  <span class="sub-title">b. Các khoản phụ cấp:</span>
       <ul>
   <li>Trang phục: <span id="pc_trangphuc"></span> VNĐ/tháng</li>
   <li>Điện thoại: <span id="pc_dienthoai"></span> VNĐ/tháng</li>
@@ -227,6 +263,7 @@ button {
             <ul>  <li>Người lao động phải thông báo cho Công ty bằng văn bản trước ít nhất 07 ngày làm việc.</li>
            </ul><br>
   <b>g. Chế độ nâng lương:</b>
+             <ul>
         <li>Việc nâng lương theo quy định của Công ty, căn cứ vào kết quả sản xuất kinh doanh hàng năm và mức độ hoàn thành công việc của Người lao động.</li>  </ul>
    <b>h. Bảo hiểm và Bảo hộ lao động:</b>
         <li>Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp: Theo quy định của Pháp luật.</li>
