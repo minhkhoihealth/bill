@@ -8,13 +8,13 @@
 /* THIẾT LẬP TRANG IN A4 */
 @page {
   size: A4;
-  margin: 20mm 15mm 20mm 20mm; /* Lề trái 20mm để đóng tập hồ sơ */
+  margin: 20mm 15mm 20mm 20mm; /* Chuẩn nhà nước */
 }
 
 body {
   font-family: "Times New Roman", Times, serif;
-  font-size: 13pt; /* Kích thước chuẩn văn bản hành chính */
-  line-height: 1.6;
+  font-size: 13pt;
+  line-height: 1.5; /* Giảm xuống để không bị tràn trang */
   margin: 0;
   padding: 0;
   color: #000;
@@ -30,6 +30,7 @@ body {
   display: flex;
   justify-content: space-between;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .header-left { width: 45%; }
@@ -42,31 +43,50 @@ body {
   margin: 5px auto;
 }
 
-.red { color: red; font-weight: bold; } /* Giữ màu đỏ như bạn yêu cầu */
-
 .title {
   text-align: center;
   font-size: 18pt;
   font-weight: bold;
-  margin: 25px 0;
+  margin: 20px 0;
+  text-transform: uppercase;
 }
 
 .section {
-  margin-top: 10px;
+  margin-top: 8px;
   text-align: justify;
+  page-break-inside: avoid; /* Không bị cắt giữa đoạn */
 }
 
+/* DANH SÁCH */
+ul {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* CHỮ KÝ */
 .signature {
-  margin-top: 50px;
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
   text-align: center;
   page-break-inside: avoid;
+  page-break-before: avoid;
 }
 
-.signature div { width: 48%; }
+.signature div {
+  width: 48%;
+}
 
-/* BUTTONS - CHỈ HIỆN TRÊN MÀN HÌNH */
+/* TRÁNH NGẮT TRANG XẤU */
+.section b {
+  page-break-after: avoid;
+}
+
+.section br {
+  line-height: 1.3;
+}
+
+/* BUTTON */
 .actions {
   position: fixed;
   top: 10px;
@@ -80,12 +100,24 @@ button {
   border: none;
   font-weight: bold;
 }
+
 .print-btn { background: green; color: white; }
 .close-btn { background: red; color: white; }
 
 @media print {
   .actions { display: none; }
-  .red { color: black !important; } /* Tùy chọn: Để đen khi in nếu cần chuyên nghiệp */
+
+  body {
+    margin: 0;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .red {
+    color: black !important; /* In ra đen cho chuẩn */
+  }
 }
 </style>
 </head>
@@ -219,11 +251,6 @@ button {
         <li>Hợp đồng lao động được lập thành 02 bản có giá trị pháp lý như nhau, mỗi bên giữ một bản để thực hiện.</li>
     </ul>
 </div>
-
-  <div class="section">
-    <b>Điều 6: Điều khoản thi hành</b><br>
-    - Hợp đồng được lập thành 02 bản có giá trị như nhau, mỗi bên giữ một bản.
-  </div>
 
   <div class="signature">
     <div>
