@@ -27,13 +27,11 @@ body {
   width: 48%;
 }
 
-.red { color: red; font-weight: bold; }
-
 .title {
   text-align: center;
   font-size: 22px;
   font-weight: bold;
-   margin: 20px 0;
+  margin: 20px 0;
 }
 
 .section {
@@ -48,7 +46,6 @@ body {
   text-align: center;
 }
 
-/* BUTTON */
 .actions {
   position: fixed;
   top: 20px;
@@ -56,11 +53,11 @@ body {
 }
 
 button {
-  padding: 10px 14px;
+  padding: 8px 12px;
   margin-left: 5px;
   border: none;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .print-btn { background: green; color: white; }
@@ -75,8 +72,8 @@ button {
 <body>
 
 <div class="actions">
-  <button class="print-btn" onclick="window.print()">🖨️ In</button>
-  <button class="close-btn" onclick="history.back()">❌ Đóng</button>
+  <button class="print-btn" onclick="window.print()">In</button>
+  <button class="close-btn" onclick="history.back()">Đóng</button>
 </div>
 
 <div class="container">
@@ -85,7 +82,7 @@ button {
   <div>
     <b id="cty"></b><br>
     ------------------<br>
-    <span>Số: <span id="sohopdong"></span></span>
+    Số: <span id="sohopdong"></span>
   </div>
 
   <div>
@@ -95,165 +92,90 @@ button {
   </div>
 </div>
 
-<p style="text-align:right" class="red">
-Đắk Lắk ngày <span id="ngay"></span> tháng <span id="thang"></span> năm <span id="nam"></span>
+<p style="text-align:right">
+Đắk Lắk, ngày <span id="ngay"></span> tháng <span id="thang"></span> năm <span id="nam"></span>
 </p>
 
 <div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
 
 <div class="section" style="font-style: italic;">
--	Căn cứ vào Bộ luật lao động 2019 và các văn bản quy định liên quan;<br>
--	Căn cứ vào nhu cầu công việc;
+- Căn cứ Bộ luật Lao động 2019;<br>
+- Căn cứ nhu cầu sử dụng lao động;
 </div>
 
 <div class="section">
-Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>,
-tại địa chỉ: <span id="diachi"></span><br>
-  -	Chúng tôi gồm có:
+Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>, tại:
+<span id="diachi"></span>
 </div>
 
 <div class="section">
-<b>Người sử dụng lao động (Bên A): <span id="cty2"></span></b><br>
+<b>1. Người sử dụng lao động:</b> <span id="cty2"></span><br>
 Địa chỉ: <span id="diachi"></span><br>
-Mã số doanh nghiệp: <span id="mst"></span><br>
-<b>Đại diện: <span id="daidien"></span> </b>
-&nbsp;&nbsp;Chức vụ: <span id="chucvu"></span><br>
-<div class="section" style="font-style: italic;"> (Sau đây gọi tắt là “Công ty”)</div>
+MST: <span id="mst"></span><br>
+Đại diện: <span id="daidien"></span> - <span id="chucvu"></span>
 </div>
 
 <div class="section">
-<b>Người lao động (Bên B):<span  id="ten"></span></b><br>
-Ngày/tháng/năm sinh: <span id="ngaysinh"></span> 
-&nbsp;&nbsp;Giới tính: <span id="gioitinh"></span><br>
-Địa chỉ thường trú: <span  id="diachitt"></span><br>
-Số CMND/CCCD: <span id="cccd"></span> 
-&nbsp;&nbsp;Ngày cấp: <span  id="ngaycap"></span><br>
-Nơi cấp: <span  id="noicap"></span><br>
-<div class="section" style="font-style: italic;"> (Sau đây gọi tắt là “Người lao động”)</div>
+<b>2. Người lao động:</b> <span id="ten"></span><br>
+Ngày sinh: <span id="ngaysinh"></span> - Giới tính: <span id="gioitinh"></span><br>
+Địa chỉ: <span id="diachithuongtru"></span><br>
+CCCD: <span id="cccd"></span> - Ngày cấp: <span id="ngaycap"></span><br>
+Nơi cấp: <span id="noicap"></span>
 </div>
 
 <div class="section">
-<b>Điều 1. Công việc và địa điểm làm việc</b><br>
-  Bên B đồng ý làm việc cho Bên A theo các nội dung, yêu cầu như sau:<br>
-- Chức danh: <span class="red" id="chucdanh"></span><br>
-- Công việc: <span class="red" id="congviec"></span><br>
-- Địa điểm: <span class="red" id="diadiem"></span>
+<b>Điều 1. Công việc</b><br>
+Chức danh: <span id="chucdanh"></span><br>
+Công việc: <span id="congviec"></span><br>
+Địa điểm: <span id="diadiemlamviec"></span>
 </div>
 
 <div class="section">
-  
-<b>Điều 2: Thời hạn hợp đồng</b><br>
-- Loại hợp đồng: <span  id="loaihd"></span><br>
-- Thời gian: từ <span  id="tungay"></span> đến <span class="red" id="denngay"></span><br>
-Từ <span id="tungay2"></span> đến <span id="denngay2"></span>
+<b>Điều 2. Thời hạn hợp đồng</b><br>
+Loại HĐ: <span id="loaihd"></span><br>
+Từ: <span id="tungay"></span> đến <span id="denngay"></span>
 </div>
 
 <div class="section">
-<b>Điều 3:</b> Thời giờ làm việc<br>
-- Làm việc: 8 giờ/ngày, 6 ngày/tuần<br>
-- Nghỉ hàng tuần: 01 ngày<br>
-- Nghỉ phép năm: 12 ngày/năm theo quy định<br>
+<b>Điều 3. Thời giờ làm việc</b><br>
+- 8 giờ/ngày, 6 ngày/tuần<br>
+- Nghỉ phép: 12 ngày/năm
+</div>
 
-<b>Điều 4: Quyền lợi và nghĩa vụ của Người lao động</b><br>
- 1. Quyền lợi của Người lao động<br>
-  a. Thu nhập<br>
-    Lương: <span id="luong"></span> VNĐ/tháng<br> 
-    (Bằng chữ: <i id="luongchu"></i>)<br>
-  b. Các khoản phụ cấp:<br>
-- Trang phục: <span id="luong"></span> VNĐ/tháng<br>
-- Điện thoại: <span id="luong"></span> VNĐ/tháng<br>
-- Xăng xe: <span id="luong"></span> VNĐ/tháng<br>
-- Chuyên cần: <span id="luong"></span> VNĐ/tháng<br>
-- Tiền ăn: <span id="luong"></span> VNĐ/tháng<br>
-- Tổng phụ cấp: <span " id="phucap"></span> VNĐ<br>
-c.Tiền thưởng:<br>
-Tháng 13 theo quy định Công ty<br>
-d. Hình thức trả và thời gian trả lương:<br>
-   Hình thức trả trả lương Tiền mặt hoặc chuyển khoản<br>
-   Thời gian: từ ngày 05 – 10 tháng <br>
-Trường hợp trùng ngày nghỉ thì trả vào ngày làm việc tiếp theo.<br>
-  Công ty có quyền thay đổi ngày chi trả bất cứ khi nào tùy theo tình hình tài chính của Công ty cho <br>
-  phép và phù hợp với quy định pháp luật lao động.  <br>
-e. Thay đổi thông tin tài khoản:<br>
-Người lao động phải thông báo trước ít nhất 07 ngày làm việc.<br>
-g. Chế độ nâng lương:<br>
-Việc nâng lương theo quy định của Công ty căn cứ vào kết quả sản xuất kinh doanh hằng năm và mức độ hoàn thành công việc của người lao động<br>.
-h. Bảo hiểm <br>
-  - Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp: Theo quy định của Pháp luật.<br>
-  - Chế độ phúc lợi, công tác phí: Theo các quy định chính sách của Công ty.<br>
-  - Bảo hộ lao động: Theo quy định của Pháp luật về lao động hiện hành.<br>
-i. Thời gian nghỉ ngơi <br>
-  Đối với ngày nghỉ hàng năm: Người lao động đã ký HĐLĐ chính thức được nghỉ mỗi tháng 1 ngày, NLĐ báo trước để người sử dụng lao động sắp xếp không ảnh hưởng công việc chung.<br>
-  Ngày nghỉ được sắp xếp từ thứ 2 đến thứ 5 hàng tuần và trừ những ngày Lế, Tết.<br>
-2. nghĩa vụ của Người lao động<br>
-a Thực hiện công việc:<br>
-thực hiện công việc trong bảng mô tả công việc và Thực hiện các công việc khác theo yêu cầu của quản lý<br>
-b Chấp hành:<br>
--Nội quy lao động<br>
--Kỷ luật lao động<br>
--An toàn lao động, vệ sinh lao động, PCCC<br>
-c Tuân thủ:<br>
--Sự phân công, điều chuyển công việc<br>
--Thời giờ làm việc, nghỉ ngơi<br>
-d Ứng xử:<br>
--Giữ thái độ lịch sự, hợp tác<br>
--Không làm ảnh hưởng đến uy tín, hình ảnh Công ty<br>
-e Bảo mật:<br>
--Bảo vệ tài sản, thông tin, bí mật kinh doanh<br>
--Không sao chép, lưu trữ, sử dụng trái phép<br>
-f Trách nhiệm:<br>
--Bồi thường thiệt hại nếu gây ra<br>
--Chịu trách nhiệm trước pháp luật nếu vi phạm<br>
-Bảo hiểm:<br>
-Thực hiện nghĩa vụ đóng BH theo quy định<br>
-Thông báo nếu đã tham gia ở nơi khác<br>
-g Hình ảnh Công ty:<br>
-Bảo vệ uy tín Công ty kể cả trên mạng xã hội và sau khi nghỉ việc<br>
-h Nghỉ việc:<br>
-Báo trước:<br>
--Từ 30 ngày (HĐ xác định thời hạn)<br>
--Từ 45 ngày (HĐ không xác định thời hạn)<br>
--Từ 120 ngày (nếu thuộc ngành nghề đặc thù)<br>
-Bàn giao:<br>
-Phải hoàn thành bàn giao khi nghỉ việc<br>
-Nếu chưa hoàn tất, Công ty có quyền tạm giữ lương tối đa 30 ngày<br>
- <b>Điều 5: Quyền và nghĩa vụ của Công ty </b><br>
-a Quyền của công ty:<br>
--	Thanh toán đầy đủ và đúng hạn tiền lương cho người lao động ;<br>
--	Điều hành, quản lý để Người lao động hoàn thành công việc theo Hợp đồng và Mô tả công việc.<br>
-  Phân công, bố trí, điều chuyển, tạm ngưng việc theo yêu cầu của công việc và năng lực thực hiện công việc của Người lao động.<br>
--	Kiểm tra, giám sát và đánh giá quá trình thực hiện công việ để Công ty có hình thức khen thưởng, xử phạt phù hợp theo quy định.<br>
--	Tạm hoãn, chấm dứt hợp đồng lao động, quyết định mức lương, khen thưởng, xử phạt, kỷ luật lao động người lao động theo đúng Hợp đồng,<br>
-  Quy định của Công ty, Thoả ước lao động tập thể (nếu có) và quy định của pháp luật.<br>
--	Đơn phương chấm dứt Hợp đồng lao động theo quy định của pháp luật trong các trường hợp sau:<br>
-- Người lao động thường xuyên không hoàn thành công việc theo hợp đồng lao động được xác định theo tiêu chí đánh giá mức độ hoàn thành công việc trong quy định của Công ty.<br>
-  Quy định đánh giá mức độ hoàn thành công việc được Công ty ban hành tại từng thời điểm.<br>
-- Các trường hợp khác theo quy định của pháp luật.<br>
-- Trường hợp Người  lao động vi phạm kỷ luật, tùy theo mức độ vi phạm sẽ áp dụng hình thức kỷ luật phù hợp với nội quy, quy chế, văn bản quy định nội bộ của Công ty<br>
-  và quy định của pháp luật về lao động, đồng thời yêu cầu bồi thường các thiệt hại liên quan nếu có. 
-b Nghĩa vụ của Công ty: 
--	Bảo đảm các điều kiện cơ bản đối với việc làm để Người lao động thực hiện đầy đủ những điều đã cam kết trong Hợp đồng lao động.<br>
--	Thanh toán đầy đủ, đúng thời hạn tiền lương và các quyền lợi khác cho người lao động theo đúng Hợp đồng lao động/ các văn bản khác (nếu có).  <br>
--	Phổ biến cho Người lao động về nội dung các quy định, quy chế, nội quy lao động, kỷ luật lao động, an toàn lao động v..v. được ban hành và áp dụng trong Công ty. <br>
--	Có trách nhiệm đóng Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp với tỷ lệ, thời gian và phương thức đóng theo quy định của Pháp luật;<br>
-<b>Điều 5 : Điều khoản thi hành:</b><br>
-- Trong quá trình thực hiện Hợp đồng, nếu có vấn đề phát sinh thì trước tiên sẽ được hai bên giải quyết thông qua thương lượng và đàm phán.<br>
-  Nếu hai bên không tự giải quyết được thì sẽ đưa ra Toà án có thẩm quyền giải quyết. Quyết định của Toà án là quyết định cuối cùng và có giá trị bắt buộc hai bên thực hiện. <br>
-  Mọi chi phí liên quan đến giải quyết vụ việc sẽ do bên thua chịu trách nhiệm chi trả.
-- Hợp đồng lao động được lập thành 02 bản có giá trị như nhau, mỗi bên giữ một bản. 
+<div class="section">
+<b>Điều 4. Quyền lợi</b><br>
 
+Lương: <span id="luong"></span> VNĐ<br>
+(Bằng chữ: <i id="luongchu"></i>)<br>
+
+Phụ cấp:<br>
+- Trang phục: <span id="pctrangphuc"></span><br>
+- Điện thoại: <span id="pcdienthoai"></span><br>
+- Xăng xe: <span id="pctienxangxe"></span><br>
+- Chuyên cần: <span id="pcchuyencan"></span><br>
+- Ăn ca: <span id="pctienan"></span><br>
+
+Tổng phụ cấp: <span id="phucap"></span> VNĐ<br>
+
+Thưởng: Theo quy định Công ty<br>
+</div>
+
+<div class="section">
+<b>Điều 5. Nghĩa vụ</b><br>
+- Thực hiện công việc theo phân công<br>
+- Tuân thủ nội quy lao động<br>
+- Bảo mật thông tin Công ty<br>
+- Bồi thường thiệt hại nếu gây ra<br>
 </div>
 
 <div class="signature">
   <div>
-    <b>Người lao động</b><br><br><br>
-    (Ký, ghi rõ họ tên)<br>
+    Người lao động<br><br><br>
     <b id="tenky"></b>
   </div>
 
   <div>
-    <b>Người sử dụng lao động</b><br><br><br>
-    (Ký, đóng dấu)<br>
+    Người sử dụng lao động<br><br><br>
     <b id="ctyky"></b>
   </div>
 </div>
@@ -267,7 +189,7 @@ const get = n => decodeURIComponent(p.get(n) || "");
 // DATE
 let d = get("ngaykyhopdong").split("/");
 if(d.length===3){
-  ngay=d[1]; thang=d[0]; nam=d[2];
+  let ngay=d[0], thang=d[1], nam=d[2];
   ["ngay","ngay2"].forEach(i=>document.getElementById(i).innerText=ngay);
   ["thang","thang2"].forEach(i=>document.getElementById(i).innerText=thang);
   ["nam","nam2"].forEach(i=>document.getElementById(i).innerText=nam);
@@ -289,25 +211,38 @@ document.querySelectorAll("[id]").forEach(el=>{
   if(get(key)) el.innerText=get(key);
 });
 
-// NUMBER → TEXT
-function numberToText(n){
-  if(n===0) return "Không đồng";
-  return n.toLocaleString("vi-VN")+" đồng";
+// FORMAT NUMBER
+function format(n){
+  return Number(n||0).toLocaleString("vi-VN");
 }
 
-let luong=Number(get("mucluongchinh")||0);
-document.getElementById("luong").innerText=luong.toLocaleString("vi-VN");
-document.getElementById("luongchu").innerText=numberToText(luong);
+// LƯƠNG
+let luong = get("mucluongchinh");
+document.getElementById("luong").innerText = format(luong);
+document.getElementById("luongchu").innerText = format(luong)+" đồng";
 
 // PHỤ CẤP
-let pc =
-  Number(get("pctrangphuc")||0)+
-  Number(get("pcdienthoai")||0)+
-  Number(get("pcchuyencan")||0)+
-  Number(get("pctienan")||0)+
-  Number(get("pctienxangxe")||0);
+let pctrangphuc = get("pctrangphuc");
+let pcdienthoai = get("pcdienthoai");
+let pctienxangxe = get("pctienxangxe");
+let pcchuyencan = get("pcchuyencan");
+let pctienan = get("pctienan");
 
-document.getElementById("phucap").innerText=pc.toLocaleString("vi-VN");
+document.getElementById("pctrangphuc").innerText = format(pctrangphuc);
+document.getElementById("pcdienthoai").innerText = format(pcdienthoai);
+document.getElementById("pctienxangxe").innerText = format(pctienxangxe);
+document.getElementById("pcchuyencan").innerText = format(pcchuyencan);
+document.getElementById("pctienan").innerText = format(pctienan);
+
+// TỔNG
+let pc =
+  Number(pctrangphuc||0)+
+  Number(pcdienthoai||0)+
+  Number(pctienxangxe||0)+
+  Number(pcchuyencan||0)+
+  Number(pctienan||0);
+
+document.getElementById("phucap").innerText = format(pc);
 </script>
 
 </body>
