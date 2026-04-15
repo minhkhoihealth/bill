@@ -5,21 +5,6 @@
 <title>Hợp đồng lao động - Chuẩn A4</title>
 
 <style>
-  /* HIỂN THỊ TRÊN MÀN HÌNH */
-@media screen {
-  body {
-    background: #f5f5f5;
-  }
-
-  .container {
-    width: 210mm;           /* đúng khổ A4 */
-    min-height: 297mm;
-    margin: 20px auto;
-    background: white;
-    padding: 20mm 15mm 20mm 20mm;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  }
-}
 @page {
   size: A4;
   margin: 20mm 15mm 20mm 20mm;
@@ -28,13 +13,17 @@
 body {
   font-family: "Times New Roman", Times, serif;
   font-size: 13pt;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
-  counter-reset: page;
 }
 
+/* KHUNG */
 .container {
-  width: 100%;
+  width: 210mm;
+  min-height: 297mm;
+  margin: auto;
+  background: #fff;
+  padding: 20mm 15mm 20mm 20mm;
 }
 
 /* HEADER */
@@ -42,7 +31,6 @@ body {
   display: flex;
   justify-content: space-between;
   text-align: center;
-  margin-bottom: 10px;
 }
 
 .header-left { width: 45%; }
@@ -50,8 +38,7 @@ body {
 
 .line {
   width: 120px;
-  height: 1px;
-  background: #000;
+  border-bottom: 1px solid #000;
   margin: 5px auto;
 }
 
@@ -60,49 +47,44 @@ body {
   text-align: center;
   font-size: 18pt;
   font-weight: bold;
-  margin: 20px 0;
+  margin: 20px 0 10px;
 }
 
-/* CONTENT */
+/* TEXT */
 .section {
-  margin-top: 8px;
+  margin-top: 10px;
   text-align: justify;
-  page-break-inside: avoid;
 }
 
-/* LIST */
+.italic {
+  font-style: italic;
+}
+
+.red {
+  color: #c00000;
+  font-weight: bold;
+}
+
+/* LIST ĐẸP HƠN */
 ul {
   margin: 5px 0;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 3px;
 }
 
 /* SIGNATURE */
-.signature-wrapper {
-  page-break-inside: avoid;
-  margin-top: 40px;
-}
-
 .signature {
+  margin-top: 70px;
   display: flex;
   justify-content: space-between;
   text-align: center;
 }
 
 .signature div {
-  width: 48%;
-}
-
-/* FOOTER PAGE NUMBER */
-.footer {
-  position: fixed;
-  bottom: 10mm;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 12pt;
-}
-
-.footer:after {
-  content: "Trang " counter(page);
+  width: 45%;
 }
 
 /* BUTTON */
@@ -112,8 +94,20 @@ ul {
   right: 10px;
 }
 
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.print-btn { background: #28a745; color: white; }
+.close-btn { background: #dc3545; color: white; }
+
+/* IN */
 @media print {
   .actions { display: none; }
+  body { margin: 0; }
 }
 </style>
 </head>
@@ -147,10 +141,10 @@ ul {
 
   <div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
 
-  <div class="section" style="font-style: italic;">
-    - Căn cứ vào Bộ luật lao động 2019 và các văn bản quy định liên quan;<br>
-    - Căn cứ vào nhu cầu công việc;
-  </div>
+  <div class="section italic">
+- Căn cứ vào Bộ luật lao động 2019 và các văn bản quy định liên quan;<br>
+- Căn cứ vào nhu cầu công việc;
+</div>
 
   <div class="section">
     Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>,
@@ -298,19 +292,19 @@ ul {
 </div>
 
   <div class="signature">
-    <div>
-      <b>Người lao động</b><br><br><br><br>
-      (Ký, ghi rõ họ tên)<br>
-      <b id="tenky"></b>
-    </div>
-
-    <div>
-      <b>Người sử dụng lao động</b><br><br><br><br>
-      (Ký, đóng dấu)<br>
-      <b id="ctyky"></b>
-    </div>
+   <div class="signature">
+  <div>
+    <b>Người lao động</b><br><br><br><br>
+    (Ký, ghi rõ họ tên)<br>
+    <b id="tenky"></b>
   </div>
 
+  <div>
+    <b>Người sử dụng lao động</b><br><br><br><br>
+    (Ký, đóng dấu)<br>
+    <b id="ctyky"></b>
+  </div>
+</div>
 </div>
 
 <script>
@@ -353,7 +347,22 @@ function formatVND(n) {
 
 let luong = Number(get("mucluongchinh") || 0);
 document.getElementById("luong").innerText = formatVND(luong);
-document.getElementById("luongchu").innerText = formatVND(luong) + " đồng";
+function numberToText(n){
+  if(n===0) return "Không đồng";
+  const u=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  let str="";
+  let nghin = Math.floor(n/1000);
+  let tram = n % 1000;
+
+  if(nghin>0) str += nghin.toLocaleString("vi-VN") + " nghìn ";
+  if(tram>0) str += tram + "";
+
+  return str.trim() + " đồng";
+}
+
+document.getElementById("luongchu").innerText = numberToText(luong);
+
+  
 
 // PHỤ CẤP RIÊNG BIỆT
 const pcs = {
