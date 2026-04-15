@@ -5,41 +5,41 @@
 <title>Hợp đồng lao động - Chuẩn A4</title>
 
 <style>
-  .section {
+.section {
   margin-top: 12px;
   text-align: justify;
-  text-indent: 30px; /* thụt đầu dòng chuẩn */
 }
 
-/* TIÊU ĐỀ ĐIỀU */
-.section > b {
-  display: block;
-  text-indent: 0;
+/* tiêu đề Điều */
+.section-title {
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
-/* DANH SÁCH */
+/* cấp 1 */
+.level1 {
+  margin-left: 0;
+  font-weight: bold;
+}
+
+/* cấp 2 */
+.level2 {
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+/* nội dung */
+.text {
+  margin-left: 20px;
+}
+
+/* list */
 ul {
-  margin: 5px 0 10px 0;
-  padding-left: 25px;
+  margin: 5px 0 10px 40px;
 }
 
 li {
   margin-bottom: 5px;
-  text-align: justify;
-}
-
-/* CHỮ a, b, c... */
-.sub-title {
-  display: block;
-  margin-top: 8px;
-  margin-bottom: 3px;
-  font-weight: bold;
-}
-
-/* BỎ THỤT DÒNG CHO LIST */
-ul, li {
-  text-indent: 0;
 }
 @page {
   size: A4;
@@ -202,130 +202,105 @@ button {
     Nơi cấp: <span id="noicap"></span><br>
     <div style="font-style: italic;"> (Sau đây gọi tắt là “Người lao động”)</div>
   </div>
+<!-- ĐIỀU 1 -->
+<div class="section">
+  <div class="section-title">Điều 1. Công việc và địa điểm làm việc</div>
 
-  <div class="section">
-    <b>Điều 1. Công việc và địa điểm làm việc</b><br>
-    Bên B đồng ý làm việc cho Bên A theo các nội dung, yêu cầu như sau:<br>
-    - Chức danh: <span  id="chucdanh"></span><br>
-    - Công việc: <span id="congviec"></span><br>
-    - Địa điểm: <span  id="diadiem"></span>
-  </div>
+  <div class="text">Bên B đồng ý làm việc cho Bên A với các nội dung sau:</div>
 
-  <div class="section">
-    <b>Điều 2: Thời hạn hợp đồng</b><br>
-    - Loại hợp đồng: <span id="loaihd"></span><br>
-    - Thời gian: từ <span id="tungay"></span> đến <span id="denngay"></span>
-  </div>
-
-  <div class="section">
-    <b>Điều 3: Thời giờ làm việc</b><br>
-    - Làm việc: 8 giờ/ngày, 6 ngày/tuần<br>
-    - Nghỉ hàng tuần: 01 ngày<br>
-    - Nghỉ phép năm: 12 ngày/năm theo quy định<br><br>
+  <ul>
+    <li>Chức danh: <span id="chucdanh"></span></li>
+    <li>Công việc: <span id="congviec"></span></li>
+    <li>Địa điểm: <span id="diadiem"></span></li>
+  </ul>
 </div>
-   
-   <div class="section">
-      <b>Điều 4: Quyền lợi và nghĩa vụ của Người lao động</b><br>
-    <div >
-     <b>1. Quyền lợi của Người lao động</b><br>
-      </div>
-<div class="sub-title">a. Thu nhập</div><br>
-           Lương cơ bản: <span id="luong"></span> VNĐ/tháng<br> 
-            (Bằng chữ: <i id="luongchu"></i>)<br>
-             
-<div class="sub-title">b. Các khoản phụ cấp:</div><br>
-      <ul>
-  <li>Trang phục: <span id="pc_trangphuc"></span> VNĐ/tháng</li>
-  <li>Điện thoại: <span id="pc_dienthoai"></span> VNĐ/tháng</li>
-  <li>Xăng xe: <span id="pc_xangxe"></span> VNĐ/tháng</li>
-  <li>Chuyên cần: <span id="pc_chuyencan"></span> VNĐ/tháng</li>
-  <li>Tiền ăn: <span id="pc_tienan"></span> VNĐ/tháng</li>
-  <li><b>Tổng phụ cấp:</b> <span id="phucap"></span> VNĐ</li>
-    </ul>
-  <div class="sub-title"> c. Tiền thưởng: Tháng 13 theo quy định Công ty</div><br>
-         <ul>
-           <li>Theo quy định của Công ty căn cứ vào: thời gian làm việc, kết quả kinh doanh và mức độ hoàn thành công việc của người lao động.</li>
-           </ul>
-<div class="sub-title">d. Hình thức và thời gian trả lương:</div>
-             <ul>
-         <li>Hình thức trả lương: Tiền mặt hoặc chuyển khoản.</li>
-         <li>Thời gian trả lương: Từ ngày 05 đến ngày 10 hàng tháng. Trường hợp trùng ngày nghỉ thì trả vào ngày làm việc tiếp theo.</li>
-        <li>Công ty có quyền thay đổi ngày chi trả bất cứ khi nào tùy theo tình hình tài chính của Công ty và phù hợp với quy định của pháp luật lao động.</li>
-             </ul>
-  <b>e. Thay đổi thông tin tài khoản:</b>
-            <ul>  <li>Người lao động phải thông báo cho Công ty bằng văn bản trước ít nhất 07 ngày làm việc.</li>
-           </ul>
-  <b>g. Chế độ nâng lương:</b>
-             <ul>
-        <li>Việc nâng lương theo quy định của Công ty, căn cứ vào kết quả sản xuất kinh doanh hàng năm và mức độ hoàn thành công việc của Người lao động.</li>  </ul>
-   <b>h. Bảo hiểm và Bảo hộ lao động:</b>
-        <li>Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp: Theo quy định của Pháp luật.</li>
-             <ul> 
-        <li>Chế độ phúc lợi, công tác phí: Theo các quy định, chính sách nội bộ của Công ty.</li>
-        <li>Bảo hộ lao động: Theo quy định của Pháp luật về lao động hiện hành.</li>
-               </ul>
-     <b>i. Thời gian nghỉ ngơi:</b>
-              <ul> 
-        <li>Đối với ngày nghỉ hàng năm: Người lao động đã ký HĐLĐ chính thức được nghỉ mỗi tháng 01 ngày. Người lao động cần báo trước để Người sử dụng lao động sắp xếp, tránh ảnh hưởng đến công việc chung.</li>
-         <li>Ngày nghỉ được sắp xếp từ thứ 2 đến thứ 5 hàng tuần (trừ các ngày Lễ, Tết theo quy định).</li>
-           </ul>
-           </div>
-      <div>
-      <b >2. Nghĩa vụ của Người lao động</b></div>
-          <div class="sub-title"> a. Thực hiện công việc:</div> Thực hiện đúng các công việc trong bảng mô tả công việc và các nhiệm vụ khác theo yêu cầu điều động của quản lý.</li>
-          <div class="sub-title">b. Chấp hành:</div> Nội quy lao động; Kỷ luật lao động; An toàn lao động, vệ sinh lao động và phòng cháy chữa cháy (PCCC).</li>
-          <div class="sub-title">c. Tuân thủ:</div> Sự phân công, điều chuyển công việc và quy định về thời giờ làm việc, nghỉ ngơi.</li>
-          <div class="sub-title">d. Ứng xử:</div> Giữ thái độ lịch sự, hợp tác; không làm ảnh hưởng đến uy tín, hình ảnh của Công ty.</li>
-          <div class="sub-title">e. Bảo mật:</div> Bảo vệ tài sản, thông tin, bí mật kinh doanh; không sao chép, lưu trữ hoặc sử dụng trái phép dữ liệu của Công ty.</li>
-          <div class="sub-title">f. Trách nhiệm:</div> Bồi thường thiệt hại nếu gây ra tổn thất; chịu trách nhiệm trước pháp luật nếu vi phạm. Thực hiện nghĩa vụ đóng bảo hiểm theo quy định và thông báo nếu đã tham gia tại nơi khác.</li>
-          <div class="sub-title">g. Hình ảnh Công ty:</div> Có trách nhiệm bảo vệ uy tín Công ty trên mạng xã hội và cả sau khi chấm dứt hợp đồng lao động.</li>
-            <ul>
-           <div class="sub-title">h. Nghỉ việc:</div> </li>
-                 <ul>
-            <b>thời hạn báo trước:</b> Ít nhất 30 ngày (đối với HĐ xác định thời hạn); 45 ngày (đối với HĐ không xác định thời hạn); 120 ngày (đối với ngành nghề đặc thù theo quy định).</li>
-        <b>Bàn giao:</b> Phải hoàn thành thủ tục bàn giao tài sản và công việc khi nghỉ việc. Nếu chưa hoàn tất bàn giao, Công ty có quyền tạm giữ lương tối đa 30 ngày theo quy định.</li>
-          </ul>
-  </li>
-</ul>
-           </div>
-        </div>
- <div class="section">
-    <b>Điều 5: Quyền và nghĩa vụ của Công ty</b>
-     <div>
-        <b>1 Quyền của Công ty:</b>
-            <div>
-               <ul>
-            <li>Điều hành, quản lý để Người lao động hoàn thành công việc theo Hợp đồng và Mô tả công việc. Phân công, bố trí, điều chuyển, tạm ngưng việc theo yêu cầu của công việc và năng lực thực hiện công việc của Người lao động.</li>
-            <li>Kiểm tra, giám sát và đánh giá quá trình thực hiện công việc để Công ty có hình thức khen thưởng, xử phạt phù hợp theo quy định.</li>
-            <li>Tạm hoãn, chấm dứt hợp đồng lao động, quyết định mức lương, khen thưởng, xử phạt, kỷ luật lao động người lao động theo đúng Hợp đồng, Quy định của Công ty, Thoả ước lao động tập thể (nếu có) và quy định của pháp luật.</li>
-            <li>Đơn phương chấm dứt Hợp đồng lao động theo quy định của pháp luật trong các trường hợp sau:
-            <li>Người lao động thường xuyên không hoàn thành công việc theo hợp đồng lao động được xác định theo tiêu chí đánh giá mức độ hoàn thành công việc trong quy định của Công ty ban hành tại từng thời điểm.</li>
-            <li>Các trường hợp khác theo quy định của pháp luật.</li>
-             <li>Trường hợp Người lao động vi phạm kỷ luật, tùy theo mức độ vi phạm sẽ áp dụng hình thức kỷ luật phù hợp với nội quy, quy chế, văn bản quy định nội bộ của Công ty và quy định của pháp luật về lao động, đồng thời yêu cầu bồi thường các thiệt hại liên quan (nếu có).</li>
-    
-             </ul>
-            </div>
-          </div>
-       <div >
-        <b>2. Nghĩa vụ của Công ty:</b>
-             <div >
-                <ul>
-            <li>Bảo đảm các điều kiện cơ bản đối với việc làm để Người lao động thực hiện đầy đủ những điều đã cam kết trong Hợp đồng lao động.</li>
-            <li>Thanh toán đầy đủ, đúng thời hạn tiền lương và các quyền lợi khác cho người lao động theo đúng Hợp đồng lao động và các văn bản khác liên quan.</li>
-            <li>Phổ biến cho Người lao động về nội dung các quy định, quy chế, nội quy lao động, kỷ luật lao động, an toàn lao động, v.v. được ban hành và áp dụng trong Công ty.</li>
-            <li>Có trách nhiệm đóng Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp với tỷ lệ, thời gian và phương thức đóng theo quy định của Pháp luật.</li>
-            </ul>
-             </div>
-       </div>
+<!-- ĐIỀU 2 -->
+<div class="section">
+  <div class="section-title">Điều 2. Thời hạn hợp đồng</div>
+  <ul>
+    <li>Loại hợp đồng: <span id="loaihd"></span></li>
+    <li>Thời gian: từ <span id="tungay"></span> đến <span id="denngay"></span></li>
+  </ul>
+</div>
+<!-- ĐIỀU 3 -->
+<div class="section">
+  <div class="section-title">Điều 3. Thời giờ làm việc</div>
 
- <div class="section">
-    <b>Điều 6: Điều khoản thi hành</b>
-    <div >
-       <ul>
-        <li>Trong quá trình thực hiện Hợp đồng, nếu có vấn đề phát sinh thì trước tiên sẽ được hai bên giải quyết thông qua thương lượng và đàm phán. Nếu hai bên không tự giải quyết được thì sẽ đưa ra Tòa án có thẩm quyền giải quyết. Quyết định của Tòa án là quyết định cuối cùng và có giá trị bắt buộc hai bên thực hiện. Mọi chi phí liên quan đến giải quyết vụ việc sẽ do bên thua chịu trách nhiệm chi trả.</li>
-        <li>Hợp đồng lao động được lập thành 02 bản có giá trị pháp lý như nhau, mỗi bên giữ một bản để thực hiện.</li>
-          <ul>
-      </div>
+  <ul>
+    <li>Làm việc: 8 giờ/ngày, 6 ngày/tuần</li>
+    <li>Nghỉ hàng tuần: 01 ngày</li>
+    <li>Nghỉ phép năm: 12 ngày/năm theo quy định</li>
+  </ul>
+</div>
+<!-- ĐIỀU 4 -->
+<div class="section">
+  <div class="section-title">Điều 4. Quyền lợi và nghĩa vụ của Người lao động</div>
+
+  <div class="level1">1. Quyền lợi của Người lao động</div>
+
+  <div class="level2">a. Thu nhập</div>
+  <div class="text">
+    Lương cơ bản: <span id="luong"></span> VNĐ/tháng<br>
+    (Bằng chữ: <i id="luongchu"></i>)
+  </div>
+
+  <div class="level2">b. Các khoản phụ cấp</div>
+  <ul>
+    <li>Trang phục: <span id="pc_trangphuc"></span></li>
+    <li>Điện thoại: <span id="pc_dienthoai"></span></li>
+    <li>Xăng xe: <span id="pc_xangxe"></span></li>
+    <li>Chuyên cần: <span id="pc_chuyencan"></span></li>
+    <li>Tiền ăn: <span id="pc_tienan"></span></li>
+    <li><b>Tổng phụ cấp:</b> <span id="phucap"></span></li>
+  </ul>
+
+  <div class="level2">c. Tiền thưởng</div>
+  <ul>
+    <li>Thưởng tháng 13 theo quy định Công ty</li>
+  </ul>
+
+  <div class="level2">d. Trả lương</div>
+  <ul>
+    <li>Tiền mặt hoặc chuyển khoản</li>
+    <li>Từ ngày 05 đến ngày 10 hàng tháng</li>
+  </ul>
+
+  <div class="level1">2. Nghĩa vụ của Người lao động</div>
+  <ul>
+    <li>Thực hiện đúng công việc được giao</li>
+    <li>Chấp hành nội quy, quy định Công ty</li>
+    <li>Tuân thủ điều động công việc</li>
+    <li>Bảo mật thông tin Công ty</li>
+    <li>Chịu trách nhiệm khi gây thiệt hại</li>
+  </ul>
+</div>
+<!-- ĐIỀU 5 -->
+<div class="section">
+  <div class="section-title">Điều 5. Quyền và nghĩa vụ của Công ty</div>
+
+  <div class="level1">1. Quyền của Công ty</div>
+  <ul>
+    <li>Quản lý, điều hành công việc</li>
+    <li>Đánh giá, khen thưởng, kỷ luật</li>
+    <li>Chấm dứt hợp đồng theo quy định pháp luật</li>
+  </ul>
+
+  <div class="level1">2. Nghĩa vụ của Công ty</div>
+  <ul>
+    <li>Đảm bảo điều kiện làm việc</li>
+    <li>Thanh toán lương đầy đủ</li>
+    <li>Đóng bảo hiểm theo quy định</li>
+  </ul>
+</div>
+
+<!-- ĐIỀU 6 -->
+<div class="section">
+  <div class="section-title">Điều 6. Điều khoản thi hành</div>
+
+  <ul>
+    <li>Tranh chấp giải quyết tại Tòa án có thẩm quyền</li>
+    <li>Hợp đồng gồm 02 bản, mỗi bên giữ 01 bản</li>
+  </ul>
 </div>
 
 
