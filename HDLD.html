@@ -354,16 +354,34 @@ function formatVND(n) {
 let luong = Number(get("mucluongchinh") || 0);
 document.getElementById("luong").innerText = formatVND(luong);
 function numberToText(n){
-  if(n===0) return "Không đồng";
-  const u=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  const dv = ["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+
+  function read3(num){
+    let tram = Math.floor(num/100);
+    let chuc = Math.floor((num%100)/10);
+    let donvi = num%10;
+    let str="";
+    if(tram>0) str+=dv[tram]+" trăm ";
+    if(chuc>1) str+=dv[chuc]+" mươi ";
+    else if(chuc==1) str+="mười ";
+    if(donvi>0) str+=dv[donvi];
+    return str;
+  }
+
+  if(n==0) return "Không đồng";
+
+  let ty = Math.floor(n/1e9);
+  let trieu = Math.floor((n%1e9)/1e6);
+  let nghin = Math.floor((n%1e6)/1e3);
+  let donvi = n%1e3;
+
   let str="";
-  let nghin = Math.floor(n/1000);
-  let tram = n % 1000;
+  if(ty) str+=read3(ty)+" tỷ ";
+  if(trieu) str+=read3(trieu)+" triệu ";
+  if(nghin) str+=read3(nghin)+" nghìn ";
+  if(donvi) str+=read3(donvi);
 
-  if(nghin>0) str += nghin.toLocaleString("vi-VN") + " nghìn ";
-  if(tram>0) str += tram + "";
-
-  return str.trim() + " đồng";
+  return str.trim()+" đồng";
 }
 
 document.getElementById("luongchu").innerText = numberToText(luong);
