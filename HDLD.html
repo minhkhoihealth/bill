@@ -1,110 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hợp đồng lao động</title>
+
+<style>
+body {
+  font-family: "Times New Roman";
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 40px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.header div {
+  width: 48%;
+}
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.section {
+  margin-top: 10px;
+  text-align: justify;
+}
+
+.signature {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+/* BUTTON */
+.actions {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+button {
+  padding: 10px 14px;
+  margin-left: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.print-btn { background: #28a745; color: white; }
+.close-btn { background: #dc3545; color: white; }
+
+@media print {
+  .actions { display: none; }
+  body { margin: 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="actions">
+  <button class="print-btn" onclick="window.print()">🖨️ In</button>
+  <button class="close-btn" onclick="history.back()">❌ Đóng</button>
+</div>
+
+<div class="container">
+
+<div class="header">
+  <div>
+    <b id="cty"></b><br>
+    ------------------<br>
+    Số: <span id="sohopdong"></span>
+  </div>
+
+  <div>
+    <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>
+    Độc lập - Tự do - Hạnh phúc<br>
+    ------------------
+  </div>
+</div>
+
+<p style="text-align:right">
+Đắk Lắk, ngày <span id="ngay"></span> tháng <span id="thang"></span> năm <span id="nam"></span>
+</p>
+
+<div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
+
+<div class="section">
+- Căn cứ Bộ luật lao động 2019;<br>
+- Căn cứ nhu cầu công việc;
+</div>
+
+<div class="section">
+Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>,
+tại địa chỉ: <span id="diachi"></span>
+</div>
+
+<div class="section">
+<b>Người sử dụng lao động:</b> <span id="cty2"></span><br>
+Địa chỉ: <span id="diachi2"></span><br>
+Mã số doanh nghiệp: <span id="mst"></span><br>
+Đại diện: <span id="daidien"></span> - Chức vụ: <span id="chucvu"></span>
+</div>
+
+<div class="section">
+<b>Người lao động:</b> <span id="ten"></span><br>
+Sinh ngày: <span id="ngaysinh"></span> - <span id="gioitinh"></span><br>
+Địa chỉ: <span id="diachitt"></span><br>
+CCCD: <span id="cccd"></span> - Ngày cấp: <span id="ngaycap"></span><br>
+Nơi cấp: <span id="noicap"></span>
+</div>
+
+<div class="section">
+<b>Điều 1: Nội dung công việc</b><br>
+- Loại hợp đồng: <span id="loaihd"></span><br>
+- Thời gian: từ <span id="tungay"></span> đến <span id="denngay"></span><br>
+- Chức danh: <span id="chucdanh"></span><br>
+- Công việc: <span id="congviec"></span><br>
+- Địa điểm: <span id="diadiem"></span>
+</div>
+
+<div class="section">
+<b>Điều 3: Thu nhập</b><br>
+- Lương: <b><span id="luong"></span> VNĐ</b><br>
+(Bằng chữ: <i id="luongchu"></i>)<br>
+- Tổng phụ cấp: <span id="phucap"></span> VNĐ
+</div>
+
+<div class="signature">
+  <div>
+    <b>Người lao động</b><br><br><br>
+    (Ký, ghi rõ họ tên)<br>
+    <b id="tenky"></b>
+  </div>
+
+  <div>
+    <b>Người sử dụng lao động</b><br><br><br>
+    (Ký, đóng dấu)<br>
+    <b id="ctyky"></b>
+  </div>
+</div>
+
+</div>
+
 <script>
 
-// ===== GET PARAM =====
+// GET PARAM
 const p = new URLSearchParams(window.location.search);
 const get = n => decodeURIComponent(p.get(n) || "");
 
-// ===== FORMAT DATE =====
+// DATE
 let d = get("ngaykyhopdong").split("/");
 if(d.length===3){
-  document.getElementById("ngay").innerText = d[1];
-  document.getElementById("thang").innerText = d[0];
-  document.getElementById("nam").innerText = d[2];
-
-  document.getElementById("ngay2").innerText = d[1];
-  document.getElementById("thang2").innerText = d[0];
-  document.getElementById("nam2").innerText = d[2];
+  ngay = d[1]; thang = d[0]; nam = d[2];
+  ["ngay","ngay2"].forEach(id=>document.getElementById(id).innerText=ngay);
+  ["thang","thang2"].forEach(id=>document.getElementById(id).innerText=thang);
+  ["nam","nam2"].forEach(id=>document.getElementById(id).innerText=nam);
 }
 
-// ===== DATA =====
-document.getElementById("sohopdong").innerText = get("sohopdong");
-document.getElementById("cty").innerText = get("nguoisudunglaodong");
-document.getElementById("cty2").innerText = get("nguoisudunglaodong");
-document.getElementById("ctyky").innerText = get("nguoisudunglaodong");
+// MAP DATA
+const map = {
+  cty:"nguoisudunglaodong",
+  cty2:"nguoisudunglaodong",
+  ctyky:"nguoisudunglaodong",
+  mst:"masaodoanhnghiep",
+  daidien:"nguoidaidien",
+  tungay:"thoigianlamviectu",
+  denngay:"thoigianlamviecden"
+};
 
-document.getElementById("diachi").innerText = get("diachi");
-document.getElementById("diachi2").innerText = get("diachi");
-document.getElementById("mst").innerText = get("masaodoanhnghiep");
+document.querySelectorAll("[id]").forEach(el=>{
+  let key = map[el.id] || el.id;
+  if(get(key)) el.innerText = get(key);
+});
 
-document.getElementById("daidien").innerText = get("nguoidaidien");
-document.getElementById("chucvu").innerText = get("chucvu");
+// NUMBER TO TEXT
+function numberToText(n){
+  if(n===0) return "Không đồng";
+  const u=["","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  const s=["","nghìn","triệu","tỷ"];
+  let str="",i=0;
 
-document.getElementById("ten").innerText = get("ten");
-document.getElementById("tenky").innerText = get("ten");
-
-document.getElementById("ngaysinh").innerText = get("ngaythangnamsinh");
-document.getElementById("gioitinh").innerText = get("gioitinh");
-
-document.getElementById("diachitt").innerText = get("diachithuongtru");
-document.getElementById("cccd").innerText = get("cccd");
-document.getElementById("ngaycap").innerText = get("ngaycap");
-document.getElementById("noicap").innerText = get("noicap");
-
-document.getElementById("loaihd").innerText = get("loaihd");
-document.getElementById("tungay").innerText = get("thoigianlamviectu");
-document.getElementById("denngay").innerText = get("thoigianlamviecden");
-
-document.getElementById("tungay2").innerText = get("thoigianlamviectu");
-document.getElementById("denngay2").innerText = get("thoigianlamviecden");
-
-document.getElementById("chucdanh").innerText = get("chucdanh");
-document.getElementById("congviec").innerText = get("congviec");
-document.getElementById("diadiem").innerText = get("diadiemlamviec");
-
-// ===== ĐỌC SỐ → CHỮ =====
-function numberToVietnameseText(number) {
-  const units = ["", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"];
-  const scales = ["", "nghìn", "triệu", "tỷ"];
-
-  function readThreeDigits(num) {
-    let hundred = Math.floor(num / 100);
-    let ten = Math.floor((num % 100) / 10);
-    let unit = num % 10;
-    let str = "";
-
-    if (hundred > 0) str += units[hundred] + " trăm ";
-
-    if (ten > 1) {
-      str += units[ten] + " mươi ";
-      if (unit === 1) str += "mốt ";
-      else if (unit === 5) str += "lăm ";
-      else if (unit > 0) str += units[unit] + " ";
-    } else if (ten === 1) {
-      str += "mười ";
-      if (unit === 5) str += "lăm ";
-      else if (unit > 0) str += units[unit] + " ";
-    } else if (ten === 0 && unit > 0) {
-      if (hundred > 0) str += "lẻ ";
-      str += (unit === 5 ? "năm " : units[unit] + " ");
+  while(n>0){
+    let block=n%1000;
+    if(block){
+      let h=Math.floor(block/100);
+      let t=Math.floor((block%100)/10);
+      let d=block%10;
+      let part="";
+      if(h) part+=u[h]+" trăm ";
+      if(t>1){
+        part+=u[t]+" mươi ";
+        if(d===1) part+="mốt ";
+        else if(d===5) part+="lăm ";
+        else if(d) part+=u[d]+" ";
+      }else if(t===1){
+        part+="mười ";
+        if(d===5) part+="lăm ";
+        else if(d) part+=u[d]+" ";
+      }else if(d){
+        if(h) part+="lẻ ";
+        part+=u[d]+" ";
+      }
+      str=part+s[i]+" "+str;
     }
-
-    return str.trim();
+    n=Math.floor(n/1000); i++;
   }
-
-  if (number === 0) return "Không đồng";
-
-  let result = "";
-  let scaleIndex = 0;
-
-  while (number > 0) {
-    let chunk = number % 1000;
-    if (chunk !== 0) {
-      result = readThreeDigits(chunk) + " " + scales[scaleIndex] + " " + result;
-    }
-    number = Math.floor(number / 1000);
-    scaleIndex++;
-  }
-
-  let text = result.trim().replace(/\s+/g, " ") + " đồng";
-  return text.charAt(0).toUpperCase() + text.slice(1);
+  return str.trim()+" đồng";
 }
 
-// ===== LƯƠNG =====
-let luong = Number(get("mucluongchinh") || 0);
+// LƯƠNG
+let luong = Number(get("mucluongchinh")||0);
 document.getElementById("luong").innerText = luong.toLocaleString("vi-VN");
-document.getElementById("luongchu").innerText = numberToVietnameseText(luong);
+document.getElementById("luongchu").innerText = numberToText(luong);
 
-// ===== PHỤ CẤP =====
+// PHỤ CẤP
 let pc =
   Number(get("pctrangphuc")||0) +
   Number(get("pcdienthoai")||0) +
@@ -115,3 +239,6 @@ let pc =
 document.getElementById("phucap").innerText = pc.toLocaleString("vi-VN");
 
 </script>
+
+</body>
+</html>
