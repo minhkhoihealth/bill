@@ -7,35 +7,25 @@
 <style>
 body {
   font-family: "Times New Roman";
-  font-size: 14px;
-  line-height: 1.6;
   margin: 40px;
+  line-height: 1.6;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-}
-
-.header div {
-  width: 48%;
   text-align: center;
 }
 
 .title {
   text-align: center;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   margin: 20px 0;
 }
 
-.indent {
-  margin-left: 20px;
-}
-
 .section {
   margin-top: 10px;
-  text-align: justify;
 }
 
 .signature {
@@ -49,122 +39,124 @@ button {
   position: fixed;
   top: 20px;
   right: 20px;
-  padding: 10px;
-  background: red;
+  padding: 10px 20px;
+  background: #007bff;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 @media print {
-  button { display: none; }
+  button {
+    display: none;
+  }
 }
 </style>
-
 </head>
 
 <body>
 
-<button onclick="window.print()">🖨️ IN</button>
+<button onclick="window.print()">🖨️ In hợp đồng</button>
 
 <div class="header">
   <div>
-    <b id="cty">CÔNG TY TNHH ĐẦU TƯ VÀ<br>PHÁT TRIỂN HPY</b><br>
-    ------------------<br>
-    Số: <span id="sohopdong">01/2025/HĐLĐ/LKL-HPY</span>
+    <b id="nguoisudunglaodong"></b><br>
+    Số: <span id="sohopdong"></span>
   </div>
 
   <div>
     <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>
-    Độc lập - Tự do - Hạnh phúc<br>
-    ------------------
+    Độc lập - Tự do - Hạnh phúc
   </div>
 </div>
 
 <p style="text-align:right">
-Đắk Lắk, ngày <span id="ngay">01</span> tháng <span id="thang">09</span> năm <span id="nam">2025</span>
+Ngày ký: <span id="ngaykyhopdong"></span>
 </p>
 
 <div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
 
 <div class="section">
-- Căn cứ Bộ luật lao động 2019 và các văn bản liên quan;<br>
-- Căn cứ nhu cầu công việc;
+<b>Người sử dụng lao động:</b> <span id="cty"></span><br>
+Địa chỉ: <span id="diachi"></span><br>
+Mã số DN: <span id="masaodoanhnghiep"></span><br>
+Đại diện: <span id="nguoidaidien"></span> - <span id="chucvu"></span>
 </div>
 
 <div class="section">
-Hôm nay, ngày <span id="ngay2">01</span> tháng <span id="thang2">09</span> năm <span id="nam2">2025</span>, tại Đắk Lắk.
+<b>Người lao động:</b> <span id="ten"></span><br>
+Sinh ngày: <span id="ngaysinh"></span> - <span id="gioitinh"></span><br>
+CCCD: <span id="cccd"></span> - Ngày cấp: <span id="ngaycap"></span><br>
+Nơi cấp: <span id="noicap"></span>
 </div>
 
 <div class="section">
-<b>Người sử dụng lao động:</b> <span id="cty2">CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN HPY</span><br>
-<span class="indent">Địa chỉ: <span id="diachi">PG 1 16, Vincom...</span></span><br>
-<span class="indent">Mã số DN: <span id="mst">4401104638</span></span><br>
-<span class="indent">Đại diện: <span id="daidien">PHÍ THỊ THU HÀ</span> - <span id="chucvu">Giám đốc</span></span>
+<b>Chức danh:</b> <span id="chucdanh"></span><br>
+<b>Địa điểm làm việc:</b> <span id="diadiemlamviec"></span>
 </div>
 
 <div class="section">
-<b>Người lao động:</b> <span id="ten">LÊ KIM LINH</span><br>
-<span class="indent">Sinh ngày: <span id="ngaysinh">07/12/1992</span> - <span id="gioitinh">Nam</span></span><br>
-<span class="indent">Địa chỉ: <span id="diachitt">...</span></span><br>
-<span class="indent">CCCD: <span id="cccd">054092007211</span> - Ngày cấp: <span id="ngaycap">28/06/2021</span></span>
-</div>
-
-<div class="section">
-<b>Điều 1: Nội dung công việc</b><br>
-- Chức danh: <span id="chucdanh">Nhân viên bếp</span><br>
-- Công việc: <span id="congviec">Đầu bếp chính thực hiện các món ăn</span><br>
-- Địa điểm: <span id="diadiem">Đắk Lắk</span>
-</div>
-
-<div class="section">
-<b>Điều 2: Thời hạn hợp đồng</b><br>
-Từ <span id="tungay">01/10/2025</span> đến <span id="denngay">30/09/2030</span>
-</div>
-
-<div class="section">
-<b>Điều 3: Quyền lợi</b><br>
-- Lương: <span id="luong">3.860.000</span> VNĐ/tháng<br>
-- Phụ cấp: Theo quy định công ty<br>
-- Thưởng tháng 13
-</div>
-
-<div class="section">
-<b>Điều 4: Nghĩa vụ</b><br>
-- Tuân thủ nội quy công ty<br>
-- Đảm bảo chất lượng công việc<br>
-- Bảo mật thông tin
-</div>
-
-<div class="section">
-<b>Điều 5: Điều khoản thi hành</b><br>
-- Hợp đồng lập thành 02 bản
+<b>Mức lương:</b> <span id="luong"></span> VNĐ<br>
+<b>Phụ cấp:</b> <span id="phucap"></span> VNĐ
 </div>
 
 <div class="signature">
   <div>
     <b>Người lao động</b><br><br><br>
-    (Ký, ghi rõ họ tên)<br>
-    <b id="tenky">LÊ KIM LINH</b>
+    (Ký, ghi rõ họ tên)
   </div>
 
   <div>
     <b>Người sử dụng lao động</b><br><br><br>
-    (Ký, đóng dấu)<br>
-    <b id="ctyky">HPY</b>
+    (Ký, đóng dấu)
   </div>
 </div>
 
 <script>
+// Lấy tham số URL
 const p = new URLSearchParams(window.location.search);
-const get = n => decodeURIComponent(p.get(n) || "");
 
-// Gán dữ liệu động
-if(get("ten")) document.getElementById("ten").innerText = get("ten");
-if(get("sohopdong")) document.getElementById("sohopdong").innerText = get("sohopdong");
-if(get("mucluongchinh")) {
-  let l = Number(get("mucluongchinh"));
-  document.getElementById("luong").innerText = l.toLocaleString("vi-VN");
+// Hàm lấy dữ liệu + decode
+function get(name){
+  return decodeURIComponent(p.get(name) || "");
 }
+
+// Gán dữ liệu
+document.getElementById("sohopdong").innerText = get("sohopdong");
+document.getElementById("ngaykyhopdong").innerText = get("ngaykyhopdong");
+
+document.getElementById("cty").innerText = get("nguoisudunglaodong");
+document.getElementById("nguoisudunglaodong").innerText = get("nguoisudunglaodong");
+
+document.getElementById("diachi").innerText = get("diachi");
+document.getElementById("masaodoanhnghiep").innerText = get("masaodoanhnghiep");
+
+document.getElementById("nguoidaidien").innerText = get("nguoidaidien");
+document.getElementById("chucvu").innerText = get("chucvu");
+
+document.getElementById("ten").innerText = get("ten");
+document.getElementById("ngaysinh").innerText = get("ngaythangnamsinh");
+document.getElementById("gioitinh").innerText = get("gioitinh");
+
+document.getElementById("cccd").innerText = get("cccd");
+document.getElementById("ngaycap").innerText = get("ngaycap");
+document.getElementById("noicap").innerText = get("noicap");
+
+document.getElementById("chucdanh").innerText = get("chucdanh");
+document.getElementById("diadiemlamviec").innerText = get("diadiemlamviec");
+
+// Lương + phụ cấp
+let luong = Number(get("mucluongchinh") || 0);
+let phucap =
+  Number(get("pctrangphuc") || 0) +
+  Number(get("pcdienthoai") || 0) +
+  Number(get("pcchuyencan") || 0) +
+  Number(get("pctienan") || 0) +
+  Number(get("pctienxangxe") || 0);
+
+document.getElementById("luong").innerText = luong.toLocaleString("vi-VN");
+document.getElementById("phucap").innerText = phucap.toLocaleString("vi-VN");
+
 </script>
 
 </body>
