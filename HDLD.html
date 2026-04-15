@@ -7,25 +7,31 @@
 <style>
 body {
   font-family: "Times New Roman";
-  margin: 40px;
+  font-size: 14px;
   line-height: 1.6;
+  margin: 40px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+}
+
+.header div {
+  width: 48%;
   text-align: center;
 }
 
 .title {
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   margin: 20px 0;
 }
 
 .section {
   margin-top: 10px;
+  text-align: justify;
 }
 
 .signature {
@@ -39,123 +45,195 @@ button {
   position: fixed;
   top: 20px;
   right: 20px;
-  padding: 10px 20px;
-  background: #007bff;
+  padding: 10px;
+  background: red;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 @media print {
-  button {
-    display: none;
-  }
+  button { display: none; }
 }
 </style>
 </head>
 
 <body>
 
-<button onclick="window.print()">🖨️ In hợp đồng</button>
+<button onclick="window.print()">🖨️ IN HỢP ĐỒNG</button>
 
 <div class="header">
   <div>
-    <b id="nguoisudunglaodong"></b><br>
+    <b id="cty"></b><br>
+    ------------------<br>
     Số: <span id="sohopdong"></span>
   </div>
 
   <div>
     <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>
-    Độc lập - Tự do - Hạnh phúc
+    Độc lập - Tự do - Hạnh phúc<br>
+    ------------------
   </div>
 </div>
 
 <p style="text-align:right">
-Ngày ký: <span id="ngaykyhopdong"></span>
+Đắk Lắk, ngày <span id="ngay"></span> tháng <span id="thang"></span> năm <span id="nam"></span>
 </p>
 
 <div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
 
 <div class="section">
-<b>Người sử dụng lao động:</b> <span id="cty"></span><br>
-Địa chỉ: <span id="diachi"></span><br>
-Mã số DN: <span id="masaodoanhnghiep"></span><br>
-Đại diện: <span id="nguoidaidien"></span> - <span id="chucvu"></span>
+- Căn cứ Bộ luật lao động 2019;<br>
+- Căn cứ nhu cầu công việc;
+</div>
+
+<div class="section">
+Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>,
+tại địa chỉ: <span id="diachi"></span>
+</div>
+
+<div class="section">
+<b>Người sử dụng lao động:</b> <span id="cty2"></span><br>
+Địa chỉ: <span id="diachi2"></span><br>
+Mã số DN: <span id="mst"></span><br>
+Đại diện: <span id="daidien"></span> - <span id="chucvu"></span>
 </div>
 
 <div class="section">
 <b>Người lao động:</b> <span id="ten"></span><br>
 Sinh ngày: <span id="ngaysinh"></span> - <span id="gioitinh"></span><br>
+Địa chỉ: <span id="diachitt"></span><br>
 CCCD: <span id="cccd"></span> - Ngày cấp: <span id="ngaycap"></span><br>
 Nơi cấp: <span id="noicap"></span>
 </div>
 
 <div class="section">
-<b>Chức danh:</b> <span id="chucdanh"></span><br>
-<b>Địa điểm làm việc:</b> <span id="diadiemlamviec"></span>
+<b>Điều 1: Nội dung công việc</b><br>
+- Loại hợp đồng: <span id="loaihd"></span><br>
+- Thời gian: từ <span id="tungay"></span> đến <span id="denngay"></span><br>
+- Chức danh: <span id="chucdanh"></span><br>
+- Công việc: <span id="congviec"></span><br>
+- Địa điểm: <span id="diadiem"></span>
 </div>
 
 <div class="section">
-<b>Mức lương:</b> <span id="luong"></span> VNĐ<br>
-<b>Phụ cấp:</b> <span id="phucap"></span> VNĐ
+<b>Điều 2: Thời hạn hợp đồng</b><br>
+Từ <span id="tungay2"></span> đến <span id="denngay2"></span>
+</div>
+
+<div class="section">
+<b>Điều 3: Quyền lợi</b><br>
+- Lương: <span id="luong"></span> VNĐ/tháng<br>
+(Bằng chữ: <i id="luongchu"></i>)<br>
+- Tổng phụ cấp: <span id="phucap"></span> VNĐ<br>
+- Thưởng tháng 13<br>
+- Trả lương từ ngày 05 → 10 hàng tháng
+</div>
+
+<div class="section">
+<b>Nghĩa vụ:</b><br>
+- Thực hiện công việc theo quản lý<br>
+- Tuân thủ nội quy công ty<br>
+- Bảo mật thông tin
+</div>
+
+<div class="section">
+<b>Điều 4: Quyền và nghĩa vụ Công ty</b><br>
+- Trả lương đúng hạn<br>
+- Quản lý công việc<br>
+- Đóng BHXH theo quy định
+</div>
+
+<div class="section">
+<b>Điều 5: Điều khoản thi hành</b><br>
+- Hợp đồng lập thành 02 bản<br>
+- Giải quyết tranh chấp theo pháp luật
 </div>
 
 <div class="signature">
   <div>
     <b>Người lao động</b><br><br><br>
-    (Ký, ghi rõ họ tên)
+    (Ký, ghi rõ họ tên)<br>
+    <b id="tenky"></b>
   </div>
 
   <div>
     <b>Người sử dụng lao động</b><br><br><br>
-    (Ký, đóng dấu)
+    (Ký, đóng dấu)<br>
+    <b id="ctyky"></b>
   </div>
 </div>
 
 <script>
-// Lấy tham số URL
 const p = new URLSearchParams(window.location.search);
+const get = n => decodeURIComponent(p.get(n) || "");
 
-// Hàm lấy dữ liệu + decode
-function get(name){
-  return decodeURIComponent(p.get(name) || "");
+// DATE
+let d = get("ngaykyhopdong").split("/");
+if(d.length===3){
+  document.getElementById("ngay").innerText = d[1];
+  document.getElementById("thang").innerText = d[0];
+  document.getElementById("nam").innerText = d[2];
+
+  document.getElementById("ngay2").innerText = d[1];
+  document.getElementById("thang2").innerText = d[0];
+  document.getElementById("nam2").innerText = d[2];
 }
 
-// Gán dữ liệu
+// DATA
 document.getElementById("sohopdong").innerText = get("sohopdong");
-document.getElementById("ngaykyhopdong").innerText = get("ngaykyhopdong");
-
 document.getElementById("cty").innerText = get("nguoisudunglaodong");
-document.getElementById("nguoisudunglaodong").innerText = get("nguoisudunglaodong");
+document.getElementById("cty2").innerText = get("nguoisudunglaodong");
+document.getElementById("ctyky").innerText = get("nguoisudunglaodong");
 
 document.getElementById("diachi").innerText = get("diachi");
-document.getElementById("masaodoanhnghiep").innerText = get("masaodoanhnghiep");
+document.getElementById("diachi2").innerText = get("diachi");
+document.getElementById("mst").innerText = get("masaodoanhnghiep");
 
-document.getElementById("nguoidaidien").innerText = get("nguoidaidien");
+document.getElementById("daidien").innerText = get("nguoidaidien");
 document.getElementById("chucvu").innerText = get("chucvu");
 
 document.getElementById("ten").innerText = get("ten");
+document.getElementById("tenky").innerText = get("ten");
+
 document.getElementById("ngaysinh").innerText = get("ngaythangnamsinh");
 document.getElementById("gioitinh").innerText = get("gioitinh");
 
+document.getElementById("diachitt").innerText = get("diachithuongtru");
 document.getElementById("cccd").innerText = get("cccd");
 document.getElementById("ngaycap").innerText = get("ngaycap");
 document.getElementById("noicap").innerText = get("noicap");
 
+document.getElementById("loaihd").innerText = get("loaihd");
+document.getElementById("tungay").innerText = get("thoigianlamviectu");
+document.getElementById("denngay").innerText = get("thoigianlamviecden");
+
+document.getElementById("tungay2").innerText = get("thoigianlamviectu");
+document.getElementById("denngay2").innerText = get("thoigianlamviecden");
+
 document.getElementById("chucdanh").innerText = get("chucdanh");
-document.getElementById("diadiemlamviec").innerText = get("diadiemlamviec");
+document.getElementById("congviec").innerText = get("congviec");
+document.getElementById("diadiem").innerText = get("diadiemlamviec");
 
-// Lương + phụ cấp
+// LƯƠNG
 let luong = Number(get("mucluongchinh") || 0);
-let phucap =
-  Number(get("pctrangphuc") || 0) +
-  Number(get("pcdienthoai") || 0) +
-  Number(get("pcchuyencan") || 0) +
-  Number(get("pctienan") || 0) +
-  Number(get("pctienxangxe") || 0);
-
 document.getElementById("luong").innerText = luong.toLocaleString("vi-VN");
-document.getElementById("phucap").innerText = phucap.toLocaleString("vi-VN");
+
+// PHỤ CẤP
+let pc =
+  Number(get("pctrangphuc")||0) +
+  Number(get("pcdienthoai")||0) +
+  Number(get("pcchuyencan")||0) +
+  Number(get("pctienan")||0) +
+  Number(get("pctienxangxe")||0);
+
+document.getElementById("phucap").innerText = pc.toLocaleString("vi-VN");
+
+// SỐ → CHỮ (đơn giản)
+function numberToText(n){
+  return n.toLocaleString("vi-VN") + " đồng";
+}
+document.getElementById("luongchu").innerText = numberToText(luong);
 
 </script>
 
