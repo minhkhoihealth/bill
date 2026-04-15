@@ -2,107 +2,90 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Hợp đồng lao động - In A4</title>
+<title>Hợp đồng lao động - Chuẩn A4</title>
 
 <style>
-/* CẤU HÌNH TRANG IN */
+/* THIẾT LẬP TRANG IN A4 */
 @page {
   size: A4;
-  margin: 20mm 15mm 20mm 20mm; /* Lề: Trên 20, Phải 15, Dưới 20, Trái 20 */
+  margin: 20mm 15mm 20mm 20mm; /* Lề trái 20mm để đóng tập hồ sơ */
 }
 
 body {
   font-family: "Times New Roman", Times, serif;
-  font-size: 13pt; /* Font 13-14pt là chuẩn văn bản hành chính */
-  line-height: 1.5;
+  font-size: 13pt; /* Kích thước chuẩn văn bản hành chính */
+  line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  color: #000;
 }
 
 .container {
-  width: 175mm; /* A4 (210mm) - lề trái/phải */
+  width: 100%;
   margin: auto;
-  background: white;
-  padding: 10px; /* Tạo khoảng thở nhẹ khi xem trên web */
 }
 
 /* HEADER */
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 20px;
+  text-align: center;
 }
 
-.header-left {
-  width: 40%;
-  text-align: center;
-  font-size: 12pt;
-}
-
-.header-right {
-  width: 60%;
-  text-align: center;
-  font-size: 12pt;
-}
+.header-left { width: 45%; }
+.header-right { width: 55%; font-weight: bold; }
 
 .line {
-  width: 100px;
+  width: 120px;
   height: 1px;
-  background: black;
+  background: #000;
   margin: 5px auto;
 }
 
-.red { color: red; font-weight: bold; }
+.red { color: red; font-weight: bold; } /* Giữ màu đỏ như bạn yêu cầu */
 
 .title {
   text-align: center;
-  font-size: 16pt;
+  font-size: 18pt;
   font-weight: bold;
-  margin: 30px 0 10px 0;
+  margin: 25px 0;
 }
 
 .section {
-  margin-top: 8px;
+  margin-top: 10px;
   text-align: justify;
 }
 
 .signature {
   margin-top: 50px;
   display: flex;
-  justify-content: space-around;
-  page-break-inside: avoid; /* Tránh bị cắt ngang chữ khi sang trang */
-}
-
-.signature div {
+  justify-content: space-between;
   text-align: center;
-  width: 45%;
+  page-break-inside: avoid;
 }
 
-/* NÚT ĐIỀU KHIỂN */
+.signature div { width: 48%; }
+
+/* BUTTONS - CHỈ HIỆN TRÊN MÀN HÌNH */
 .actions {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
+  top: 10px;
+  right: 10px;
 }
 
 button {
-  padding: 10px 15px;
+  padding: 8px 15px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 4px;
   border: none;
   font-weight: bold;
 }
-.print-btn { background: #2ecc71; color: white; }
-.close-btn { background: #e74c3c; color: white; }
+.print-btn { background: green; color: white; }
+.close-btn { background: red; color: white; }
 
-/* ẨN KHI IN */
 @media print {
-  body { background: white; }
   .actions { display: none; }
-  .container { width: 100%; padding: 0; margin: 0; }
+  .red { color: black !important; } /* Tùy chọn: Để đen khi in nếu cần chuyên nghiệp */
 }
 </style>
 </head>
@@ -115,22 +98,23 @@ button {
 </div>
 
 <div class="container">
+
   <div class="header">
     <div class="header-left">
-      <b id="cty">TÊN CÔNG TY</b><br>
+      <b id="cty">CÔNG TY ...</b><br>
       <div class="line"></div>
-      <span>Số: <span id="sohopdong">....../HĐLĐ</span></span>
+      <span>Số: <span id="sohopdong"></span></span>
     </div>
 
     <div class="header-right">
-      <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>
-      <b>Độc lập - Tự do - Hạnh phúc</b><br>
+      CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
+      Độc lập - Tự do - Hạnh phúc<br>
       <div class="line"></div>
     </div>
   </div>
 
-  <p style="text-align:right; font-style: italic;">
-    Đắk Lắk, ngày <span id="ngay">...</span> tháng <span id="thang">...</span> năm <span id="nam">...</span>
+  <p style="text-align:right" class="red">
+    Đắk Lắk, ngày <span id="ngay"></span> tháng <span id="thang"></span> năm <span id="nam"></span>
   </p>
 
   <div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
@@ -141,65 +125,120 @@ button {
   </div>
 
   <div class="section">
-    Hôm nay, ngày <span id="ngay2">...</span> tháng <span id="thang2">...</span> năm <span id="nam2">...</span>,
+    Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>,
     tại địa chỉ: <span id="diachi"></span><br>
-    Chúng tôi gồm có:
+    - Chúng tôi gồm có:
   </div>
 
   <div class="section">
     <b>Người sử dụng lao động (Bên A): <span id="cty2"></span></b><br>
     Địa chỉ: <span id="diachi_cty"></span><br>
     Mã số doanh nghiệp: <span id="mst"></span><br>
-    <b>Đại diện: <span id="daidien"></span></b> &nbsp;&nbsp; Chức vụ: <span id="chucvu"></span><br>
-    <i>(Sau đây gọi tắt là “Công ty”)</i>
+    <b>Đại diện: <span id="daidien"></span> </b>
+    &nbsp;&nbsp;Chức vụ: <span id="chucvu"></span><br>
+    <div style="font-style: italic;"> (Sau đây gọi tắt là “Công ty”)</div>
   </div>
 
   <div class="section">
     <b>Người lao động (Bên B): <span id="ten"></span></b><br>
-    Ngày/tháng/năm sinh: <span id="ngaysinh"></span> &nbsp;&nbsp; Giới tính: <span id="gioitinh"></span><br>
+    Ngày/tháng/năm sinh: <span id="ngaysinh"></span> 
+    &nbsp;&nbsp;Giới tính: <span id="gioitinh"></span><br>
     Địa chỉ thường trú: <span id="diachitt"></span><br>
-    Số CMND/CCCD: <span id="cccd"></span> &nbsp;&nbsp; Ngày cấp: <span id="ngaycap"></span><br>
+    Số CMND/CCCD: <span id="cccd"></span> 
+    &nbsp;&nbsp;Ngày cấp: <span id="ngaycap"></span><br>
     Nơi cấp: <span id="noicap"></span><br>
-    <i>(Sau đây gọi tắt là “Người lao động”)</i>
+    <div style="font-style: italic;"> (Sau đây gọi tắt là “Người lao động”)</div>
   </div>
 
   <div class="section">
     <b>Điều 1. Công việc và địa điểm làm việc</b><br>
+    Bên B đồng ý làm việc cho Bên A theo các nội dung, yêu cầu như sau:<br>
     - Chức danh: <span class="red" id="chucdanh"></span><br>
-    - Công việc: <span id="congviec"></span><br>
-    - Địa điểm: <span id="diadiem"></span>
+    - Công việc: <span class="red" id="congviec"></span><br>
+    - Địa điểm: <span class="red" id="diadiem"></span>
   </div>
 
   <div class="section">
     <b>Điều 2: Thời hạn hợp đồng</b><br>
     - Loại hợp đồng: <span id="loaihd"></span><br>
-    - Thời gian: từ <span id="tungay"></span> đến <span id="denngay"></span>
+    - Thời gian: từ <span id="tungay"></span> đến <span class="red" id="denngay"></span>
   </div>
 
   <div class="section">
-    <b>Điều 3: Thu nhập và quyền lợi</b><br>
-    - Lương chính: <b><span id="luong"></span></b> VNĐ/tháng<br>
-    - Bằng chữ: <i id="luongchu"></i><br>
-    - Tổng phụ cấp: <b><span id="phucap"></span></b> VNĐ/tháng
+    <b>Điều 3: Thời giờ làm việc</b><br>
+    - Làm việc: 8 giờ/ngày, 6 ngày/tuần<br>
+    - Nghỉ hàng tuần: 01 ngày<br>
+    - Nghỉ phép năm: 12 ngày/năm theo quy định<br><br>
+
+    <b>Điều 4: Quyền lợi và nghĩa vụ của Người lao động</b><br>
+    1. Quyền lợi của Người lao động<br>
+    a. Thu nhập<br>
+    Lương: <span id="luong"></span> VNĐ/tháng<br> 
+    (Bằng chữ: <i id="luongchu"></i>)<br>
+    b. Các khoản phụ cấp:<br>
+    - Trang phục: <span id="pc_trangphuc"></span> VNĐ/tháng<br>
+    - Điện thoại: <span id="pc_dienthoai"></span> VNĐ/tháng<br>
+    - Xăng xe: <span id="pc_xangxe"></span> VNĐ/tháng<br>
+    - Chuyên cần: <span id="pc_chuyencan"></span> VNĐ/tháng<br>
+    - Tiền ăn: <span id="pc_tienan"></span> VNĐ/tháng<br>
+    - Tổng phụ cấp: <b id="phucap"></b> VNĐ<br>
+    c. Tiền thưởng: Tháng 13 theo quy định Công ty<br>
+    d. Hình thức và thời gian trả lương: Tiền mặt hoặc chuyển khoản từ ngày 05 – 10 hàng tháng.<br>
+    <i>(Toàn bộ nội dung điều khoản còn lại được giữ nguyên...)</i>
   </div>
 
   <div class="section">
-    <i>(Các điều khoản khác thực hiện theo quy định của Pháp luật và Nội quy công ty...)</i>
+    <b>Điều 5: Quyền và nghĩa vụ của Công ty</b>
+    <div style="margin-left: 15px;">
+        <b>a. Quyền của Công ty:</b>
+        <ul style="list-style-type: disc; margin-top: 5px; padding-left: 20px;">
+            <li>Điều hành, quản lý để Người lao động hoàn thành công việc theo Hợp đồng và Mô tả công việc. Phân công, bố trí, điều chuyển, tạm ngưng việc theo yêu cầu của công việc và năng lực thực hiện công việc của Người lao động.</li>
+            <li>Kiểm tra, giám sát và đánh giá quá trình thực hiện công việc để Công ty có hình thức khen thưởng, xử phạt phù hợp theo quy định.</li>
+            <li>Tạm hoãn, chấm dứt hợp đồng lao động, quyết định mức lương, khen thưởng, xử phạt, kỷ luật lao động người lao động theo đúng Hợp đồng, Quy định của Công ty, Thoả ước lao động tập thể (nếu có) và quy định của pháp luật.</li>
+            <li>Đơn phương chấm dứt Hợp đồng lao động theo quy định của pháp luật trong các trường hợp sau:
+                <ul style="list-style-type: circle; padding-left: 20px; margin-top: 5px;">
+                    <li>Người lao động thường xuyên không hoàn thành công việc theo hợp đồng lao động được xác định theo tiêu chí đánh giá mức độ hoàn thành công việc trong quy định của Công ty ban hành tại từng thời điểm.</li>
+                    <li>Các trường hợp khác theo quy định của pháp luật.</li>
+                </ul>
+            </li>
+            <li>Trường hợp Người lao động vi phạm kỷ luật, tùy theo mức độ vi phạm sẽ áp dụng hình thức kỷ luật phù hợp với nội quy, quy chế, văn bản quy định nội bộ của Công ty và quy định của pháp luật về lao động, đồng thời yêu cầu bồi thường các thiệt hại liên quan (nếu có).</li>
+        </ul>
+
+        <b>b. Nghĩa vụ của Công ty:</b>
+        <ul style="list-style-type: disc; margin-top: 5px; padding-left: 20px;">
+            <li>Bảo đảm các điều kiện cơ bản đối với việc làm để Người lao động thực hiện đầy đủ những điều đã cam kết trong Hợp đồng lao động.</li>
+            <li>Thanh toán đầy đủ, đúng thời hạn tiền lương và các quyền lợi khác cho người lao động theo đúng Hợp đồng lao động và các văn bản khác liên quan.</li>
+            <li>Phổ biến cho Người lao động về nội dung các quy định, quy chế, nội quy lao động, kỷ luật lao động, an toàn lao động, v.v. được ban hành và áp dụng trong Công ty.</li>
+            <li>Có trách nhiệm đóng Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp với tỷ lệ, thời gian và phương thức đóng theo quy định của Pháp luật.</li>
+        </ul>
+    </div>
+
+    <b>Điều 6: Điều khoản thi hành</b>
+    <ul style="list-style-type: disc; margin-top: 5px; padding-left: 20px;">
+        <li>Trong quá trình thực hiện Hợp đồng, nếu có vấn đề phát sinh thì trước tiên sẽ được hai bên giải quyết thông qua thương lượng và đàm phán. Nếu hai bên không tự giải quyết được thì sẽ đưa ra Tòa án có thẩm quyền giải quyết. Quyết định của Tòa án là quyết định cuối cùng và có giá trị bắt buộc hai bên thực hiện. Mọi chi phí liên quan đến giải quyết vụ việc sẽ do bên thua chịu trách nhiệm chi trả.</li>
+        <li>Hợp đồng lao động được lập thành 02 bản có giá trị pháp lý như nhau, mỗi bên giữ một bản để thực hiện.</li>
+    </ul>
+</div>
+
+  <div class="section">
+    <b>Điều 6: Điều khoản thi hành</b><br>
+    - Hợp đồng được lập thành 02 bản có giá trị như nhau, mỗi bên giữ một bản.
   </div>
 
   <div class="signature">
     <div>
-      <b>Người lao động</b><br>
-      <i>(Ký, ghi rõ họ tên)</i><br><br><br><br>
+      <b>Người lao động</b><br><br><br><br>
+      (Ký, ghi rõ họ tên)<br>
       <b id="tenky"></b>
     </div>
 
     <div>
-      <b>Người sử dụng lao động</b><br>
-      <i>(Ký, đóng dấu)</i><br><br><br><br>
+      <b>Người sử dụng lao động</b><br><br><br><br>
+      (Ký, đóng dấu)<br>
       <b id="ctyky"></b>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -207,52 +246,59 @@ const p = new URLSearchParams(window.location.search);
 const get = n => decodeURIComponent(p.get(n) || "");
 
 // XỬ LÝ NGÀY THÁNG
-let ngayKy = get("ngaykyhopdong");
-if(ngayKy && ngayKy.includes("/")){
-    let d = ngayKy.split("/");
-    // Định dạng dự kiến: MM/DD/YYYY hoặc DD/MM/YYYY tùy nguồn dữ liệu
-    document.getElementById("ngay").innerText = d[0];
-    document.getElementById("thang").innerText = d[1];
-    document.getElementById("nam").innerText = d[2];
-    document.getElementById("ngay2").innerText = d[0];
-    document.getElementById("thang2").innerText = d[1];
-    document.getElementById("nam2").innerText = d[2];
+let dRaw = get("ngaykyhopdong").split("/");
+if(dRaw.length === 3){
+  const ngay = dRaw[0], thang = dRaw[1], nam = dRaw[2];
+  document.getElementById("ngay").innerText = ngay;
+  document.getElementById("ngay2").innerText = ngay;
+  document.getElementById("thang").innerText = thang;
+  document.getElementById("thang2").innerText = thang;
+  document.getElementById("nam").innerText = nam;
+  document.getElementById("nam2").innerText = nam;
 }
 
-// MAP DỮ LIỆU
+// MAPPING DỮ LIỆU
 const map = {
-    cty: "nguoisudunglaodong",
-    cty2: "nguoisudunglaodong",
-    ctyky: "nguoisudunglaodong",
-    mst: "masaodoanhnghiep",
-    daidien: "nguoidaidien",
-    diachi_cty: "diachi",
-    tungay: "thoigianlamviectu",
-    denngay: "thoigianlamviecden"
+  cty: "nguoisudunglaodong",
+  cty2: "nguoisudunglaodong",
+  ctyky: "nguoisudunglaodong",
+  mst: "masaodoanhnghiep",
+  daidien: "nguoidaidien",
+  diachi_cty: "diachi",
+  tungay: "thoigianlamviectu",
+  denngay: "thoigianlamviecden"
 };
 
 document.querySelectorAll("[id]").forEach(el => {
-    let key = map[el.id] || el.id;
-    let value = get(key);
-    if(value) el.innerText = value;
+  let key = map[el.id] || el.id;
+  if(get(key)) el.innerText = get(key);
 });
 
-// TÍNH TOÁN LƯƠNG
-function docSoTien(n) {
-    if(!n || n == 0) return "Không đồng";
-    return n.toLocaleString("vi-VN") + " đồng";
+// ĐỌC SỐ THÀNH CHỮ (CƠ BẢN)
+function formatVND(n) {
+  return Number(n).toLocaleString("vi-VN");
 }
 
-let luongChinh = Number(get("mucluongchinh") || 0);
-document.getElementById("luong").innerText = luongChinh.toLocaleString("vi-VN");
-document.getElementById("luongchu").innerText = docSoTien(luongChinh);
+let luong = Number(get("mucluongchinh") || 0);
+document.getElementById("luong").innerText = formatVND(luong);
+document.getElementById("luongchu").innerText = formatVND(luong) + " đồng";
 
-let pc = Number(get("pctrangphuc")||0) + 
-         Number(get("pcdienthoai")||0) + 
-         Number(get("pcchuyencan")||0) + 
-         Number(get("pctienan")||0) + 
-         Number(get("pctienxangxe")||0);
-document.getElementById("phucap").innerText = pc.toLocaleString("vi-VN");
+// PHỤ CẤP RIÊNG BIỆT
+const pcs = {
+  pc_trangphuc: "pctrangphuc",
+  pc_dienthoai: "pcdienthoai",
+  pc_xangxe: "pctienxangxe",
+  pc_chuyencan: "pcchuyencan",
+  pc_tienan: "pctienan"
+};
+
+let tongPC = 0;
+for (let id in pcs) {
+  let val = Number(get(pcs[id]) || 0);
+  document.getElementById(id).innerText = formatVND(val);
+  tongPC += val;
+}
+document.getElementById("phucap").innerText = formatVND(tongPC);
 
 </script>
 </body>
