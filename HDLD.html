@@ -347,25 +347,8 @@ button {
 
 <script>
 
-  function formatDateVN(dateStr) {
-  if (!dateStr) return "";
-
-  // nếu đã là dd/mm/yyyy thì giữ nguyên
-  if (dateStr.includes("/")) return dateStr;
-
-  let d = new Date(dateStr);
-  if (isNaN(d)) return dateStr;
-
-  let day = String(d.getDate()).padStart(2, "0");
-  let month = String(d.getMonth() + 1).padStart(2, "0");
-  let year = d.getFullYear();
-
-  return `${day}/${month}/${year}`;
-}
-  document.getElementById("ngaysinh").innerText = formatDateVN(get("ngaysinh"));
-document.getElementById("ngaycap").innerText = formatDateVN(get("ngaycap"));
-document.getElementById("tungay").innerText = formatDateVN(get("thoigianlamviectu"));
-document.getElementById("denngay").innerText = formatDateVN(get("thoigianlamviecden"));
+ 
+  
 const p = new URLSearchParams(window.location.search);
 const get = n => decodeURIComponent(p.get(n) || "");
 
