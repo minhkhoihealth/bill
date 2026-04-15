@@ -244,15 +244,15 @@ button {
     (Bằng chữ: <i id="luongchu"></i>)
   </div>
 
-  <div class="level2">b. Các khoản phụ cấp</div>
-  <ul>
-    <li>Trang phục: <span id="pc_trangphuc"></span>VNĐ/tháng</li>
-    <li>Điện thoại: <span id="pc_dienthoai"></span>VNĐ/tháng</li>
-    <li>Xăng xe: <span id="pc_xangxe"></span>VNĐ/tháng</li>
-    <li>Chuyên cần: <span id="pc_chuyencan"></span>VNĐ/tháng</li>
-    <li>Tiền ăn: <span id="pc_tienan"></span>VNĐ/tháng</li>
-    <li><b>Tổng phụ cấp:</b> <span id="phucap"></span>VNĐ/tháng</li>
-  </ul>
+<div class="level2">b. Các khoản phụ cấp</div>
+<ul id="list_phucap">
+  <li id="row_trangphuc">Trang phục: <span id="pc_trangphuc"></span></li>
+  <li id="row_dienthoai">Điện thoại: <span id="pc_dienthoai"></span></li>
+  <li id="row_xangxe">Xăng xe: <span id="pc_xangxe"></span></li>
+  <li id="row_chuyencan">Chuyên cần: <span id="pc_chuyencan"></span></li>
+  <li id="row_tienan">Tiền ăn: <span id="pc_tienan"></span></li>
+  <li id="row_tong"><b>Tổng phụ cấp:</b> <span id="phucap"></span></li>
+</ul>
 
   <div class="level2">c. Tiền thưởng</div>
   <ul>
@@ -277,7 +277,7 @@ button {
    <div class="level2">g. Bảo hiểm và Bảo hộ lao động:</div>
   <ul>
     <li>Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp: Theo quy định của Pháp luật.</li>
-    li>Bảo hộ lao động: Theo quy định của Pháp luật về lao động hiện hành.</li>
+    <li>Bảo hộ lao động: Theo quy định của Pháp luật về lao động hiện hành.</li>
       </ul>
   <div class="level2">h. Chế độ phúc lợi, công tác phí:</div>
   <ul>
@@ -285,7 +285,7 @@ button {
       </ul>
     <div class="level2">i. Thời gian nghỉ ngơi:</div>
   <ul>
-    li>Đối với ngày nghỉ hàng năm: Người lao động đã ký HĐLĐ chính thức được nghỉ mỗi tháng 01 ngày. Người lao động cần báo trước để Người sử dụng lao động sắp xếp, tránh ảnh hưởng đến công việc chung.</li> <li>Ngày nghỉ được sắp xếp từ thứ 2 đến thứ 5 hàng tuần (trừ các ngày Lễ, Tết theo quy định).</li>
+    <li>Đối với ngày nghỉ hàng năm: Người lao động đã ký HĐLĐ chính thức được nghỉ mỗi tháng 01 ngày. Người lao động cần báo trước để Người sử dụng lao động sắp xếp, tránh ảnh hưởng đến công việc chung.</li> <li>Ngày nghỉ được sắp xếp từ thứ 2 đến thứ 5 hàng tuần (trừ các ngày Lễ, Tết theo quy định).</li>
       </ul>
 
   <div class="level1">2. Nghĩa vụ của Người lao động</div>
@@ -427,12 +427,39 @@ const pcs = {
 };
 
 let tongPC = 0;
+let count = 0;
+
 for (let id in pcs) {
   let val = Number(get(pcs[id]) || 0);
-  document.getElementById(id).innerText = formatVND(val);
-  tongPC += val;
+  let row = document.getElementById("row_" + id.replace("pc_", ""));
+
+  if (val > 0) {
+    document.getElementById(id).innerText = formatVND(val);
+    tongPC += val;
+    count++;
+  } else {
+    if (row) row.style.display = "none"; // ẩn dòng
+  }
 }
-document.getElementById("phucap").innerText = formatVND(tongPC);
+
+// tổng phụ cấp
+if (tongPC > 0) {
+  document.getElementById("phucap").innerText = formatVND(tongPC);
+} else {
+  document.getElementById("row_tong").style.display = "none";
+}
+
+// nếu không có phụ cấp nào → ẩn luôn cả khối
+if (count === 0) {
+  document.getElementById("list_phucap").style.display = "none";
+}
+  function closePage() {
+  if (window.history.length > 1) {
+    history.back();
+  } else {
+    window.close();
+  }
+}
 
 </script>
 </body>
