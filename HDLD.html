@@ -1,279 +1,10 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<title>Hợp đồng lao động</title>
-
-<style>
-body {
-  font-family: "Times New Roman";
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 40px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header div {
-  width: 48%;
-  text-align: center;
-}
-
-.title {
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  margin: 20px 0;
-}
-
-.section {
-  margin-top: 10px;
-  text-align: justify;
-}
-
-.signature {
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-}
-
-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px;
-  background: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-@media print {
-  button { display: none; }
-}
-</style>
-</head>
-
-<body>
-
-<button onclick="window.print()">🖨️ IN HỢP ĐỒNG</button>
-
-<div class="header">
-  <div>
-    <b id="cty"></b><br>
-    ------------------<br>
-    Số: <span id="sohopdong"></span>
-  </div>
-
-  <div>
-    <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br>
-    Độc lập - Tự do - Hạnh phúc<br>
-    ------------------
-  </div>
-</div>
-
-<p style="text-align:right">
-Đắk Lắk, ngày <span id="ngay"></span> tháng <span id="thang"></span> năm <span id="nam"></span>
-</p>
-
-<div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
-
-<div class="section">
-- Căn cứ vào Bộ luật lao động 2019 và các văn bản quy định liên quan;;<br>
-- Căn cứ nhu cầu công việc;
-</div>
-
-<div class="section">
-Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>,
-tại địa chỉ: <span id="diachi"></span>
-</div>
-
-<div class="section">
-<b>Người sử dụng lao động:</b> <span id="cty2"></span><br>
-Địa chỉ: <span id="diachi2"></span><br>
-Mã số doanh nghiệp: <span id="mst"></span><br>
-Đại diện: <span id="daidien"></span> - Chức vụ:<span id="chucvu"></span> <br>
-   (Sau đây gọi tắt là “Công ty”)
-</div>
-
-<div class="section">
-<b>Người lao động:</b> <span id="ten"></span><br>
-Sinh ngày: <span id="ngaysinh"></span> - <span id="gioitinh"></span><br>
-Địa chỉ: <span id="diachitt"></span><br>
-CCCD: <span id="cccd"></span> - Ngày cấp: <span id="ngaycap"></span><br>
-Nơi cấp: <span id="noicap"></span> <br>
-  (Sau đây gọi tắt là “Người lao động”) <br>
-  Sau quá trình trao đổi, hai bên cùng đồng ý ký kết Hợp đồng lao động và cam kết thực hiện đúng các những điều khoản sau: 
-</div>
-
-<div class="section">
-<b>Điều 1: Nội dung công việc</b><br>
-- Loại hợp đồng: <span id="loaihd"></span><br>
-- Thời gian: từ <span id="tungay"></span> đến <span id="denngay"></span><br>
-- Chức danh: <span id="chucdanh"></span><br>
-- Công việc: <span id="congviec"></span><br>
-- Địa điểm: <span id="diadiem"></span>
-</div>
-
-<div class="section">
-<b>Điều 2: Thời hạn hợp đồng</b><br>
-Từ <span id="tungay2"></span> đến <span id="denngay2"></span><br>
-  Hợp đồng có thể được gia hạn thêm 01 năm kể từ thời điểm hết, tùy vào thỏa thuận của hai bên.
-</div>
-
-<div class="section">
-<b>Điều 3: Quyền lợi</b><br>
-- Lương: <span id="luong"></span> VNĐ/tháng<br>
-(Bằng chữ: <i id="luongchu"></i>)<br>
-- Tổng phụ cấp: <span id="phucap"></span> VNĐ<br>
-- Thưởng tháng 13<br>
-- Trả lương từ ngày 05 → 10 hàng tháng
-  (iii)	Tiền thưởng tháng lương thứ 13: Theo quy định của Công ty căn cứ vào: thời gian làm việc, kết quả kinh doanh và mức độ hoàn thành công việc của người lao động
-(iv)	Hình thức chi trả thu nhập: Trả trực tiếp bằng tiền mặt hoặc chuyển khoản.
-(v)	Thời gian chi trả: Từ ngày 05 đến ngày 10 của tháng kế tiếp. Nếu ngày trả lương trùng vào thứ 7, chủ nhật, ngày lễ thì được chi trả vào ngày làm việc sau đó. Công ty có quyền thay đổi ngày chi trả bất cứ khi nào tùy theo tình hình tài chính của Công ty cho phép và phù hợp với quy định pháp luật lao động.  
-(vi)	Trong trường hợp có thay đổi về thông tin tài khoản, Người lao động phải thông báo trước cho Công ty ít nhất bảy (07) ngày làm việc trước thời gian chi trả theo Hợp đồng này.
-(vii)	Chế độ nâng lương: Việc nâng lương theo quy định của Công ty căn cứ vào kết quả sản xuất kinh doanh hằng năm và mức độ hoàn thành công việc của người lao động
-b.	Chế độ phúc lợi, công tác phí: Theo các quy định chính sách của Công ty.
-c.	Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp: Theo quy định của Pháp luật.
-d.	Bảo hộ lao động: Theo quy định của Pháp luật về lao động hiện hành.
-e.	Đối với ngày nghỉ hàng năm: Người lao động đã ký HĐLĐ chính thức được nghỉ mỗi tháng 1 ngày, NLĐ báo trước để người sử dụng lao động sắp xếp không ảnh hưởng công việc chung. Ngày nghỉ được sắp xếp từ thứ 2 đến thứ 5 hàng tuần và trừ những ngày Lế, Tết.
-
-</div>
-
-<div class="section">
-<b>Nghĩa vụ:</b><br>
--	Kiểm tra đối chiếu số liệu giữa các đơn vị nội bộ, dữ liệu chi tiết.
--	Ghi chép sổ sách, theo dõi thu chi, công nợ,
--	Thực hiện các công việc khác theo yêu cầu của Quản lý.
--	Chấp hành nội quy, kỷ luật lao động, an toàn lao động, vệ sinh lao động, PCCC Thực hiện các quy định, nội quy về an toàn lao động và vệ sinh lao động có liên quan đến công việc, nhiệm vụ được giao.
--	Tuyệt đối tôn trọng và tuân theo sự chỉ đạo của cấp trên về bố trí, phân công, điều chuyển vị trí làm việc. 
--	Tuân thủ các quy định thời giờ làm việc, thời giờ nghỉ ngơi. Thực hiện đúng các quy định, thủ tục để được hưởng chế độ nghỉ phép, nghỉ việc riêng, nghỉ chế độ ...
--	Trong quá trình làm việc, đối nội và đối ngoại, phải giữ thái độ lịch sự trên tinh thần hợp tác vì lợi ích của Công ty. 
--	Không được tiến hành bất kỳ việc làm và hành vi nào gây tổn hại hình ảnh, tài chính và uy tín của Công ty. 
--	Có trách nhiệm bảo vệ tài sản và bí mật kinh doanh, thông tin bảo mật khác của Công ty. Bồi thường thiệt hại về tài chính cho Công ty do lỗi của Người lao động gây ra. 
--	Không lưu trữ, sao chụp, sử dụng cho mục đích cá nhân.
--	Trường hợp người lao động vi phạm bảo mật thông tin, người lao động có trách nhiệm bồi thường mọi thiệt hại cho công ty, chịu trách nhiệm kỷ luật lao động – trách nhiệm vật chất, cũng như chịu trác nhiệm trước pháp luật.
--	Có trách nhiệm đóng Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp với tỷ lệ, thời gian và phương thức đóng theo quy định của Pháp luật. Trường hợp Người lao động đã tham gia BHXH, BHYT, BHTN tại nơi khác, Người lao động có trách nhiệm thông báo cho Công ty và chịu hoàn toàn các trách nhiệm đối với việc thông báo của mình.
--	Bảo vệ uy tín, hình ảnh Công ty trên mọi phương diện bao gồm nhưng không giới hạn trên các mạng xã hội trong và ngay cả sau khi không còn làm việc cho Công ty nữa. 
--	Khi người lao động đơn phương chấm dứt hợp đồng lao động này, phải báo cho Công ty trước ít nhất 30 ngày đối với hợp đồng có thời hạn từ 12 đến 36 tháng và trước 45 ngày đối với hợp đồng không xác định thời hạn. Đối với các trường hợp người lao động thuộc các ngành, nghề, công việc đặc thù theo quy định của pháp luật lao động khi đơn phương chấm dứt hợp đồng lao động này phải báo cho Công ty trước ít nhất 120 ngày đối với hợp đồng lao động có thời hạn từ 12 tháng trở lên. 
-Người lao động khi nghỉ việc phải hoàn thành các thủ tục bàn giao theo quy định của Công ty. Trong trường hợp chưa hoàn thành bàn giao đầy đủ theo quy định, Công ty tạm thời giữ các khoản thu nhập của tháng cuối cùng trong vòng 30 ngày cho đến khi người lao động hoàn thành công việc bàn giao. 
-
-</div>
-
-<div class="section">
-<b>Điều 4: Quyền và nghĩa vụ Công ty</b><br>
-- Trả lương đúng hạn<br>
-- Quản lý công việc<br>
-- Đóng BHXH theo quy định
-  -	Thanh toán đầy đủ và đúng hạn tiền lương cho người lao động ;
--	Điều hành, quản lý để Người lao động hoàn thành công việc theo Hợp đồng và Mô tả công việc. Phân công, bố trí, điều chuyển, tạm ngưng việc theo yêu cầu của công việc và năng lực thực hiện công việc của Người lao động.
--	Kiểm tra, giám sát và đánh giá quá trình thực hiện công việc để Công ty có hình thức khen thưởng, xử phạt phù hợp theo quy định.
--	Tạm hoãn, chấm dứt hợp đồng lao động, quyết định mức lương, khen thưởng, xử phạt, kỷ luật lao động người lao động theo đúng Hợp đồng, Quy định của Công ty, Thoả ước lao động tập thể (nếu có) và quy định của pháp luật.
--	Đơn phương chấm dứt Hợp đồng lao động theo quy định của pháp luật trong các trường hợp sau:
-(i)	Người lao động thường xuyên không hoàn thành công việc theo hợp đồng lao động được xác định theo tiêu chí đánh giá mức độ hoàn thành công việc trong quy định của Công ty. Quy định đánh giá mức độ hoàn thành công việc được Công ty ban hành tại từng thời điểm.
-(ii)	Các trường hợp khác theo quy định của pháp luật.
-- Trường hợp Người  lao động vi phạm kỷ luật, tùy theo mức độ vi phạm sẽ áp dụng hình thức kỷ luật phù hợp với nội quy, quy chế, văn bản quy định nội bộ của Công ty và quy định của pháp luật về lao động, đồng thời yêu cầu bồi thường các thiệt hại liên quan nếu có. 
-Nghĩa vụ của Công ty: 
--	Bảo đảm các điều kiện cơ bản đối với việc làm để Người lao động thực hiện đầy đủ những điều đã cam kết trong Hợp đồng lao động.
--	Thanh toán đầy đủ, đúng thời hạn tiền lương và các quyền lợi khác cho người lao động theo đúng Hợp đồng lao động/ các văn bản khác (nếu có).  
--	Phổ biến cho Người lao động về nội dung các quy định, quy chế, nội quy lao động, kỷ luật lao động, an toàn lao động v..v. được ban hành và áp dụng trong Công ty. 
--	Có trách nhiệm đóng Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp với tỷ lệ, thời gian và phương thức đóng theo quy định của Pháp luật;
-
-
-</div>
-
-<div class="section">
-<b>Điều 5: Điều khoản thi hành</b><br>
-- Hợp đồng lập thành 02 bản<br>
-- Trong quá trình thực hiện Hợp đồng, nếu có vấn đề phát sinh thì trước tiên sẽ được hai bên giải quyết thông qua thương lượng và đàm phán. Nếu hai bên không tự giải quyết được thì sẽ đưa ra Toà án có thẩm quyền giải quyết. Quyết định của Toà án là quyết định cuối cùng và có giá trị bắt buộc hai bên thực hiện. Mọi chi phí liên quan đến giải quyết vụ việc sẽ do bên thua chịu trách nhiệm chi trả.
-- Hợp đồng lao động được lập thành 02 bản có giá trị như nhau, mỗi bên giữ một bản. 
-- Giải quyết tranh chấp theo pháp luật
-</div>
-
-<div class="signature">
-  <div>
-    <b>Người lao động</b><br><br><br>
-    (Ký, ghi rõ họ tên)<br>
-    <b id="tenky"></b>
-  </div>
-
-  <div>
-    <b>Người sử dụng lao động</b><br><br><br>
-    (Ký, đóng dấu)<br>
-    <b id="ctyky"></b>
-  </div>
-</div>
-
 <script>
 
-
-
-  <script>
-// ===== ĐỌC SỐ THÀNH CHỮ TIẾNG VIỆT =====
-function numberToVietnameseText(number) {
-  const units = ["", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"];
-  const scales = ["", "nghìn", "triệu", "tỷ"];
-
-  function readThreeDigits(num) {
-    let hundred = Math.floor(num / 100);
-    let ten = Math.floor((num % 100) / 10);
-    let unit = num % 10;
-    let str = "";
-
-    if (hundred > 0) {
-      str += units[hundred] + " trăm ";
-    }
-
-    if (ten > 1) {
-      str += units[ten] + " mươi ";
-      if (unit === 1) str += "mốt ";
-      else if (unit === 5) str += "lăm ";
-      else if (unit > 0) str += units[unit] + " ";
-    } else if (ten === 1) {
-      str += "mười ";
-      if (unit === 5) str += "lăm ";
-      else if (unit > 0) str += units[unit] + " ";
-    } else if (ten === 0 && unit > 0) {
-      if (hundred > 0) str += "lẻ ";
-      if (unit === 5) str += "năm ";
-      else str += units[unit] + " ";
-    }
-
-    return str.trim();
-  }
-
-  if (number === 0) return "Không đồng";
-
-  let result = "";
-  let scaleIndex = 0;
-
-  while (number > 0) {
-    let chunk = number % 1000;
-    if (chunk !== 0) {
-      result = readThreeDigits(chunk) + " " + scales[scaleIndex] + " " + result;
-    }
-    number = Math.floor(number / 1000);
-    scaleIndex++;
-  }
-
-  return result.trim().replace(/\s+/g, " ") + " đồng";
-}
-
-// ===== ÁP DỤNG =====
-let luong = Number(get("mucluongchinh") || 0);
-
-document.getElementById("luong").innerText = luong.toLocaleString("vi-VN");
-document.getElementById("luongchu").innerText = numberToVietnameseText(luong);
-
-
+// ===== GET PARAM =====
 const p = new URLSearchParams(window.location.search);
 const get = n => decodeURIComponent(p.get(n) || "");
 
-// DATE
+// ===== FORMAT DATE =====
 let d = get("ngaykyhopdong").split("/");
 if(d.length===3){
   document.getElementById("ngay").innerText = d[1];
@@ -285,7 +16,7 @@ if(d.length===3){
   document.getElementById("nam2").innerText = d[2];
 }
 
-// DATA
+// ===== DATA =====
 document.getElementById("sohopdong").innerText = get("sohopdong");
 document.getElementById("cty").innerText = get("nguoisudunglaodong");
 document.getElementById("cty2").innerText = get("nguoisudunglaodong");
@@ -320,11 +51,60 @@ document.getElementById("chucdanh").innerText = get("chucdanh");
 document.getElementById("congviec").innerText = get("congviec");
 document.getElementById("diadiem").innerText = get("diadiemlamviec");
 
-// LƯƠNG
+// ===== ĐỌC SỐ → CHỮ =====
+function numberToVietnameseText(number) {
+  const units = ["", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"];
+  const scales = ["", "nghìn", "triệu", "tỷ"];
+
+  function readThreeDigits(num) {
+    let hundred = Math.floor(num / 100);
+    let ten = Math.floor((num % 100) / 10);
+    let unit = num % 10;
+    let str = "";
+
+    if (hundred > 0) str += units[hundred] + " trăm ";
+
+    if (ten > 1) {
+      str += units[ten] + " mươi ";
+      if (unit === 1) str += "mốt ";
+      else if (unit === 5) str += "lăm ";
+      else if (unit > 0) str += units[unit] + " ";
+    } else if (ten === 1) {
+      str += "mười ";
+      if (unit === 5) str += "lăm ";
+      else if (unit > 0) str += units[unit] + " ";
+    } else if (ten === 0 && unit > 0) {
+      if (hundred > 0) str += "lẻ ";
+      str += (unit === 5 ? "năm " : units[unit] + " ");
+    }
+
+    return str.trim();
+  }
+
+  if (number === 0) return "Không đồng";
+
+  let result = "";
+  let scaleIndex = 0;
+
+  while (number > 0) {
+    let chunk = number % 1000;
+    if (chunk !== 0) {
+      result = readThreeDigits(chunk) + " " + scales[scaleIndex] + " " + result;
+    }
+    number = Math.floor(number / 1000);
+    scaleIndex++;
+  }
+
+  let text = result.trim().replace(/\s+/g, " ") + " đồng";
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+// ===== LƯƠNG =====
 let luong = Number(get("mucluongchinh") || 0);
 document.getElementById("luong").innerText = luong.toLocaleString("vi-VN");
+document.getElementById("luongchu").innerText = numberToVietnameseText(luong);
 
-// PHỤ CẤP
+// ===== PHỤ CẤP =====
 let pc =
   Number(get("pctrangphuc")||0) +
   Number(get("pcdienthoai")||0) +
@@ -334,13 +114,4 @@ let pc =
 
 document.getElementById("phucap").innerText = pc.toLocaleString("vi-VN");
 
-// SỐ → CHỮ (đơn giản)
-function numberToText(n){
-  return n.toLocaleString("vi-VN") + " đồng";
-}
-document.getElementById("luongchu").innerText = numberToText(luong);
-
 </script>
-
-</body>
-</html>
