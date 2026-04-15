@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-  max-width: 850px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -29,9 +29,10 @@ body {
 
 .title {
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   margin: 20px 0;
+  text-transform: uppercase;
 }
 
 .section {
@@ -99,32 +100,33 @@ button {
 <div class="title">HỢP ĐỒNG LAO ĐỘNG</div>
 
 <div class="section" style="font-style: italic;">
-- Căn cứ Bộ luật Lao động 2019;<br>
-- Căn cứ nhu cầu sử dụng lao động;
+- Căn cứ vào Bộ luật lao động 2019 và các văn bản quy định liên quan;<br>
+- Căn cứ vào nhu cầu công việc;
 </div>
 
 <div class="section">
-Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>, tại:
-<span id="diachi"></span>
+Hôm nay, ngày <span id="ngay2"></span> tháng <span id="thang2"></span> năm <span id="nam2"></span>,
+tại địa chỉ: <span id="diachi"></span><br>
+- Chúng tôi gồm có:
 </div>
 
 <div class="section">
-<b>1. Người sử dụng lao động:</b> <span id="cty2"></span><br>
+<b>Người sử dụng lao động:</b> <span id="cty2"></span><br>
 Địa chỉ: <span id="diachi"></span><br>
-MST: <span id="mst"></span><br>
-Đại diện: <span id="daidien"></span> - <span id="chucvu"></span>
+Mã số doanh nghiệp: <span id="mst"></span><br>
+Đại diện: <span id="daidien"></span> &nbsp;&nbsp;Chức vụ: <span id="chucvu"></span><br>
 </div>
 
 <div class="section">
-<b>2. Người lao động:</b> <span id="ten"></span><br>
-Ngày sinh: <span id="ngaysinh"></span> - Giới tính: <span id="gioitinh"></span><br>
-Địa chỉ: <span id="diachithuongtru"></span><br>
-CCCD: <span id="cccd"></span> - Ngày cấp: <span id="ngaycap"></span><br>
+<b>Người lao động:</b> <span id="ten"></span><br>
+Ngày sinh: <span id="ngaysinh"></span> &nbsp;&nbsp;Giới tính: <span id="gioitinh"></span><br>
+Địa chỉ thường trú: <span id="diachithuongtru"></span><br>
+Số CCCD: <span id="cccd"></span> &nbsp;&nbsp;Ngày cấp: <span id="ngaycap"></span><br>
 Nơi cấp: <span id="noicap"></span>
 </div>
 
 <div class="section">
-<b>Điều 1. Công việc</b><br>
+<b>Điều 1. Công việc và địa điểm làm việc</b><br>
 Chức danh: <span id="chucdanh"></span><br>
 Công việc: <span id="congviec"></span><br>
 Địa điểm: <span id="diadiemlamviec"></span>
@@ -132,40 +134,47 @@ Công việc: <span id="congviec"></span><br>
 
 <div class="section">
 <b>Điều 2. Thời hạn hợp đồng</b><br>
-Loại HĐ: <span id="loaihd"></span><br>
-Từ: <span id="tungay"></span> đến <span id="denngay"></span>
+Loại hợp đồng: <span id="loaihd"></span><br>
+Thời gian: từ <span id="tungay"></span> đến <span id="denngay"></span>
 </div>
 
+<!-- GIỮ NGUYÊN ĐIỀU 3 BẠN -->
 <div class="section">
-<b>Điều 3. Thời giờ làm việc</b><br>
-- 8 giờ/ngày, 6 ngày/tuần<br>
-- Nghỉ phép: 12 ngày/năm
+<b>Điều 3: Thời giờ làm việc</b><br>
+- Làm việc: 8 giờ/ngày, 6 ngày/tuần<br>
+- Nghỉ hàng tuần: 01 ngày<br>
+- Nghỉ phép năm: 12 ngày/năm theo quy định<br>
 </div>
 
+<!-- GIỮ NGUYÊN NỘI DUNG BẠN -->
 <div class="section">
-<b>Điều 4. Quyền lợi</b><br>
+<b>Điều 4: Quyền lợi và nghĩa vụ của Người lao động</b><br>
+1. Quyền lợi của Người lao động<br>
+a. Thu nhập:<br>
+(i) Mức lương chính: <span id="luong"></span> VNĐ/tháng (Bằng chữ: <i id="luongchu"></i>)<br>
+(ii) Các khoản phụ cấp:<br>
+- Phụ cấp trang phục: <span id="pctrangphuc"></span><br>
+- Phụ cấp điện thoại: <span id="pcdienthoai"></span><br>
+- Phụ cấp xăng xe cá nhân: <span id="pctienxangxe"></span><br>
+- Phụ cấp chuyên cần: <span id="pcchuyencan"></span><br>
+- Hỗ trợ tiền ăn giữa ca: <span id="pctienan"></span><br>
+- Tổng phụ cấp: <span id="phucap"></span><br>
+(iii) Tiền thưởng tháng 13 theo quy định Công ty<br>
+(iv) Hình thức chi trả: tiền mặt hoặc chuyển khoản<br>
+(v) Thời gian chi trả: từ ngày 05 đến ngày 10 hàng tháng<br>
+(vi) Thay đổi tài khoản: báo trước 07 ngày<br>
+(vii) Nâng lương theo quy định Công ty<br>
+b. Phúc lợi: theo quy định Công ty<br>
+c. Bảo hiểm: theo pháp luật<br>
+d. Bảo hộ lao động: theo pháp luật<br>
+e. Nghỉ ngơi: 12 ngày/năm<br>
 
-Lương: <span id="luong"></span> VNĐ<br>
-(Bằng chữ: <i id="luongchu"></i>)<br>
-
-Phụ cấp:<br>
-- Trang phục: <span id="pctrangphuc"></span><br>
-- Điện thoại: <span id="pcdienthoai"></span><br>
-- Xăng xe: <span id="pctienxangxe"></span><br>
-- Chuyên cần: <span id="pcchuyencan"></span><br>
-- Ăn ca: <span id="pctienan"></span><br>
-
-Tổng phụ cấp: <span id="phucap"></span> VNĐ<br>
-
-Thưởng: Theo quy định Công ty<br>
-</div>
-
-<div class="section">
-<b>Điều 5. Nghĩa vụ</b><br>
-- Thực hiện công việc theo phân công<br>
+2. Nghĩa vụ<br>
+- Thực hiện công việc theo yêu cầu<br>
 - Tuân thủ nội quy lao động<br>
-- Bảo mật thông tin Công ty<br>
-- Bồi thường thiệt hại nếu gây ra<br>
+- Bảo mật thông tin<br>
+- Bồi thường nếu gây thiệt hại<br>
+- Báo trước khi nghỉ việc theo quy định<br>
 </div>
 
 <div class="signature">
@@ -234,7 +243,7 @@ document.getElementById("pctienxangxe").innerText = format(pctienxangxe);
 document.getElementById("pcchuyencan").innerText = format(pcchuyencan);
 document.getElementById("pctienan").innerText = format(pctienan);
 
-// TỔNG
+// TỔNG PHỤ CẤP
 let pc =
   Number(pctrangphuc||0)+
   Number(pcdienthoai||0)+
