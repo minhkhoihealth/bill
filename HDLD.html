@@ -173,9 +173,9 @@ button {
 
 /* IN */
 @media print {
-  .actions { display: none; }
-  body { margin: 0; }
-}
+  .no-print {
+    display: none !important;
+  }
 </style>
 </head>
 
@@ -183,7 +183,7 @@ button {
 
 <div class="actions">
   <button class="print-btn" onclick="window.print()">🖨️ In Hợp Đồng</button>
-  <button class="close-btn" onclick="history.back()">❌ Đóng</button>
+  < <button onclick="window.close()">❌ Đóng</button>
 </div>
 
 <div class="container">
