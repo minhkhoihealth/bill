@@ -154,66 +154,49 @@ li {
   width: 45%;
 }
 
-/* BUTTON */
+/* ===== BUTTON FIXED ===== */
 .actions {
   position: fixed;
-  top: 10px;
-  right: 10px;
-}
-  .actions {
+  top: 15px;
+  right: 15px;
   display: flex;
   gap: 10px;
-  justify-content: flex-end;
-  margin: 20px 0;
+  z-index: 999;
 }
-  .btn {
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 6px;
-  border: 1px solid #000;
-  background: #fff;
-  color: #000;
-  cursor: pointer;
-  transition: all 0.25s ease;
+
+/* ===== STYLE CHUNG ===== */
+.btn {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(4px);
 }
-  /* hover chung */
+
+/* ===== HOVER ===== */
 .btn:hover {
   background: #000;
   color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* nút in (nhấn mạnh nhẹ) */
+/* ===== PRINT BUTTON ===== */
 .print-btn {
-  border: 1px solid #000;
+  /* giữ trắng đen */
 }
 
-/* nút đóng (nhẹ hơn chút) */
+/* ===== CLOSE BUTTON ===== */
 .close-btn {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .close-btn:hover {
   opacity: 1;
-  background: #000;
-  color: #fff;
 }
 
-button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.print-btn { background: #28a745; color: white; }
-.close-btn { background: #dc3545; color: white; }
-
-/* IN */
+/* ===== ẨN KHI IN ===== */
 @media print {
-  .no-print {
+  .actions {
     display: none !important;
   }
+}
 </style>
 </head>
 
