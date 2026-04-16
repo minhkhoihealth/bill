@@ -79,7 +79,7 @@ li {
 }
 @page {
   size: A4;
-  margin: 20mm 15mm 20mm 20mm;
+  margin: 20mm 15mm 20mm 30mm; /* chuẩn nhà nước: trái rộng hơn */
 }
 
 body {
@@ -91,11 +91,12 @@ body {
 
 /* KHUNG */
 .container {
+  position: relative;
   width: 210mm;
   min-height: 297mm;
   margin: auto;
   background: #fff;
-  padding: 20mm 15mm 20mm 20mm;
+  padding: 20mm 15mm 20mm 30mm; /* đồng bộ @page */
 }
 
 /* HEADER */
@@ -103,15 +104,24 @@ body {
   display: flex;
   justify-content: space-between;
   text-align: center;
+  font-size: 14pt;
 }
 
-.header-left { width: 45%; }
-.header-right { width: 55%; font-weight: bold; }
+.header-left {
+  width: 45%;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.header-right {
+  width: 55%;
+  font-weight: bold;
+}
 
 .line {
-  width: 120px;
+  width: 140px;
   border-bottom: 1px solid #000;
-  margin: 5px auto;
+  margin: 6px auto;
 }
 
 /* TITLE */
@@ -120,6 +130,8 @@ body {
   font-size: 18pt;
   font-weight: bold;
   margin: 20px 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 
