@@ -5,14 +5,7 @@
 <title>Hợp đồng lao động - Chuẩn A4</title>
 
 <style>
-  .page-number {
-  position: fixed;
-  bottom: 8mm;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12pt;
-  font-style: italic;
-}
+  
 
 .container {
   position: relative;
@@ -455,17 +448,7 @@ li {
 
 
 <script>
-  window.onafterprint = function () {
-  window.close();
-};
-
-window.onload = function () {
-  let totalPages = Math.ceil(document.body.scrollHeight / window.innerHeight);
   
-  document.querySelectorAll(".page-number").forEach((el, i) => {
-    el.innerText = "Trang " + (i + 1) + " / " + totalPages;
-  });
-};
 
  
   
