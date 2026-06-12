@@ -89,6 +89,7 @@ button{
 <div class="info-line">
   <div>Số HĐ: <span id="orderId"></span></div>
   <div>Bàn: <span id="ban"></span></div>
+  <div>Nhân viên: <span id="nhanvien"></span></div>
 </div>
 
 <hr>
@@ -110,6 +111,8 @@ document.getElementById("orderId").textContent =
 
 document.getElementById("ban").textContent =
   params.get("ban") || "";
+  document.getElementById("nhanvien").textContent =
+  params.get("nhanvien") || "";
 
 // Format: Tên|Số lượng|Ghi chú
 const rawData = params.get("data") || "";
@@ -142,6 +145,8 @@ data.forEach(row => {
 
 document.getElementById("datetime").textContent =
   "Giờ in: " + new Date().toLocaleString("vi-VN");
+   document.getElementById("nhanvien").textContent =
+  params.get("nhanvien") || "";
 
 function closePage(){
   window.close();
