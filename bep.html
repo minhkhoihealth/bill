@@ -87,9 +87,8 @@ button{
 <div class="title">PHIẾU ORDER BẾP</div>
 
 <div class="info-line">
-  <div>Số HĐ: <span id="orderId"></span></div>
-  <div>Bàn: <span id="ban"></span></div>
-  <div>Nhân viên: <span id="nhanvien"></span></div>
+  <div><strong>Bàn:</strong> <span id="ban"></span></div>
+  <div><strong>Nhân viên:</strong> <span id="nhanvien"></span></div>
 </div>
 
 <hr>
@@ -98,7 +97,10 @@ button{
 
 <hr>
 
-<div class="footer" id="datetime"></div>
+<div class="footer">
+  <div id="datetime"></div>
+  <div>Mã đơn: <span id="orderId"></span></div>
+</div>
 
 <script>
 const params = new URLSearchParams(window.location.search);
