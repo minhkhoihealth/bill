@@ -55,7 +55,7 @@ table{width:100%;border-collapse:collapse}
 </table>
 <div class="total"><table>
 <tr><td>TỔNG SỐ LƯỢNG</td><td align="right" id="sl"></td></tr>
-<tr><td>TỔNG TIỀN BILL</td><td align="right" id="tong"></td></tr>
+<tr><td>TỔNG TIỀN</td><td align="right" id="tong"></td></tr>
 </table></div>
 <script>
 const p=new URLSearchParams(location.search);
@@ -83,4 +83,15 @@ Object.values(groups).sort((a,b)=>a.name.localeCompare(b.name,"vi")).forEach(i=>
  body.appendChild(tr);
 });
 sl.textContent=totalQty;
+ function closePage() {
+
+    // Nếu cửa sổ được mở bằng window.open()
+    window.close();
+
+    // Nếu trình duyệt không cho phép đóng
+    setTimeout(function () {
+        history.back();
+    }, 300);
+
+}
 </script></body></html>
