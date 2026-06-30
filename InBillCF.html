@@ -1,84 +1,60 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ORDER BẾP</title>
+<html lang="vi"><head><meta charset="UTF-8"><title>ORDER</title>
 <style>
-body{font-family:Tahoma,Arial,sans-serif;width:76mm;margin:0 auto;font-size:13px;color:#000}
-.button-box{text-align:center;margin:10px 0}
-@media print{.button-box{display:none}}
-button{padding:5px 10px}
-.logo{text-align:center;margin:8px 0}
-.logo img{max-width:140px;max-height:70px}
-.store{text-align:center;font-weight:bold;font-size:18px}
-.title{text-align:center;font-size:22px;font-weight:bold;margin:6px 0}
-hr{border:none;border-top:2px solid #000}
-.info{width:100%;border-collapse:collapse}
+body{font-family:Tahoma,Arial;width:76mm;margin:auto;font-size:13px}
+.logo{text-align:center}.logo img{max-width:140px;max-height:70px}
+h1{text-align:center;font-size:24px;margin:4px 0}
+table{width:100%;border-collapse:collapse}
 .info td{padding:2px 0}
-.menu{width:100%;border-collapse:collapse;margin-top:8px}
 .menu th{border-top:2px solid #000;border-bottom:2px solid #000;padding:6px 0}
 .menu td{padding:6px 0;vertical-align:top}
-.qty{text-align:center;width:45px;font-weight:bold}
-.note{font-style:italic;font-size:12px;margin-left:10px}
-.total{margin-top:6px;border-top:2px solid #000}
-.total table{width:100%}
+.qty{text-align:center;font-weight:bold;width:45px}
+.note{font-style:italic;margin-left:10px;font-size:12px}
+.total{border-top:2px solid #000;margin-top:8px}
 .total td{padding:4px 0;font-weight:bold}
-.footer{text-align:center;margin-top:10px;font-size:12px}
-</style>
-</head>
-<body>
-<div class="button-box">
-<button onclick="window.print()">🖨 In</button>
-<button onclick="window.close()">Đóng</button>
-</div>
+@media print{.btn{display:none}}
+</style></head><body>
+<div class="btn"><button onclick="print()">In</button></div>
 <div class="logo"><img id="logo"></div>
-<div class="store" id="storeName"></div>
-<hr>
-<div class="title">ORDER BẾP</div>
-
+<h1>ORDER BẾP</h1>
 <table class="info">
 <tr><td>Mã HĐ</td><td>: <span id="orderId"></span></td></tr>
-<tr><td>Bàn</td><td>: <b id="ban" style="font-size:18px"></b></td></tr>
+<tr><td>Bàn</td><td>: <b id="ban" style="font-size:20px"></b></td></tr>
 <tr><td>Nhân viên</td><td>: <span id="nhanvien"></span></td></tr>
-<tr><td>Thời gian</td><td>: <span id="datetime"></span></td></tr>
+<tr><td>Thời gian</td><td>: <span id="tg"></span></td></tr>
 </table>
-
 <table class="menu">
 <thead><tr><th align="left">MÓN</th><th class="qty">SL</th></tr></thead>
-<tbody id="productBody"></tbody>
+<tbody id="body"></tbody>
 </table>
-
-<div class="total">
-<table>
-<tr><td>TỔNG SỐ LƯỢNG</td><td align="right" id="totalQty"></td></tr>
-<tr><td>TỔNG TIỀN BILL</td><td align="right" id="tongBill"></td></tr>
-</table>
-</div>
-
-<div class="footer">Kitchen Order</div>
-
+<div class="total"><table>
+<tr><td>TỔNG SỐ LƯỢNG</td><td align="right" id="sl"></td></tr>
+<tr><td>TỔNG TIỀN BILL</td><td align="right" id="tong"></td></tr>
+</table></div>
 <script>
 const p=new URLSearchParams(location.search);
 const fm=n=>Number(n||0).toLocaleString('vi-VN');
-const lg=p.get('logo');
-if(lg&&lg.startsWith('http')) document.getElementById('logo').src=lg; else document.querySelector('.logo').style.display='none';
-storeName.textContent=p.get('tencuahang')||'';
-orderId.textContent=p.get('id')||'';
-ban.textContent=p.get('ban')||'';
-nhanvien.textContent=p.get('nhanvien')||'';
-datetime.textContent=new Date().toLocaleString('vi-VN');
-tongBill.textContent=fm(p.get('tongthanhtoan'));
-let tq=0;
-const rows=decodeURIComponent(p.get('data')||'').split('_n_');
-rows.forEach(r=>{
+const logo=p.get("logo");
+if(logo&&logo.startsWith("http"))document.getElementById("logo").src=logo;else document.querySelector(".logo").style.display="none";
+orderId.textContent=p.get("id")||"";
+ban.textContent=p.get("ban")||"";
+nhanvien.textContent=p.get("nhanvien")||"";
+tg.textContent=new Date().toLocaleString("vi-VN");
+tong.textContent=fm(p.get("tongthanhtoan"));
+const groups={}; let totalQty=0;
+(decodeURIComponent(p.get("data")||"").split("_n_")).forEach(r=>{
  if(!r.trim())return;
- const a=r.split('|');
- const tr=document.createElement('tr');
- tq+=Number(a[3]||0);
- tr.innerHTML=`<td><div style="font-weight:bold">${(a[1]||'').toUpperCase()}</div>${a[2]?'<div class="note">+ '+a[2]+'</div>':''}</td><td class="qty">${a[3]||0}</td>`;
- productBody.appendChild(tr);
+ const a=r.split("|");
+ const name=(a[1]||"").trim(),note=(a[2]||"").trim(),qty=Number(a[3]||0);
+ totalQty+=qty;
+ const k=name+"|"+note;
+ if(!groups[k])groups[k]={name,note,qty:0};
+ groups[k].qty+=qty;
 });
-totalQty.textContent=tq;
-</script>
-</body></html>
+Object.values(groups).sort((a,b)=>a.name.localeCompare(b.name,"vi")).forEach(i=>{
+ const tr=document.createElement("tr");
+ tr.innerHTML=`<td><div style="font-weight:bold">${i.name.toUpperCase()}</div>${i.note?'<div class="note">+ '+i.note+'</div>':''}</td><td class="qty">${i.qty}</td>`;
+ body.appendChild(tr);
+});
+sl.textContent=totalQty;
+</script></body></html>
