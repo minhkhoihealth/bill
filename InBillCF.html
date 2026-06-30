@@ -153,7 +153,9 @@ button {
 
 <tfoot>
 <tr class="bold">
-  <td colspan="3">TỔNG CỘNG:</td>
+  <td>TỔNG CỘNG:</td>
+  <td class="center" id="totalQty"></td>
+  <td></td>
   <td class="right" id="totalPrice"></td>
 </tr>
 
@@ -239,6 +241,7 @@ if (!thue || Number(thue) == 0)
 /* ===== Sản phẩm ===== */
 const data = decodeURIComponent(params.get("data") || "").split("_n_");
 let total = 0;
+let totalQty = 0;
 let tbody = document.getElementById("productBody");
 
 data.forEach(row => {
@@ -251,7 +254,8 @@ data.forEach(row => {
   const price = parts[4] || 0;
   const amount = parts[5] || 0;
 
-  total += Number(amount);
+total += Number(amount);
+totalQty += Number(qty);
 
   let tr = document.createElement("tr");
   tr.innerHTML = `
@@ -264,6 +268,7 @@ data.forEach(row => {
 });
 
 document.getElementById("totalPrice").textContent = formatMoney(total);
+document.getElementById("totalQty").textContent = totalQty;
 
 /* ===== QR ===== */
 const bank = params.get("bank");
