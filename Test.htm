@@ -41,33 +41,30 @@ body {
 ==========================*/
 
 .stamp{
-    width:95px;
-    height:95px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    border:4px solid red;
-    border-radius:50%;
+    width:90px;
+    height:48px;
 
-    color:red;
-    font-size:18px;
+    border:3px solid #d60000;
+    border-radius:4px;
+
+    color:#d60000;
+    background:#fff;
+
+    font-family: Arial Black, Tahoma, Arial, sans-serif;
+    font-size:16px;
     font-weight:900;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transform:rotate(-15deg);
-
     text-align:center;
-
     line-height:1.1;
     letter-spacing:1px;
-font-family: "Arial Black", sans-serif;
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    text-transform:uppercase;
 
-  
+    transform:rotate(-8deg);
+    box-sizing:border-box;
 }
 .right {
   text-align: right;
@@ -285,7 +282,7 @@ const stamp = document.getElementById("paymentStamp");
 
 if (httt === "TM") {
 
-    stamp.innerHTML = "TIỀN<br>MẶT";
+    stamp.innerHTML = "TIỀN MẶT";
     stamp.style.borderColor = "#009900";
     stamp.style.color = "#009900";
 
@@ -299,9 +296,9 @@ else if (httt === "CK") {
 }
 else{
 
-    stamp.innerHTML = "CHƯA<br>TT";
-    stamp.style.borderColor = "red";
-    stamp.style.color = "red";
+    stamp.innerHTML = "CHƯA<br>THANH TOÁN";
+    stamp.style.borderColor = "#d60000";
+    stamp.style.color = "#d60000";
 
 }
 
