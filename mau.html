@@ -152,11 +152,17 @@ button {
 <tbody id="productBody"></tbody>
 
 <tfoot>
+
 <tr class="bold">
   <td>TỔNG CỘNG:</td>
   <td class="center" id="totalQty"></td>
   <td></td>
   <td class="right" id="totalPrice"></td>
+</tr>
+
+<tr id="cocRow">
+  <td colspan="3">Tiền cọc:</td>
+  <td class="right" id="coc"></td>
 </tr>
 
 <tr id="giamgiaRow">
@@ -168,14 +174,17 @@ button {
   <td colspan="3">Phụ thu:</td>
   <td class="right" id="phuthu"></td>
 </tr>
+
 <tr id="thueRow">
   <td colspan="3">Thuế:</td>
   <td class="right" id="thue"></td>
 </tr>
+
 <tr class="bold">
   <td colspan="3">TỔNG THANH TOÁN:</td>
   <td class="right" id="tongthanhtoan"></td>
 </tr>
+
 </tfoot>
 </table>
 
@@ -220,16 +229,20 @@ document.getElementById("customerAddress").textContent = params.get("diachi") ||
 const giamgia = params.get("giamgia");
 const phuthu = params.get("phuthu");
   const thue = params.get("thue");
+  const coc = params.get("coc");
 const tongThanhToan = params.get("tongthanhtoan");
 
 
 document.getElementById("giamgia").textContent = formatMoney(giamgia);
 document.getElementById("phuthu").textContent = formatMoney(phuthu);
   document.getElementById("thue").textContent = formatMoney(thue);
+  document.getElementById("coc").textContent = formatMoney(coc);
 document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
 
 if (!giamgia || Number(giamgia) == 0)
   document.getElementById("giamgiaRow").style.display = "none";
+  if (!coc || Number(coc) == 0)
+  document.getElementById("cocRow").style.display = "none";
 
 if (!phuthu || Number(phuthu) == 0)
   document.getElementById("phuthuRow").style.display = "none";
