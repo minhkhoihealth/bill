@@ -430,14 +430,19 @@ const thuePT =
 
 // Hiển thị tiêu đề
 
+function formatPercent(value){
+    const p = Number(value) * 100;
+    return Number.isInteger(p) ? p : p.toFixed(2).replace(/\.?0+$/,"");
+}
+
 document.getElementById("giamgiaLabel").textContent =
-    "Giảm giá" + (giamgiaPT !== "" ? ` (${giamgiaPT}%)` : "") + ":";
+    `Giảm giá (${formatPercent(giamgiaPT)}%):`;
 
 document.getElementById("phuthuLabel").textContent =
-    "Phụ thu" + (phuthuPT !== "" ? ` (${phuthuPT}%)` : "") + ":";
+    `Phụ thu (${formatPercent(phuthuPT)}%):`;
 
 document.getElementById("thueLabel").textContent =
-    "Thuế" + (thuePT !== "" ? ` (${thuePT}%)` : "") + ":";
+    `Thuế (${formatPercent(thuePT)}%):`;
 
 /* ===== QR ===== */
 const bank = params.get("bank");
