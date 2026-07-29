@@ -415,8 +415,7 @@ document.getElementById("totalQty").textContent = totalQty;
   const giamgiaPT =
     total > 0 ? Number(giamgia) * 100 / total : 0;
 
-const phuthuPT =
-    total > 0 ? Number(phuthu) * 100 / total : 0;
+const phuthuPT = Number(params.get("phuthupt") || 0) * 100
 
 // Thuế tính trên giá tính thuế
 const giaTinhThue =
