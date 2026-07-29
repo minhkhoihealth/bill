@@ -308,6 +308,9 @@ document.getElementById("customerAddress").textContent = params.get("diachi") ||
 const giamgia = params.get("giamgia");
 const phuthu = params.get("phuthu");
   const thue = params.get("thue");
+  const giamgiaPT = params.get("giamgiapt") || "";
+const phuthuPT  = params.get("phuthupt") || "";
+const thuePT    = params.get("thuept") || "";
 const tongThanhToan = params.get("tongthanhtoan");
   const coc = params.get("coc");
 const nhan = params.get("nhan");
@@ -342,9 +345,8 @@ document.getElementById("giamgia").textContent = formatMoney(giamgia);
 document.getElementById("phuthu").textContent  = formatMoney(phuthu);
 document.getElementById("thue").textContent    = formatMoney(thue);
 
-
 document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
-  document.getElementById("coc").textContent = formatMoney(coc);
+document.getElementById("coc").textContent = formatMoney(coc);
 document.getElementById("nhan").textContent = formatMoney(nhan);
 document.getElementById("tralai").textContent = formatMoney(tralai);
 
@@ -429,13 +431,13 @@ const thuePT =
 // Hiển thị tiêu đề
 
 document.getElementById("giamgiaLabel").textContent =
-    `Giảm giá (${giamgiaPT.toFixed(1).replace(/\.0$/,"")}%) :`;
+    "Giảm giá" + (giamgiaPT !== "" ? ` (${giamgiaPT}%)` : "") + ":";
 
 document.getElementById("phuthuLabel").textContent =
-    `Phụ thu (${phuthuPT.toFixed(1).replace(/\.0$/,"")}%) :`;
+    "Phụ thu" + (phuthuPT !== "" ? ` (${phuthuPT}%)` : "") + ":";
 
 document.getElementById("thueLabel").textContent =
-    `Thuế (${thuePT.toFixed(1).replace(/\.0$/,"")}%) :`;
+    "Thuế" + (thuePT !== "" ? ` (${thuePT}%)` : "") + ":";
 
 /* ===== QR ===== */
 const bank = params.get("bank");
