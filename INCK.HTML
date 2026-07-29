@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Báo cáo doanh thu ca</title>
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 76mm;
+  margin: 0 auto;
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* ===== Logo ===== */
+.logo-box {
+  text-align: center;
+  margin: 8px 0;
+}
+
+.logo-box img {
+  max-width: 150px;
+  max-height: 80px;
+}
+
+/* ===== Tiêu đề ===== */
+.bill-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 15px;
+  margin: 8px 0;
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  text-align: center;
+  margin: 6px 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.info {
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+/* ===== Bảng ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+th {
+  font-size: 12px;
+  border-bottom: 1.5px dashed #000;
+  padding: 8px 0;
+  font-weight: 700;
+}
+
+td {
+  border-bottom: 1px dashed #000;
+  padding: 8px 0;
+  font-size: 11px;
+  vertical-align: top;
+  font-family: Tahoma, sans-serif;
+}
+
+.right { text-align: right; }
+.center { text-align: center; }
+.bold { font-weight: 800; }
+
+/* ===== Tổng ===== */
+tfoot tr:last-child,
+.total-row {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.button-box {
+  text-align: center;
+  margin-top: 16px;
+}
+
+button {
+  padding: 6px 12px;
+  font-size: 13px;
+  margin: 4px;
+}
+
+@media print {
+  .button-box { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="button-box">
+  <button onclick="window.print()">🖨 In</button>
+  <button onclick="closePage()">❌ Đóng</button>
+</div>
+
+<div class="logo-box">
+  <img id="logo">
+</div>
+
+<h2 id="storeName"></h2>
+<div class="info" id="storeAddress"></div>
+<div class="info" id="storePhone"></div>
+
+<hr>
+
+<div class="bill-title">BÁO CÁO DOANH THU CA</div>
+
+<div><strong>Từ ngày:</strong> <span id="tungay"></span></div>
+<div><strong>Đến ngày:</strong> <span id="denngay"></span></div>
+<div><strong>Ca:</strong> <span id="ca"></span></div>
+
+<table>
+<tbody>
+<tr>
+  <td>Tiền mặt</td>
+  <td class="right" id="TM"></td>
+</tr>
+
+<tr>
+  <td>Chuyển khoản</td>
+  <td class="right" id="CK"></td>
+</tr>
+
+<tr>
+  <td>Chuyển vào phòng</td>
+  <td class="right" id="CP"></td>
+</tr>
+
+<tr class="total-row">
+  <td>TỔNG THU</td>
+  <td class="right" id="TongThu"></td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<div class="bill-title">DANH SÁCH MÃ ĐƠN</div>
+
+<table>
+<thead>
+<tr>
+  <th style="width:25%">STT</th>
+  <th>Mã đơn</th>
+</tr>
+</thead>
+
+<tbody id="listBill"></tbody>
+</table>
+
+<div class="footer" id="datetime"></div>
+<div class="footer">Cảm ơn quý khách!</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+function formatMoney(n) {
+  return Number(n || 0).toLocaleString("vi-VN");
+}
+
+/* ===== Logo ===== */
+const logo = params.get("logo");
+
+if (logo && logo.startsWith("http")) {
+  document.getElementById("logo").src = logo;
+} else {
+  document.getElementById("logo").style.display = "none";
+}
+
+/* ===== Thông tin cửa hàng ===== */
+document.getElementById("storeName").textContent = params.get("tencuahang") || "";
+document.getElementById("storeAddress").textContent = params.get("diachicuahang") || "";
+document.getElementById("storePhone").textContent = params.get("dienthoaicuahang") || "";
+
+/* ===== Thời gian ===== */
+document.getElementById("tungay").textContent = params.get("tungay") || "";
+document.getElementById("denngay").textContent = params.get("denngay") || "";
+document.getElementById("ca").textContent = params.get("ca") || "";
+
+/* ===== Doanh thu ===== */
+const TM = Number(params.get("TM") || 0);
+const CK = Number(params.get("CK") || 0);
+const CP = Number(params.get("Chuyenphong") || 0);
+
+document.getElementById("TM").textContent = formatMoney(TM);
+document.getElementById("CK").textContent = formatMoney(CK);
+document.getElementById("CP").textContent = formatMoney(CP);
+
+document.getElementById("TongThu").textContent =
+  formatMoney(TM + CK + CP);
+
+/* ===== Danh sách mã đơn ===== */
+const tbody = document.getElementById("listBill");
+
+const bills = decodeURIComponent(params.get("data") || "")
+  .split("_n_")
+  .filter(x => x.trim() !== "");
+
+bills.forEach((bill, index) => {
+  let tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td class="center">${index + 1}</td>
+    <td>${bill.trim()}</td>
+  `;
+
+  tbody.appendChild(tr);
+});
+
+/* ===== Ngày giờ ===== */
+document.getElementById("datetime").textContent =
+  "Ngày in: " + new Date().toLocaleString("vi-VN");
+
+/* ===== Đóng trang ===== */
+function closePage() {
+  window.close();
+  setTimeout(() => {
+    window.history.back();
+  }, 300);
+}
+</script>
+
+</body>
+</html>
