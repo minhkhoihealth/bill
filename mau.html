@@ -66,6 +66,22 @@ body {
     transform:rotate(-8deg);
     box-sizing:border-box;
 }
+  .total-row{
+
+    font-size:16px;
+    font-weight:900;
+
+    border-top:2px solid #000;
+    border-bottom:2px solid #000;
+
+}
+
+.total-row td{
+
+    border-top:2px solid #000;
+    border-bottom:2px solid #000;
+
+}
 .right {
   text-align: right;
   padding-right: 8px;
@@ -206,34 +222,36 @@ button {
 
 <tbody id="productBody"></tbody>
 
-<tfoot>
 <tr class="bold">
-  <td>TỔNG CỘNG:</td>
-  <td class="center" id="totalQty"></td>
-  <td></td>
-  <td class="right" id="totalPrice"></td>
+    <td>TỔNG CỘNG:</td>
+    <td class="center" id="totalQty"></td>
+    <td></td>
+    <td class="right" id="totalPrice"></td>
 </tr>
 
 <tr id="giamgiaRow">
-  <td colspan="3">Giảm giá:</td>
-  <td class="right" id="giamgia"></td>
+    <td colspan="3">Giảm giá:</td>
+    <td class="right" id="giamgia"></td>
 </tr>
 
 <tr id="phuthuRow">
-  <td colspan="3">Phụ thu:</td>
-  <td class="right" id="phuthu"></td>
+    <td colspan="3">Phụ thu:</td>
+    <td class="right" id="phuthu"></td>
 </tr>
+
 <tr id="thueRow">
-  <td colspan="3">Thuế:</td>
-  <td class="right" id="thue"></td>
+    <td colspan="3">Thuế:</td>
+    <td class="right" id="thue"></td>
 </tr>
-<tr class="bold">
-  <td colspan="3">TỔNG THANH TOÁN:</td>
-  <td class="right" id="tongthanhtoan"></td>
-</tr>
-  <tr id="cocRow">
+
+<tr id="cocRow">
     <td colspan="3">Tiền cọc trước:</td>
     <td class="right" id="coc"></td>
+</tr>
+
+<tr class="total-row">
+    <td colspan="3">TỔNG THANH TOÁN:</td>
+    <td class="right" id="tongthanhtoan"></td>
 </tr>
 
 <tr id="nhanRow">
@@ -245,8 +263,6 @@ button {
     <td colspan="3">Tiền thừa:</td>
     <td class="right" id="tralai"></td>
 </tr>
-
-
 
 </tfoot>
 </table>
