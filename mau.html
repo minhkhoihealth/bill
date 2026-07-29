@@ -330,22 +330,38 @@ document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan
 document.getElementById("nhan").textContent = formatMoney(nhan);
 document.getElementById("tralai").textContent = formatMoney(tralai);
 
-if (!giamgia || Number(giamgia) == 0)
-  document.getElementById("giamgiaRow").style.display = "none";
+// Giảm giá
+document.getElementById("giamgiaRow").style.display =
+(Number(giamgia) > 0) ? "" : "none";
 
-if (!phuthu || Number(phuthu) == 0)
-  document.getElementById("phuthuRow").style.display = "none";
+// Phụ thu
+document.getElementById("phuthuRow").style.display =
+(Number(phuthu) > 0) ? "" : "none";
 
-if (!thue || Number(thue) == 0)
-  document.getElementById("thueRow").style.display = "none";
-  if (!coc || Number(coc) == 0)
-    document.getElementById("cocRow").style.display = "none";
+// Thuế
+document.getElementById("thueRow").style.display =
+(Number(thue) > 0) ? "" : "none";
 
-if (!nhan || Number(nhan) == 0)
+// Tiền cọc
+document.getElementById("cocRow").style.display =
+(Number(coc) > 0) ? "" : "none";
+
+// Đã nhận & Tiền thừa
+if (httt === "TM") {
+
+    document.getElementById("nhanRow").style.display =
+        Number(nhan) > 0 ? "" : "none";
+
+    document.getElementById("tralaiRow").style.display =
+        Number(tralai) > 0 ? "" : "none";
+
+}
+else{
+
     document.getElementById("nhanRow").style.display = "none";
-
-if (!tralai || Number(tralai) == 0)
     document.getElementById("tralaiRow").style.display = "none";
+
+}
 
 
 /* ===== Sản phẩm ===== */
