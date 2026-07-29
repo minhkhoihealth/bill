@@ -230,17 +230,17 @@ button {
 </tr>
 
 <tr id="giamgiaRow">
-    <td colspan="3">Giảm giá:</td>
+    <td colspan="3" id="giamgiaLabel">Giảm giá:</td>
     <td class="right" id="giamgia"></td>
 </tr>
 
 <tr id="phuthuRow">
-    <td colspan="3">Phụ thu:</td>
+    <td colspan="3" id="phuthuLabel">Phụ thu:</td>
     <td class="right" id="phuthu"></td>
 </tr>
 
 <tr id="thueRow">
-    <td colspan="3">Thuế:</td>
+    <td colspan="3" id="thueLabel">Thuế:</td>
     <td class="right" id="thue"></td>
 </tr>
 
@@ -311,6 +311,9 @@ const phuthu = params.get("phuthu");
 const tongThanhToan = params.get("tongthanhtoan");
   const coc = params.get("coc");
 const nhan = params.get("nhan");
+  const giamgiaPT = params.get("giamgiapt") || "";
+const phuthuPT  = params.get("phuthupt") || "";
+const thuePT    = params.get("thuept") || "";
 const tralai = params.get("tralaikhach");
 const httt = (params.get("HTTT") || "").toUpperCase();
 
@@ -339,8 +342,17 @@ else{
 }
 
 document.getElementById("giamgia").textContent = formatMoney(giamgia);
-document.getElementById("phuthu").textContent = formatMoney(phuthu);
-  document.getElementById("thue").textContent = formatMoney(thue);
+document.getElementById("phuthu").textContent  = formatMoney(phuthu);
+document.getElementById("thue").textContent    = formatMoney(thue);
+
+document.getElementById("giamgiaLabel").textContent =
+    "Giảm giá" + (giamgiaPT ? ` (${giamgiaPT}%)` : "") + ":";
+
+document.getElementById("phuthuLabel").textContent =
+    "Phụ thu" + (phuthuPT ? ` (${phuthuPT}%)` : "") + ":";
+
+document.getElementById("thueLabel").textContent =
+    "Thuế" + (thuePT ? ` (${thuePT}%)` : "") + ":";
 document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
   document.getElementById("coc").textContent = formatMoney(coc);
 document.getElementById("nhan").textContent = formatMoney(nhan);
