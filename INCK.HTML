@@ -215,16 +215,22 @@ const bills = decodeURIComponent(params.get("data") || "")
   .filter(x => x.trim() !== "");
 
 bills.forEach((bill, index) => {
-  let tr = document.createElement("tr");
 
-  tr.innerHTML = `
-    <td class="center">${index + 1}</td>
-    <td>${bill.trim()}</td>
-  `;
+    const parts = bill.trim().split("|");
 
-  tbody.appendChild(tr);
+    const maDon = parts[0] || "";
+    const soTien = Number(parts[1] || 0);
+
+    let tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td class="center">${index + 1}</td>
+        <td>${maDon}: <b>${soTien.toLocaleString("vi-VN")}</b></td>
+    `;
+
+    tbody.appendChild(tr);
+
 });
-
 /* ===== Ngày giờ ===== */
 document.getElementById("datetime").textContent =
   "Ngày in: " + new Date().toLocaleString("vi-VN");
