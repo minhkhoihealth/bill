@@ -311,9 +311,6 @@ const phuthu = params.get("phuthu");
 const tongThanhToan = params.get("tongthanhtoan");
   const coc = params.get("coc");
 const nhan = params.get("nhan");
-  const giamgiaPT = params.get("giamgiapt") || "";
-const phuthuPT  = params.get("phuthupt") || "";
-const thuePT    = params.get("thuept") || "";
 const tralai = params.get("tralaikhach");
 const httt = (params.get("HTTT") || "").toUpperCase();
 
@@ -345,14 +342,7 @@ document.getElementById("giamgia").textContent = formatMoney(giamgia);
 document.getElementById("phuthu").textContent  = formatMoney(phuthu);
 document.getElementById("thue").textContent    = formatMoney(thue);
 
-document.getElementById("giamgiaLabel").textContent =
-    "Giảm giá" + (giamgiaPT ? ` (${giamgiaPT}%)` : "") + ":";
 
-document.getElementById("phuthuLabel").textContent =
-    "Phụ thu" + (phuthuPT ? ` (${phuthuPT}%)` : "") + ":";
-
-document.getElementById("thueLabel").textContent =
-    "Thuế" + (thuePT ? ` (${thuePT}%)` : "") + ":";
 document.getElementById("tongthanhtoan").textContent = formatMoney(tongThanhToan);
   document.getElementById("coc").textContent = formatMoney(coc);
 document.getElementById("nhan").textContent = formatMoney(nhan);
@@ -423,6 +413,29 @@ totalQty += Number(qty);
 
 document.getElementById("totalPrice").textContent = formatMoney(total);
 document.getElementById("totalQty").textContent = totalQty;
+  const giamgiaPT =
+    total > 0 ? Number(giamgia) * 100 / total : 0;
+
+const phuthuPT =
+    total > 0 ? Number(phuthu) * 100 / total : 0;
+
+// Thuế tính trên giá tính thuế
+const giaTinhThue =
+    total - Number(giamgia) + Number(phuthu);
+
+const thuePT =
+    giaTinhThue > 0 ? Number(thue) * 100 / giaTinhThue : 0;
+
+// Hiển thị tiêu đề
+
+document.getElementById("giamgiaLabel").textContent =
+    `Giảm giá (${giamgiaPT.toFixed(1).replace(/\.0$/,"")}%) :`;
+
+document.getElementById("phuthuLabel").textContent =
+    `Phụ thu (${phuthuPT.toFixed(1).replace(/\.0$/,"")}%) :`;
+
+document.getElementById("thueLabel").textContent =
+    `Thuế (${thuePT.toFixed(1).replace(/\.0$/,"")}%) :`;
 
 /* ===== QR ===== */
 const bank = params.get("bank");
