@@ -31,28 +31,29 @@ body {
   width: 90mm;
   height: 56mm;
   margin: 10px auto;
-  padding: 4.5mm 2.5mm 2mm;
+  padding: 4mm 2.5mm 2mm;
   background: #fff;
   overflow: hidden;
   border: 0.7mm solid #111;
   box-shadow: 0 0 3px rgba(0,0,0,.45);
 }
 
-/* ===== WATERMARK ===== */
+/* ===== LOGO CHÌM ===== */
 .watermark {
   position: absolute;
   left: 50%;
-  top: 53%;
-  width: 45mm;
-  height: 45mm;
+  top: 51%;
+  width: 42mm;
+  height: 42mm;
   transform: translate(-50%, -50%);
-  opacity: .055;
+  opacity: .10;
   z-index: 0;
 }
 
-.watermark svg {
+.watermark img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 /* ===== NỘI DUNG ===== */
@@ -63,45 +64,46 @@ body {
 
 .title {
   text-align: center;
-  font-family: "Arial Black", Arial, sans-serif;
-  font-size: 6.1mm;
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  font-size: 6mm;
   line-height: 1;
   font-weight: 900;
-  letter-spacing: .15mm;
+  letter-spacing: .1mm;
   margin: 0;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 4.15mm;
+  font-size: 4.05mm;
   line-height: 1;
-  margin-top: 2mm;
-  letter-spacing: .05mm;
+  margin-top: 1.8mm;
 }
 
 /* ===== THÔNG TIN ===== */
 .info {
-  margin-top: 9.2mm;
-  font-size: 4.25mm;
+  margin-top: 8.2mm;
+  font-size: 4.15mm;
   line-height: 1.65;
-  white-space: nowrap;
 }
 
 .row {
   display: flex;
   align-items: baseline;
+  width: 100%;
 }
 
 .label {
   flex: 0 0 auto;
 }
 
-.dots {
+.value {
   flex: 1;
   min-width: 0;
-  height: 4.6mm;
   margin-left: 1mm;
   border-bottom: 0.45mm dotted #111;
+  min-height: 5mm;
+  padding-left: 1mm;
+  font-weight: 500;
 }
 
 /* ===== GHI CHÚ ===== */
@@ -109,9 +111,9 @@ body {
   position: absolute;
   left: 2.5mm;
   right: 2.5mm;
-  bottom: 4.7mm;
+  bottom: 4.1mm;
   text-align: center;
-  font-size: 3.35mm;
+  font-size: 3.15mm;
   line-height: 1.15;
   font-style: italic;
   z-index: 2;
@@ -119,8 +121,8 @@ body {
 
 .note-en {
   display: block;
-  margin-top: .8mm;
-  font-size: 2.35mm;
+  margin-top: .7mm;
+  font-size: 2.25mm;
   font-style: normal;
 }
 
@@ -136,7 +138,7 @@ button {
   border: 0;
   border-radius: 4px;
   background: #222;
-  color: white;
+  color: #fff;
   cursor: pointer;
   font-size: 14px;
 }
@@ -147,13 +149,12 @@ button:hover {
 
 @media print {
   html, body {
-    background: white;
+    background: #fff;
   }
 
   .ticket {
     margin: 0;
     box-shadow: none;
-    page-break-after: always;
   }
 
   .buttons {
@@ -172,32 +173,9 @@ button:hover {
 
 <div class="ticket">
 
-  <!-- WATERMARK HÌNH XE ĐẠP -->
+  <!-- LOGO TRUYỀN VÀO QUA ?logo= -->
   <div class="watermark">
-    <svg viewBox="0 0 200 200" fill="none"
-         xmlns="http://www.w3.org/2000/svg">
-      <circle cx="55" cy="145" r="30" stroke="#000" stroke-width="7"/>
-      <circle cx="145" cy="145" r="30" stroke="#000" stroke-width="7"/>
-      <path d="M55 145L83 91L110 145L55 145Z"
-            stroke="#000" stroke-width="7"
-            stroke-linejoin="round"/>
-      <path d="M83 91L117 91L145 145"
-            stroke="#000" stroke-width="7"
-            stroke-linecap="round"
-            stroke-linejoin="round"/>
-      <path d="M103 72L117 91"
-            stroke="#000" stroke-width="7"
-            stroke-linecap="round"/>
-      <path d="M76 91L91 91"
-            stroke="#000" stroke-width="7"
-            stroke-linecap="round"/>
-      <path d="M117 91L132 72"
-            stroke="#000" stroke-width="7"
-            stroke-linecap="round"/>
-      <path d="M127 69L139 69"
-            stroke="#000" stroke-width="7"
-            stroke-linecap="round"/>
-    </svg>
+    <img id="logo" alt="">
   </div>
 
   <div class="content">
@@ -209,17 +187,17 @@ button:hover {
 
       <div class="row">
         <span class="label">Số phòng/Room No:</span>
-        <span class="dots"></span>
+        <span class="value" id="sophong"></span>
       </div>
 
       <div class="row">
         <span class="label">Số lượng/Quantity:</span>
-        <span class="dots"></span>
+        <span class="value" id="soluong"></span>
       </div>
 
       <div class="row">
         <span class="label">Ngày/Date:</span>
-        <span class="dots"></span>
+        <span class="value" id="ngaytao"></span>
       </div>
 
     </div>
@@ -236,6 +214,52 @@ button:hover {
 </div>
 
 <script>
+const params = new URLSearchParams(window.location.search);
+
+/* ===== NHẬN THAM SỐ TỪ URL ===== */
+const logo = params.get("logo") || "";
+const sophong = params.get("sophong") || "";
+const soluong = params.get("soluong") || "";
+const ngaytao = params.get("ngaytao") || "";
+
+/* ===== HIỂN THỊ DỮ LIỆU ===== */
+document.getElementById("sophong").textContent = sophong;
+document.getElementById("soluong").textContent = soluong;
+
+/* Chuyển ngày nếu URL có dạng MM/DD/YYYY HH:mm:ss */
+function formatDate(value) {
+  if (!value) return "";
+
+  const match = value.match(
+    /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+  );
+
+  if (!match) return value;
+
+  const month = match[1].padStart(2, "0");
+  const day = match[2].padStart(2, "0");
+  const year = match[3];
+  const hour = match[4] ? match[4].padStart(2, "0") : "";
+  const minute = match[5] || "";
+  const second = match[6] || "";
+
+  if (hour) {
+    return `${day}/${month}/${year} ${hour}:${minute}${second ? ":" + second : ""}`;
+  }
+
+  return `${day}/${month}/${year}`;
+}
+
+document.getElementById("ngaytao").textContent = formatDate(ngaytao);
+
+/* ===== LOGO ===== */
+if (logo && /^https?:\/\//i.test(logo)) {
+  document.getElementById("logo").src = logo;
+} else {
+  document.querySelector(".watermark").style.display = "none";
+}
+
+/* ===== ĐÓNG ===== */
 function closePage() {
   window.close();
 
