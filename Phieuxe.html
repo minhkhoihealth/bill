@@ -2,290 +2,707 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <title>Phiếu mượn xe đạp</title>
 
 <style>
+
+/* =====================================================
+   KHỔ GIẤY IN NHIỆT 80MM
+   ===================================================== */
+
 @page {
-  size: 80mm 56mm;
-  margin: 0;
+    size: 80mm 56mm;
+    margin: 0;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #eee;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 80mm;
+    min-width: 80mm;
+    background: #fff;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ===== PHIẾU 80MM ===== */
+
+/* =====================================================
+   KHU VỰC PHIẾU
+   ===================================================== */
+
 .ticket {
-  position: relative;
-  width: 80mm;
-  height: 56mm;
-  margin: 10px auto;
-  padding: 3.5mm 2mm 1.5mm;
-  background: #fff;
-  overflow: hidden;
-  border: 0.7mm solid #111;
-  box-shadow: 0 0 3px rgba(0,0,0,.45);
 
-  display: flex;
-  flex-direction: column;
+    position: relative;
+
+    width: 80mm;
+    height: 56mm;
+
+    margin: 0;
+
+    padding:
+        3.5mm
+        2mm
+        1.5mm
+        2mm;
+
+    background: #fff;
+
+    overflow: hidden;
+
+    border: 0.6mm solid #111;
+
+    display: flex;
+    flex-direction: column;
 }
 
-/* ===== LOGO CHÌM ===== */
+
+/* =====================================================
+   LOGO CHÌM
+   ===================================================== */
+
 .watermark {
-  position: absolute;
-  left: 50%;
-  top: 51%;
-  width: 40mm;
-  height: 40mm;
-  transform: translate(-50%, -50%);
-  opacity: .08;
-  z-index: 0;
-  pointer-events: none;
+
+    position: absolute;
+
+    left: 50%;
+    top: 48%;
+
+    width: 38mm;
+    height: 38mm;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0.08;
+
+    z-index: 0;
+
+    pointer-events: none;
 }
 
 .watermark img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
 }
 
-/* ===== NỘI DUNG ===== */
+
+/* =====================================================
+   NỘI DUNG CHÍNH
+   ===================================================== */
+
 .content {
-  position: relative;
-  z-index: 2;
-  flex: 0 0 auto;
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    flex-shrink: 0;
 }
+
+
+/* =====================================================
+   TIÊU ĐỀ
+   ===================================================== */
 
 .title {
-  text-align: center;
-  font-family: "Arial Black", Arial, Helvetica, sans-serif;
-  font-size: 5.7mm;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: .05mm;
-  margin: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family:
+        "Arial Black",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 5.6mm;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: 0;
+
+    white-space: nowrap;
+
+    margin: 0;
 }
+
 
 .subtitle {
-  text-align: center;
-  font-size: 3.8mm;
-  line-height: 1;
-  margin-top: 1.5mm;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 3.65mm;
+
+    line-height: 1;
+
+    margin-top: 1.7mm;
+
+    white-space: nowrap;
 }
 
-/* ===== THÔNG TIN ===== */
+
+/* =====================================================
+   THÔNG TIN
+   ===================================================== */
+
 .info {
-  margin-top: 6.5mm;
-  font-size: 3.9mm;
-  line-height: 1;
+
+    width: 100%;
+
+    margin-top: 6.5mm;
 }
+
 
 .row {
-  display: flex;
-  align-items: flex-end;
-  width: 100%;
-  height: 6.2mm;
-  margin-bottom: 1.2mm;
+
+    display: flex;
+
+    width: 100%;
+
+    height: 6.5mm;
+
+    margin-bottom: 0.7mm;
+
+    align-items: flex-end;
 }
+
 
 .label {
-  flex: 0 0 auto;
-  white-space: nowrap;
+
+    flex: 0 0 auto;
+
+    white-space: nowrap;
+
+    font-size: 3.9mm;
+
+    line-height: 1;
 }
+
 
 .value {
-  flex: 1 1 auto;
-  min-width: 0;
-  height: 5.2mm;
-  margin-left: 1mm;
-  padding: 0 0.5mm;
-  border-bottom: 0.45mm dotted #111;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 5mm;
+
+    margin-left: 1mm;
+
+    padding-left: 0.7mm;
+
+    padding-right: 0.5mm;
+
+    border-bottom:
+        0.4mm dotted #111;
+
+    font-size: 3.9mm;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    font-weight: 500;
 }
 
-/* ===== GHI CHÚ ===== */
+
+/* =====================================================
+   GHI CHÚ CUỐI PHIẾU
+   ===================================================== */
+
 .note {
-  position: relative;
-  z-index: 2;
-  flex: 0 0 auto;
-  margin-top: auto;
-  padding: 0 0.5mm;
-  text-align: center;
-  font-size: 2.7mm;
-  line-height: 1.15;
-  font-style: italic;
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    margin-top: auto;
+
+    padding:
+        0
+        0.5mm
+        0
+        0.5mm;
+
+    text-align: center;
+
+    font-size: 2.65mm;
+
+    line-height: 1.15;
+
+    font-style: italic;
+
+    flex-shrink: 0;
 }
+
 
 .note-en {
-  display: block;
-  margin-top: .5mm;
-  font-size: 1.9mm;
-  font-style: normal;
-  white-space: nowrap;
+
+    display: block;
+
+    margin-top: 0.5mm;
+
+    font-size: 1.85mm;
+
+    line-height: 1.05;
+
+    font-style: normal;
+
+    white-space: nowrap;
 }
 
-/* ===== NÚT ===== */
+
+/* =====================================================
+   NÚT IN / ĐÓNG
+   ===================================================== */
+
 .buttons {
-  text-align: center;
-  margin: 12px auto;
+
+    width: 100%;
+
+    text-align: center;
+
+    margin: 12px auto;
 }
+
 
 button {
-  padding: 7px 16px;
-  margin: 3px;
-  border: 0;
-  border-radius: 4px;
-  background: #222;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
+
+    padding: 7px 16px;
+
+    margin: 3px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #222;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 14px;
 }
+
 
 button:hover {
-  opacity: .85;
+
+    opacity: 0.85;
 }
+
+
+/* =====================================================
+   IN
+   ===================================================== */
 
 @media print {
-  html, body {
-    width: 80mm;
-    height: 56mm;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-  }
 
-  .ticket {
-    margin: 0;
-    box-shadow: none;
-  }
+    html,
+    body {
 
-  .buttons {
-    display: none;
-  }
+        width: 80mm;
+
+        min-width: 80mm;
+
+        height: 56mm;
+
+        min-height: 56mm;
+
+        margin: 0;
+
+        padding: 0;
+
+        background: #fff;
+    }
+
+
+    .buttons {
+
+        display: none !important;
+    }
+
+
+    .ticket {
+
+        width: 80mm;
+
+        height: 56mm;
+
+        margin: 0;
+
+        padding:
+            3.5mm
+            2mm
+            1.5mm
+            2mm;
+
+        border: 0.6mm solid #111;
+
+        box-shadow: none;
+
+        page-break-after: avoid;
+
+        break-after: avoid;
+    }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     NÚT
+     ===================================================== -->
+
 <div class="buttons">
-  <button onclick="window.print()">🖨 In phiếu</button>
-  <button onclick="closePage()">✕ Đóng</button>
+
+    <button onclick="window.print()">
+        🖨 In phiếu
+    </button>
+
+    <button onclick="closePage()">
+        ✕ Đóng
+    </button>
+
 </div>
+
+
+
+<!-- =====================================================
+     PHIẾU
+     ===================================================== -->
 
 <div class="ticket">
 
-  <!-- LOGO TRUYỀN QUA ?logo= -->
-  <div class="watermark">
-    <img id="logo" alt="">
-  </div>
 
-  <div class="content">
+    <!-- =================================================
+         LOGO CHÌM
+         ================================================= -->
 
-    <div class="title">PHIẾU MƯỢN XE ĐẠP</div>
-    <div class="subtitle">BICYCLE BORROWING FORM</div>
+    <div class="watermark">
 
-    <div class="info">
-
-      <div class="row">
-        <span class="label">Số phòng/Room No:</span>
-        <span class="value" id="sophong"></span>
-      </div>
-
-      <div class="row">
-        <span class="label">Số lượng/Quantity:</span>
-        <span class="value" id="soluong"></span>
-      </div>
-
-      <div class="row">
-        <span class="label">Ngày/Date:</span>
-        <span class="value" id="ngaytao"></span>
-      </div>
+        <img
+            id="logo"
+            alt="Logo"
+        >
 
     </div>
 
-  </div>
 
-  <!-- PHẦN NÀY KHÔNG CÒN POSITION ABSOLUTE,
-       nên sẽ không đè lên dòng Ngày -->
-  <div class="note">
-    Vui lòng xuất trình thẻ này cho bảo vệ để lấy và trả xe
-    <span class="note-en">
-      Please present this card to the security guard when picking up and returning the bicycle.
-    </span>
-  </div>
+
+    <!-- =================================================
+         NỘI DUNG
+         ================================================= -->
+
+    <div class="content">
+
+
+        <!-- TIÊU ĐỀ -->
+
+        <div class="title">
+            PHIẾU MƯỢN XE ĐẠP
+        </div>
+
+
+        <div class="subtitle">
+            BICYCLE BORROWING FORM
+        </div>
+
+
+
+        <!-- THÔNG TIN -->
+
+        <div class="info">
+
+
+            <!-- PHÒNG -->
+
+            <div class="row">
+
+                <span class="label">
+                    Số phòng/Room No:
+                </span>
+
+                <span
+                    class="value"
+                    id="sophong">
+                </span>
+
+            </div>
+
+
+
+            <!-- SỐ LƯỢNG -->
+
+            <div class="row">
+
+                <span class="label">
+                    Số lượng/Quantity:
+                </span>
+
+                <span
+                    class="value"
+                    id="soluong">
+                </span>
+
+            </div>
+
+
+
+            <!-- NGÀY -->
+
+            <div class="row">
+
+                <span class="label">
+                    Ngày/Date:
+                </span>
+
+                <span
+                    class="value"
+                    id="ngaytao">
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         GHI CHÚ
+         ================================================= -->
+
+    <div class="note">
+
+        Vui lòng xuất trình thẻ này cho bảo vệ để lấy và trả xe
+
+        <span class="note-en">
+            Please present this card to the security guard
+            when picking up and returning the bicycle.
+        </span>
+
+    </div>
+
 
 </div>
 
+
+
 <script>
-const params = new URLSearchParams(window.location.search);
 
-/* ===== NHẬN THAM SỐ URL ===== */
-const logo = params.get("logo") || "";
-const sophong = params.get("sophong") || "";
-const soluong = params.get("soluong") || "";
-const ngaytao = params.get("ngaytao") || "";
+/* =====================================================
+   LẤY THÔNG SỐ TỪ URL
+   ===================================================== */
 
-/* ===== HIỂN THỊ ===== */
-document.getElementById("sophong").textContent = sophong;
-document.getElementById("soluong").textContent = soluong;
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
 
-/* ===== ĐỔI NGÀY MM/DD/YYYY -> DD/MM/YYYY ===== */
+
+/* =====================================================
+   THÔNG SỐ
+   ===================================================== */
+
+const logo =
+    params.get("logo") || "";
+
+const sophong =
+    params.get("sophong") || "";
+
+const soluong =
+    params.get("soluong") || "";
+
+const ngaytao =
+    params.get("ngaytao") || "";
+
+
+
+/* =====================================================
+   HIỂN THỊ PHÒNG
+   ===================================================== */
+
+document
+    .getElementById("sophong")
+    .textContent = sophong;
+
+
+
+/* =====================================================
+   HIỂN THỊ SỐ LƯỢNG
+   ===================================================== */
+
+document
+    .getElementById("soluong")
+    .textContent = soluong;
+
+
+
+/* =====================================================
+   ĐỊNH DẠNG NGÀY
+   MM/DD/YYYY HH:mm:ss
+   →
+   DD/MM/YYYY HH:mm:ss
+   ===================================================== */
+
 function formatDate(value) {
-  if (!value) return "";
 
-  const match = value.match(
-    /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
-  );
+    if (!value) {
+        return "";
+    }
 
-  if (!match) return value;
 
-  const month = match[1].padStart(2, "0");
-  const day = match[2].padStart(2, "0");
-  const year = match[3];
+    const match =
+        value.match(
+            /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+        );
 
-  const hour = match[4] ? match[4].padStart(2, "0") : "";
-  const minute = match[5] || "";
-  const second = match[6] || "";
 
-  if (hour) {
-    return `${day}/${month}/${year} ${hour}:${minute}${second ? ":" + second : ""}`;
-  }
+    /* Nếu không đúng định dạng
+       thì giữ nguyên */
 
-  return `${day}/${month}/${year}`;
+    if (!match) {
+
+        return value;
+
+    }
+
+
+    const month =
+        match[1].padStart(2, "0");
+
+    const day =
+        match[2].padStart(2, "0");
+
+    const year =
+        match[3];
+
+
+    const hour =
+        match[4]
+        ? match[4].padStart(2, "0")
+        : "";
+
+    const minute =
+        match[5] || "";
+
+    const second =
+        match[6] || "";
+
+
+    /* Có giờ */
+
+    if (hour) {
+
+        return (
+            `${day}/${month}/${year} ` +
+            `${hour}:${minute}` +
+            `${second ? ":" + second : ""}`
+        );
+
+    }
+
+
+    /* Chỉ có ngày */
+
+    return `${day}/${month}/${year}`;
 }
 
-document.getElementById("ngaytao").textContent = formatDate(ngaytao);
 
-/* ===== LOGO ===== */
-if (logo && /^https?:\/\//i.test(logo)) {
-  document.getElementById("logo").src = logo;
-} else {
-  document.querySelector(".watermark").style.display = "none";
+
+/* =====================================================
+   HIỂN THỊ NGÀY
+   ===================================================== */
+
+document
+    .getElementById("ngaytao")
+    .textContent =
+    formatDate(ngaytao);
+
+
+
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+if (
+    logo &&
+    /^https?:\/\//i.test(logo)
+) {
+
+    document
+        .getElementById("logo")
+        .src = logo;
+
+}
+else {
+
+    document
+        .querySelector(".watermark")
+        .style.display = "none";
+
 }
 
-/* ===== ĐÓNG ===== */
+
+
+/* =====================================================
+   ĐÓNG TRANG
+   ===================================================== */
+
 function closePage() {
-  window.close();
 
-  setTimeout(() => {
-    window.history.back();
-  }, 300);
+    window.close();
+
+
+    setTimeout(
+        function() {
+
+            window.history.back();
+
+        },
+        300
+    );
 }
+
 </script>
+
 
 </body>
 </html>
