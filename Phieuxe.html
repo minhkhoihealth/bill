@@ -331,27 +331,28 @@ button:hover {
 
 
     .ticket {
+    position: relative;
 
-        width: 80mm;
+    width: 80mm;
+    min-height: 65mm;
+    height: 65mm;
 
-        height: 56mm;
+    margin: 0 auto;
 
-        margin: 0;
+    padding:
+        3.5mm
+        2mm
+        2mm
+        2mm;
 
-        padding:
-            3.5mm
-            2mm
-            1.5mm
-            2mm;
+    background: #fff;
 
-        border: 0.6mm solid #111;
+    overflow: hidden;
 
-        box-shadow: none;
+    border: 0.6mm solid #111;
 
-        page-break-after: avoid;
-
-        break-after: avoid;
-    }
+    display: flex;
+    flex-direction: column;
 }
 
 </style>
