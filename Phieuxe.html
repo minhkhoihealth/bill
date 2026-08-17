@@ -119,20 +119,17 @@ body {
    ===================================================== */
 
 .title {
-
-    width: 100%;
-
     text-align: center;
 
     font-family:
-        "Arial Black",
         Arial,
+        Tahoma,
         Helvetica,
         sans-serif;
 
     font-size: 5.6mm;
 
-    line-height: 1;
+    line-height: 1.1;
 
     font-weight: 900;
 
@@ -141,6 +138,9 @@ body {
     white-space: nowrap;
 
     margin: 0;
+
+    /* Giúp chữ tiếng Việt hiển thị rõ */
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -237,48 +237,27 @@ body {
    ===================================================== */
 
 .note {
-
     position: relative;
-
     z-index: 2;
-
     width: 100%;
-
     margin-top: auto;
-
-    padding:
-        0
-        0.5mm
-        0
-        0.5mm;
-
+    padding: 0 0.5mm;
     text-align: center;
 
-    font-size: 2.65mm;
-
-    line-height: 1.15;
-
+    font-size: 3.05mm;
+    line-height: 1.2;
     font-style: italic;
-
-    flex-shrink: 0;
 }
-
 
 .note-en {
-
     display: block;
+    margin-top: 0.6mm;
 
-    margin-top: 0.5mm;
-
-    font-size: 1.85mm;
-
+    font-size: 1.9mm;
     line-height: 1.05;
-
     font-style: normal;
-
     white-space: nowrap;
 }
-
 
 /* =====================================================
    NÚT IN / ĐÓNG
