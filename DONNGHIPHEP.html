@@ -185,18 +185,18 @@ p {
     margin-bottom: 8px;
 }
 
-.signature {
+.signature-container {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
     text-align: center;
     margin-top: 5px;
 }
 
 .signature-box {
-    width: 45%;
+    width: 100%;
     text-align: center;
-    margin-left: auto;
-    margin-top: 20px;
 }
 
 .signature-title {
@@ -205,20 +205,23 @@ p {
     line-height: 1.5;
 }
 
-.signature-title span {
+.signature-title i {
     font-weight: normal;
     font-style: italic;
     font-size: 13px;
 }
 
-.signature-note {
-    min-height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+.signature-space {
+    height: 100px;
 }
 
+.signature-name {
+    min-height: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+#chuKyQuanLy,
 #chuKyHoTen {
     font-size: 14px;
     font-weight: bold;
@@ -608,38 +611,37 @@ button {
 
     <!-- SIGNATURE -->
 
-   <div class="signature-container">
+    <div class="signature-container">
 
-    <!-- QUẢN LÝ TRỰC TIẾP -->
-    <div class="signature-box">
-        <div class="signature-title">
-            <b>QUẢN LÝ TRỰC TIẾP</b><br>
-            <i>(Ký và ghi rõ họ tên)</i>
+        <!-- QUẢN LÝ TRỰC TIẾP -->
+        <div class="signature-box">
+            <div class="signature-title">
+                <b>QUẢN LÝ TRỰC TIẾP</b><br>
+                <i>(Ký và ghi rõ họ tên)</i>
+            </div>
+
+            <div class="signature-space"></div>
+
+            <div class="signature-name">
+                <b id="chuKyQuanLy"></b>
+            </div>
         </div>
 
-        <div class="signature-space"></div>
+        <!-- NGƯỜI LÀM ĐƠN -->
+        <div class="signature-box">
+            <div class="signature-title">
+                <b>NGƯỜI LÀM ĐƠN</b><br>
+                <i>(Ký và ghi rõ họ tên)</i>
+            </div>
 
-        <div class="signature-name">
-            <b id="chuKyQuanLy"></b>
+            <div class="signature-space"></div>
+
+            <div class="signature-name">
+                <b id="chuKyHoTen">VĂN THỊ ÚT TRÀ</b>
+            </div>
         </div>
+
     </div>
-
-    <!-- NGƯỜI LÀM ĐƠN -->
-    <div class="signature-box">
-        <div class="signature-title">
-            <b>NGƯỜI LÀM ĐƠN</b><br>
-            <i>(Ký và ghi rõ họ tên)</i>
-        </div>
-
-        <div class="signature-space"></div>
-
-        <div class="signature-name">
-            <b id="chuKyHoTen">VĂN THỊ ÚT TRÀ</b>
-        </div>
-    </div>
-
-</div>
-
 
 <script>
 
@@ -704,7 +706,10 @@ document.getElementById("soNgayNghi").textContent =
     soNgay;
 
 document.getElementById("chuKyHoTen").textContent =
-    ten;
+    ten || "VĂN THỊ ÚT TRÀ";
+
+document.getElementById("chuKyQuanLy").textContent =
+    params.get("quanly") || "";
 
 document.getElementById("soDon").textContent =
     id;
