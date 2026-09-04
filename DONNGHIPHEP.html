@@ -193,19 +193,36 @@ p {
 }
 
 .signature-box {
-    min-height: 115px;
-    font-size: 14px;
+    width: 45%;
+    text-align: center;
+    margin-left: auto;
+    margin-top: 20px;
 }
 
 .signature-title {
     font-weight: bold;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.signature-title span {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 13px;
 }
 
 .signature-note {
-    font-style: italic;
-    margin-top: 75px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
 
+#chuKyHoTen {
+    font-size: 14px;
+    font-weight: bold;
+}
 /* ================= BUTTON ================= */
 
 .buttons {
@@ -607,22 +624,19 @@ button {
         </div>
 
 
-        <div class="signature-box">
+       <div class="signature-box">
 
-            <div class="signature-title">
-                NGƯỜI LÀM ĐƠN
-                    (Ký và ghi rõ họ tên)
-            </div>
+    <div class="signature-title">
+        NGƯỜI LÀM ĐƠN<br>
+        <span>(Ký và ghi rõ họ tên)</span>
+    </div>
 
-            <div class="signature-note">
+    <div class="signature-note">
+        <br><br><br><br>
+        <b id="chuKyHoTen"></b>
+    </div>
 
-              
-
-                <br><br>
-
-                <b id="chuKyHoTen"></b>
-
-            </div>
+</div>
 
         </div>
 
